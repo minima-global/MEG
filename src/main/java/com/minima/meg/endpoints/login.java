@@ -15,7 +15,7 @@ public class login extends HttpServlet {
 	protected void doPost(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException, IOException {
 	
-		Log.log("Login Attempt.. POST");
+		Log.log("Login Attempt..");
 		
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
@@ -28,7 +28,8 @@ public class login extends HttpServlet {
 	    out.println("<body>");
 	    out.println("Login!");
 	    out.println("<br>");
-	    out.println(username+" "+password);
+	    out.println(username+" "+password+"<br><br>");
+	    out.println("<a href='home.html'>HOME</a>");
 	    out.println("</body>");
 	    out.println("</html>");
 	}

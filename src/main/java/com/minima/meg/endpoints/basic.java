@@ -18,7 +18,7 @@ public class basic extends HttpServlet {
 		
 		
 		if(Log.LOGGING_ENABLED) {
-			Log.log("INDEX GET "+request.getRequestURI());
+			Log.log("GET "+request.getRequestURI());
 		}
 		
 		String reqfile = request.getRequestURI();
