@@ -6,7 +6,7 @@ import org.eclipse.jetty.servlet.ServletHandler;
 import org.eclipse.jetty.util.thread.QueuedThreadPool;
 
 import com.minima.meg.endpoints.basic;
-import com.minima.meg.endpoints.index;
+import com.minima.meg.endpoints.login;
 
 public class JettyServer {
 	
@@ -30,6 +30,7 @@ public class JettyServer {
 
         //Add all the handlers
         servletHandler.addServletWithMapping(basic.class, "/");
+        servletHandler.addServletWithMapping(login.class, "/login.html");
         
         server.start();
         
