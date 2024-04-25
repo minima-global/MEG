@@ -1,4 +1,4 @@
-package com.minima.meg.endpoints;
+package com.minima.meg.server;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.minima.meg.mainsite.footer;
 import com.minima.meg.mainsite.header;
 
-public abstract class base extends HttpServlet {
+public abstract class BasicPage extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException, IOException {

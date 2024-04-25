@@ -1,4 +1,4 @@
-package com.minima.meg.endpoints;
+package com.minima.meg.server;
 
 import java.io.IOException;
 
@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.minima.meg.Log;
 import com.minima.meg.utils.FileUtils;
 
-public class basic extends HttpServlet {
+public class DefaultLoader extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request,HttpServletResponse response)
 				throws ServletException, IOException {
