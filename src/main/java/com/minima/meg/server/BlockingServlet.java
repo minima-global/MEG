@@ -23,23 +23,26 @@ public abstract class BlockingServlet extends HttpServlet {
 		
 		JSONObject params = new JSONObject();
 		
-		StringTokenizer strtok = new StringTokenizer(request.getQueryString(),"&");
-		while(strtok.hasMoreElements()) {
-			String fullparam = strtok.nextToken();
-			
-			int equals = fullparam.indexOf("=");
-			if(equals != -1) {
+		//Any GET params..
+		if(request.getQueryString() != null) {
+			StringTokenizer strtok = new StringTokenizer(request.getQueryString(),"&");
+			while(strtok.hasMoreElements()) {
+				String fullparam = strtok.nextToken();
 				
-				String key 		= fullparam.substring(0,equals);
-				String value 	= fullparam.substring(equals+1,fullparam.length());
-				
-				//GET requests always add all params as Strings..
-				params.put(key, value);
+				int equals = fullparam.indexOf("=");
+				if(equals != -1) {
+					
+					String key 		= fullparam.substring(0,equals);
+					String value 	= fullparam.substring(equals+1,fullparam.length());
+					
+					//GET requests always add all params as Strings..
+					params.put(key, value);
+				}
 			}
 		}
 		
 		//Now run it..
-		JSONObject res = getResponse(params);
+		JSONObject res = getResponse(request.getRequestURI(), params);
 			
 		String resp = res.toString();
 		if(Log.LOGGING_ENABLED) {
@@ -58,7 +61,7 @@ public abstract class BlockingServlet extends HttpServlet {
 		
 		//Get the POST params
 		BufferedReader br = request.getReader();
-		
+				
 		String tot = "";
 		String line = br.readLine();
 		while(line != null) {
@@ -70,7 +73,7 @@ public abstract class BlockingServlet extends HttpServlet {
 		JSONObject json = new JSONObject(tot);
 
 		//Now run it..
-		JSONObject res = getResponse(json);
+		JSONObject res = getResponse(request.getRequestURI(), json);
 		
 		String resp = res.toString();
 		if(Log.LOGGING_ENABLED) {
@@ -83,5 +86,5 @@ public abstract class BlockingServlet extends HttpServlet {
 		response.getWriter().println(resp);
 	}
 	
-	protected abstract JSONObject getResponse(JSONObject zParams);
+	protected abstract JSONObject getResponse(String zPath, JSONObject zParams);
 }

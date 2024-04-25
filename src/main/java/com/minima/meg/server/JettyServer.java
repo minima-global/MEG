@@ -6,6 +6,7 @@ import org.eclipse.jetty.servlet.ServletHandler;
 import org.eclipse.jetty.util.thread.QueuedThreadPool;
 
 import com.minima.meg.endpoints.basic;
+import com.minima.meg.endpoints.index;
 
 public class JettyServer {
 	
@@ -28,9 +29,11 @@ public class JettyServer {
         server.setHandler(servletHandler);
 
         //Add all the handlers
-        servletHandler.addServletWithMapping(basic.class, "/basic");
+        servletHandler.addServletWithMapping(basic.class, "/");
         
         server.start();
+        
+        servletHandler.initialize();
     }
     
     public void stop() throws Exception {
