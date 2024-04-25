@@ -1,0 +1,10 @@
+
+@font-face {
+	font-family: Manrope;
+	src: url('./Manrope-Regular.ttf');
+}
+
+body {
+	font-family: Manrope; 
+    margin: 8;   /* Remove body margins */
+}

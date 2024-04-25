@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.minima.meg.Log;
+import com.minima.meg.mainsite.footer;
+import com.minima.meg.mainsite.header;
 import com.minima.meg.server.UserSessions;
 
 public class logoff extends HttpServlet {
@@ -31,12 +33,12 @@ public class logoff extends HttpServlet {
       	UserSessions.clearSession(session.getId());
         
 		PrintWriter out = response.getWriter();
-	    out.println("<html>");
-	    out.println("<body>");
-	    out.println("LogOFF!");
+		header.writeHeader(out);
+		
+	    out.println("LogOFF Success!<br><br>");
 	    out.println("<a href='index.html'>BACK TO START</a>");
-	    out.println("</body>");
-	    out.println("</html>");
+	    
+	    footer.writeFooter(out);
 	}
 	
 }

@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.minima.meg.Log;
+import com.minima.meg.mainsite.footer;
+import com.minima.meg.mainsite.header;
 import com.minima.meg.server.UserSessions;
 
 public class login extends HttpServlet {
@@ -32,14 +34,15 @@ public class login extends HttpServlet {
         response.setStatus(HttpServletResponse.SC_OK);
         
 		PrintWriter out = response.getWriter();
-	    out.println("<html>");
-	    out.println("<body>");
-	    out.println("Login!");
+	    header.writeHeader(out);
+		
+		out.println("Login!");
 	    out.println("<br>");
 	    out.println(username+" "+password+"<br><br>");
 	    out.println("<a href='home.html'>HOME</a>");
-	    out.println("</body>");
-	    out.println("</html>");
+	    
+	    footer.writeFooter(out);
+	    
 	}
 	
 }

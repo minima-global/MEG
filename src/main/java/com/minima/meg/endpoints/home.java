@@ -10,7 +10,7 @@ public class home extends BasicPage {
 	@Override
 	public void writePage(PrintWriter zOut) {
 		
-		UserSessions.printAllSessions();
+		//UserSessions.printAllSessions();
 		
 		zOut.println("<h1>Home Page</h1>");
 		zOut.println("<br><br>");
