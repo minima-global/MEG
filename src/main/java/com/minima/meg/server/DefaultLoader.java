@@ -7,6 +7,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.minima.meg.Log;
 import com.minima.meg.utils.FileUtils;
@@ -17,8 +18,9 @@ public class DefaultLoader extends HttpServlet {
 				throws ServletException, IOException {
 		
 		
+		HttpSession session = request.getSession();
 		if(Log.LOGGING_ENABLED) {
-			Log.log("GET "+request.getRequestURI());
+			Log.log("RESOURCE GET "+request.getRequestURI()+" session:"+session.getId());
 		}
 		
 		String reqfile = request.getRequestURI();

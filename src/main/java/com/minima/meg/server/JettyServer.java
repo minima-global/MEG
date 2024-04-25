@@ -2,11 +2,15 @@ package com.minima.meg.server;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
+import org.eclipse.jetty.server.session.DefaultSessionIdManager;
+import org.eclipse.jetty.server.session.SessionHandler;
+import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHandler;
 import org.eclipse.jetty.util.thread.QueuedThreadPool;
 
 import com.minima.meg.endpoints.home;
 import com.minima.meg.endpoints.login;
+import com.minima.meg.endpoints.logoff;
 
 public class JettyServer {
 	
@@ -20,19 +24,35 @@ public class JettyServer {
 
         QueuedThreadPool threadPool = new QueuedThreadPool(maxThreads, minThreads, idleTimeout);
 
+        //Create the Server
         server = new Server(threadPool);
+        
+        //Session Manager
+        DefaultSessionIdManager idmanager = new DefaultSessionIdManager(server);
+        server.setSessionIdManager(idmanager);
+        
+        //Create  Connector on a port
         ServerConnector connector = new ServerConnector(server);
         connector.setPort(8080);
         server.addConnector(connector);
 
+        //Create a session handler
+        SessionHandler seshhandler = new SessionHandler();
+        
+        //Servlet Handler
         ServletHandler servletHandler = new ServletHandler();
-        server.setHandler(servletHandler);
-
+        servletHandler.setHandler(seshhandler);
+        
         //Add all the handlers
         servletHandler.addServletWithMapping(DefaultLoader.class, "/");
         servletHandler.addServletWithMapping(login.class, "/login.html");
+        servletHandler.addServletWithMapping(logoff.class, "/logoff.html");
         servletHandler.addServletWithMapping(home.class, "/home.html");
         
+        //Set Servlet handler to Server
+        server.setHandler(servletHandler);
+
+        //Start the server
         server.start();
         
         servletHandler.initialize();

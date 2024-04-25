@@ -1,4 +1,4 @@
-package com.minima.meg.server;
+package com.minima.meg.endpoints;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,33 +10,33 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.minima.meg.Log;
-import com.minima.meg.mainsite.footer;
-import com.minima.meg.mainsite.header;
+import com.minima.meg.server.UserSessions;
 
-public abstract class BasicPage extends HttpServlet {
-
+public class logoff extends HttpServlet {
+	
 	protected void doGet(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException, IOException {
 	
-		//Check we are logged in Correctly!
-		//..
-		
 		HttpSession session = request.getSession();
 		if(Log.LOGGING_ENABLED) {
-			Log.log("BASIC GET "+request.getRequestURI()+" session:"+session.getId());
+			Log.log("LOGOFF GET "+request.getRequestURI()+" session:"+session.getId());
 		}
 		
 		response.setContentType("text/html");
         response.setStatus(HttpServletResponse.SC_OK);
         
+        request.getSession().invalidate();
+        
+        //Remove the session
+      	UserSessions.clearSession(session.getId());
+        
 		PrintWriter out = response.getWriter();
-	    
-		header.writeHeader(out);
-		
-		writePage(out);
-	    
-	    footer.writeFooter(out);
+	    out.println("<html>");
+	    out.println("<body>");
+	    out.println("LogOFF!");
+	    out.println("<a href='index.html'>BACK TO START</a>");
+	    out.println("</body>");
+	    out.println("</html>");
 	}
 	
-	public abstract void writePage(PrintWriter zOut);
 }
