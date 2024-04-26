@@ -34,31 +34,9 @@ public class UserDB extends SqlDB {
 		
 		//Run it..
 		stmt.execute(create);
-		
-		//Prepared statements
-		SQL_SELECT_ALLUSERS = mSQLConnection.prepareStatement("SELECT * FROM users");
 	}
 
-	public JSONArray getAllUsers() throws SQLException {
-		
-		//Run the query
-		ResultSet rs = SQL_SELECT_ALLUSERS.executeQuery();
-		
-		JSONArray results = new JSONArray();
-		while(rs.next()) {
-			
-			String username = rs.getString("username");
-			String level 	= rs.getString("level");
-			long timemilli	= rs.getLong("created");
-			
-			JSONObject res = new JSONObject();
-			res.put("username", username);
-			res.put("level", level);
-			res.put("created", timemilli);
-			
-			results.put(res);
-		}
-		
-		return results;
+	public JSONObject getAllUsers(){
+		return executeGenericSQL("SELECT * FROM users");
 	}
 }
