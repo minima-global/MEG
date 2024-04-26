@@ -11,10 +11,10 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 
-import com.minima.meg.Log;
 import com.minima.meg.mainsite.footer;
 import com.minima.meg.mainsite.header;
 import com.minima.meg.server.UserSessions;
+import com.minima.meg.utils.Log;
 
 public class login extends HttpServlet {
 	

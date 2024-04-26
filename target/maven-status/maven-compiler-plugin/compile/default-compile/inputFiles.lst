@@ -1,7 +1,13 @@
+C:\Users\spartacusrex\git\MEG\src\main\java\com\minima\meg\database\UserDB.java
 C:\Users\spartacusrex\git\MEG\src\main\java\com\minima\meg\server\BasicPage.java
+C:\Users\spartacusrex\git\MEG\src\main\java\com\minima\meg\utils\SqlDB.java
+C:\Users\spartacusrex\git\MEG\src\main\java\com\minima\meg\utils\Log.java
 C:\Users\spartacusrex\git\MEG\src\main\java\com\minima\meg\mainsite\header.java
 C:\Users\spartacusrex\git\MEG\src\main\java\com\minima\meg\server\UserSessions.java
+C:\Users\spartacusrex\git\MEG\src\main\java\com\minima\meg\MEGManager.java
+C:\Users\spartacusrex\git\MEG\src\main\java\com\minima\meg\endpoints\admin.java
 C:\Users\spartacusrex\git\MEG\src\main\java\com\minima\meg\endpoints\logoff.java
+C:\Users\spartacusrex\git\MEG\src\main\java\com\minima\meg\database\MegDB.java
 C:\Users\spartacusrex\git\MEG\src\main\java\com\minima\meg\Start.java
 C:\Users\spartacusrex\git\MEG\src\main\java\com\minima\meg\server\DefaultLoader.java
 C:\Users\spartacusrex\git\MEG\src\main\java\com\minima\meg\endpoints\login.java
@@ -9,5 +15,4 @@ C:\Users\spartacusrex\git\MEG\src\main\java\com\minima\meg\endpoints\home.java
 C:\Users\spartacusrex\git\MEG\src\main\java\com\minima\meg\mainsite\footer.java
 C:\Users\spartacusrex\git\MEG\src\main\java\com\minima\meg\server\JettyServer.java
 C:\Users\spartacusrex\git\MEG\src\main\java\com\minima\meg\utils\FileUtils.java
-C:\Users\spartacusrex\git\MEG\src\main\java\com\minima\meg\Log.java
 C:\Users\spartacusrex\git\MEG\src\main\java\com\minima\meg\server\BlockingServlet.java

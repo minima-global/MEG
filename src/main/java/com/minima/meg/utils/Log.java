@@ -1,4 +1,4 @@
-package com.minima.meg;
+package com.minima.meg.utils;
 
 public class Log {
 

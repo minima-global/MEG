@@ -11,8 +11,6 @@ import java.sql.Statement;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.minima.meg.Log;
-
 public abstract class SqlDB {
 
 	/**

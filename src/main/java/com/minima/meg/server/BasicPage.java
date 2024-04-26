@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.minima.meg.Log;
 import com.minima.meg.mainsite.footer;
 import com.minima.meg.mainsite.header;
+import com.minima.meg.utils.Log;
 
 public abstract class BasicPage extends HttpServlet {
 

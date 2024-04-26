@@ -4,7 +4,7 @@ import java.util.Hashtable;
 
 import org.json.JSONObject;
 
-import com.minima.meg.Log;
+import com.minima.meg.utils.Log;
 
 public class UserSessions {
 

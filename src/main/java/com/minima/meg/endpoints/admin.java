@@ -4,15 +4,14 @@ import java.io.PrintWriter;
 
 import com.minima.meg.server.BasicPage;
 
-public class home extends BasicPage {
+public class admin extends BasicPage {
 
 	@Override
 	public void writePage(PrintWriter zOut) {
 		
-		//UserSessions.printAllSessions();
 		
-		zOut.println("<h1>Home Page</h1>");
+		zOut.println("<h1>ADMIN</h1>");
 		zOut.println("<br><br>");
-		zOut.println("<a href='logoff.html'>LOG OFF</a>");
+		
 	}
 }

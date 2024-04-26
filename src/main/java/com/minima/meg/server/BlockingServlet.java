@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
-import com.minima.meg.Log;
+import com.minima.meg.utils.Log;
 
 public abstract class BlockingServlet extends HttpServlet {
 	

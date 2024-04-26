@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.minima.meg.Log;
 import com.minima.meg.utils.FileUtils;
+import com.minima.meg.utils.Log;
 
 public class DefaultLoader extends HttpServlet {
 	

@@ -4,11 +4,10 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.server.session.DefaultSessionIdManager;
 import org.eclipse.jetty.server.session.SessionHandler;
-import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHandler;
 import org.eclipse.jetty.util.thread.QueuedThreadPool;
 
-import com.minima.meg.endpoints.home;
+import com.minima.meg.endpoints.admin;
 import com.minima.meg.endpoints.login;
 import com.minima.meg.endpoints.logoff;
 
@@ -47,7 +46,8 @@ public class JettyServer {
         servletHandler.addServletWithMapping(DefaultLoader.class, "/");
         servletHandler.addServletWithMapping(login.class, "/login.html");
         servletHandler.addServletWithMapping(logoff.class, "/logoff.html");
-        servletHandler.addServletWithMapping(home.class, "/home.html");
+        
+        servletHandler.addServletWithMapping(admin.class, "/admin.html");
         
         //Set Servlet handler to Server
         server.setHandler(servletHandler);
