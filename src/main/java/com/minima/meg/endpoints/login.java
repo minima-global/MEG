@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 
+import com.minima.meg.database.MegDB;
 import com.minima.meg.mainsite.footer;
 import com.minima.meg.mainsite.header;
 import com.minima.meg.server.UserSessions;
@@ -26,16 +27,35 @@ public class login extends HttpServlet {
 			Log.log("LOGIN GET "+request.getRequestURI()+" session:"+session.getId());
 		}
 		
+		PrintWriter out = response.getWriter();
+		
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		
 		//Check the Username and Password..
-		//..
+		JSONObject user = MegDB.getDB().getUserDB().getUser(username, password);
+		
+		if(user.getInt("count")==0) {
+			
+			//User Not found..
+			response.setContentType("text/html");
+	        response.setStatus(HttpServletResponse.SC_OK);
+	        
+	        out.println("<html><body><center><br><br>");
+		    out.println("User / Password NOT Found..<br><br>");
+		    out.println("<a href='index.html'>Back to Login</a></center>");
+		    out.println("</body></html>");
+		    
+		    return;
+		}
 		
 		//Create a session object
-		JSONObject userobj = new JSONObject();
+		JSONObject userjson = user.getJSONArray("rows").getJSONObject(0);
+		String level = userjson.getString("LEVEL");
+		
+		JSONObject userobj  = new JSONObject();
 		userobj.put("username", username);
-		userobj.put("level", "admin");
+		userobj.put("level", level);
 		
 		//Add to Session..
 		UserSessions.addSession(session.getId(), userobj);
@@ -43,13 +63,8 @@ public class login extends HttpServlet {
 		response.setContentType("text/html");
         response.setStatus(HttpServletResponse.SC_OK);
         
-		PrintWriter out = response.getWriter();
-	    header.writeHeader(out);
-		
+		header.writeHeader(level,out);
 		out.println("<center><br><br>Login Successful!</center>");
-	    
 	    footer.writeFooter(out);
-	    
 	}
-	
 }

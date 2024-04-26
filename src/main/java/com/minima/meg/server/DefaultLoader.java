@@ -17,10 +17,8 @@ public class DefaultLoader extends HttpServlet {
 	protected void doGet(HttpServletRequest request,HttpServletResponse response)
 				throws ServletException, IOException {
 		
-		
-		HttpSession session = request.getSession();
 		if(Log.LOGGING_ENABLED) {
-			Log.log("RESOURCE GET "+request.getRequestURI()+" session:"+session.getId());
+			Log.log("GET RESOURCE "+request.getRequestURI());
 		}
 		
 		String reqfile = request.getRequestURI();

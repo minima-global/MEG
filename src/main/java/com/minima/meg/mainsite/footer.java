@@ -4,7 +4,8 @@ import java.io.PrintWriter;
 
 public class footer {
 	public static void writeFooter(PrintWriter zOut) {
-		zOut.write("</td>\r\n"
+		zOut.write("	\r\n"
+				+ "	</td>\r\n"
 				+ "</tr>\r\n"
 				+ "\r\n"
 				+ "<tr>\r\n"
@@ -20,6 +21,7 @@ public class footer {
 				+ "\r\n"
 				+ "</table>\r\n"
 				+ "\r\n"
+				+ "</center>\r\n"
 				+ "</body>\r\n"
 				+ "</html>");
 	}

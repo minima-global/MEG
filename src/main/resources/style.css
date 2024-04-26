@@ -11,6 +11,7 @@ body {
 
 .maintable{
 	width:100%;
+	max-width:1000;
 	height:100%;
 }
 
@@ -38,6 +39,10 @@ body {
   	border-radius: 10px;
   	background-color: #eeeeff;
   	padding:4px;
+}
+
+.newuserform{
+	text-align:right;
 }
 
 a.menu:link {color:blue;text-decoration: none;padding:4;} 

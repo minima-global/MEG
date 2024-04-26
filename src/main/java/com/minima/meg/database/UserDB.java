@@ -1,11 +1,9 @@
 package com.minima.meg.database;
 
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.minima.meg.utils.SqlDB;
@@ -38,5 +36,24 @@ public class UserDB extends SqlDB {
 
 	public JSONObject getAllUsers(){
 		return executeGenericSQL("SELECT * FROM users");
+	}
+	
+	public JSONObject getUser(String zUsername, String zPassword){
+		return executeGenericSQL("SELECT * FROM users "
+				+ "WHERE username='"+zUsername+"' AND password='"+zPassword+"'");
+	}
+	
+	public JSONObject addUser(String zUsername, String zPassword, String zLevel) {
+		String sql = "INSERT INTO users(username,password,level,created) VALUES "
+				+ "('"+zUsername+"','"+zPassword+"','"+zLevel+"',"+System.currentTimeMillis()+")";
+		return executeGenericSQL(sql);
+	}
+	
+	public JSONObject removeUser(String zUsername) {
+		return executeGenericSQL("DELETE FROM users WHERE username='"+zUsername+"'");
+	}
+	
+	public JSONObject removeUser(int zUserID) {
+		return executeGenericSQL("DELETE FROM users WHERE id="+zUserID);
 	}
 }

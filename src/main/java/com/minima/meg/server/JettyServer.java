@@ -8,8 +8,11 @@ import org.eclipse.jetty.servlet.ServletHandler;
 import org.eclipse.jetty.util.thread.QueuedThreadPool;
 
 import com.minima.meg.endpoints.admin;
+import com.minima.meg.endpoints.help;
 import com.minima.meg.endpoints.login;
 import com.minima.meg.endpoints.logoff;
+import com.minima.meg.endpoints.newuser;
+import com.minima.meg.endpoints.removeuser;
 
 public class JettyServer {
 	
@@ -48,6 +51,10 @@ public class JettyServer {
         servletHandler.addServletWithMapping(logoff.class, "/logoff.html");
         
         servletHandler.addServletWithMapping(admin.class, "/admin.html");
+        servletHandler.addServletWithMapping(newuser.class, "/newuser.html");
+        servletHandler.addServletWithMapping(removeuser.class, "/removeuser.html");
+        
+        servletHandler.addServletWithMapping(help.class, "/help.html");
         
         //Set Servlet handler to Server
         server.setHandler(servletHandler);

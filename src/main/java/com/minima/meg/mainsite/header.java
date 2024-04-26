@@ -2,9 +2,12 @@ package com.minima.meg.mainsite;
 
 import java.io.PrintWriter;
 
+import javax.servlet.http.HttpSession;
+
 public class header {
 
-	public static void writeHeader(PrintWriter zOut) {
+	public static void writeHeader(String zLevel, PrintWriter zOut) {
+		
 		zOut.write("<html>\r\n"
 				+ "<head>\r\n"
 				+ "	<title>MEG</title>\r\n"
@@ -13,6 +16,8 @@ public class header {
 				+ "</head>\r\n"
 				+ "\r\n"
 				+ "<body>\r\n"
+				+ "\r\n"
+				+ "<center>\r\n"
 				+ "\r\n"
 				+ "<table class=maintable border=0>\r\n"
 				+ "\r\n"
@@ -36,16 +41,22 @@ public class header {
 				+ "			<tr><td nowrap>&nbsp;<a class=menu href='triggers.html'>Triggers</a>&nbsp;</td></tr>\r\n"
 				+ "			<tr><td nowrap>&nbsp;<a class=menu href='apiendpoints.html'>API Endpoints</a>&nbsp;</td></tr>\r\n"
 				+ "			<tr><td nowrap>&nbsp;<a class=menu href='logs.html'>Logs</a>&nbsp;</td></tr>\r\n"
-				+ "			<tr><td>&nbsp;</td></tr>\r\n"
-				+ "			<tr><td nowrap>&nbsp;<a class=menu href='admin.html'>Admin</a>&nbsp;</td></tr>\r\n"
-				+ "			<tr><td>&nbsp;</td></tr>\r\n"
-				+ "			<tr><td nowrap>&nbsp;<a class=menu href='help.html'>Help</a>&nbsp;</td></tr>\r\n"
+				+ "			<tr><td>&nbsp;</td></tr>\r\n");
+		
+		//ONLY Admin gets the ADMIN tag
+		if(zLevel.equals("admin")) {
+			zOut.write("	<tr><td nowrap>&nbsp;<a class=menu href='admin.html'>Admin</a>&nbsp;</td></tr>\r\n"
+					+ "		<tr><td>&nbsp;</td></tr>\r\n");
+		}
+				
+		zOut.write(
+				"			<tr><td nowrap>&nbsp;<a class=menu href='help.html'>Help</a>&nbsp;</td></tr>\r\n"
 				+ "			<tr><td height=100%>&nbsp;</td></tr>\r\n"
 				+ "		</table>\r\n"
 				+ "		\r\n"
 				+ "	</td>\r\n"
 				+ "	\r\n"
 				+ "	<td class=mainview>\r\n"
-				+ "	");
+				+ "		");
 	}
 }
