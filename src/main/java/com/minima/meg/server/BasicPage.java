@@ -22,7 +22,7 @@ public abstract class BasicPage extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		if(Log.LOGGING_ENABLED) {
-			Log.log("GET "+request.getRequestURI()+" session:"+session.getId());
+			Log.log("GET "+request.getRequestURI());
 		}
 	
 		response.setContentType("text/html");
@@ -51,7 +51,7 @@ public abstract class BasicPage extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		if(Log.LOGGING_ENABLED) {
-			Log.log("POST "+request.getRequestURI()+" session:"+session.getId());
+			Log.log("POST "+request.getRequestURI());
 		}
 	
 		response.setContentType("text/html");
