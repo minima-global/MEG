@@ -2,17 +2,19 @@ package com.minima.meg.server;
 
 import java.util.Hashtable;
 
+import org.json.JSONObject;
+
 import com.minima.meg.Log;
 
 public class UserSessions {
 
-	private static Hashtable<String, String> mUserSessions = new Hashtable<>();
+	private static Hashtable<String, JSONObject> mUserSessions = new Hashtable<>();
 	
-	public static void addSession(String zSessionid, String zUser) {
+	public static void addSession(String zSessionid, JSONObject zUser) {
 		mUserSessions.put(zSessionid, zUser);	
 	}
 	
-	public static String getUserFromSession(String zSessionid) {
+	public static JSONObject getUserFromSession(String zSessionid) {
 		return mUserSessions.get(zSessionid);
 	}
 	

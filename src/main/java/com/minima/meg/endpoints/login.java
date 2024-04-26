@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
+
 import com.minima.meg.Log;
 import com.minima.meg.mainsite.footer;
 import com.minima.meg.mainsite.header;
@@ -27,8 +29,16 @@ public class login extends HttpServlet {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		
+		//Check the Username and Password..
+		//..
+		
+		//Create a session object
+		JSONObject userobj = new JSONObject();
+		userobj.put("username", username);
+		userobj.put("level", "admin");
+		
 		//Add to Session..
-		UserSessions.addSession(session.getId(), username);
+		UserSessions.addSession(session.getId(), userobj);
 		
 		response.setContentType("text/html");
         response.setStatus(HttpServletResponse.SC_OK);
@@ -36,10 +46,7 @@ public class login extends HttpServlet {
 		PrintWriter out = response.getWriter();
 	    header.writeHeader(out);
 		
-		out.println("Login!");
-	    out.println("<br>");
-	    out.println(username+" "+password+"<br><br>");
-	    out.println("<a href='home.html'>HOME</a>");
+		out.println("<center><br><br>Login Successful!</center>");
 	    
 	    footer.writeFooter(out);
 	    

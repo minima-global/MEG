@@ -33,12 +33,13 @@ public class logoff extends HttpServlet {
       	UserSessions.clearSession(session.getId());
         
 		PrintWriter out = response.getWriter();
-		header.writeHeader(out);
 		
-	    out.println("LogOFF Success!<br><br>");
-	    out.println("<a href='index.html'>BACK TO START</a>");
+		
+		out.println("<html><body><center><br><br>");
+	    out.println("Log Off Success<br><br>");
+	    out.println("<a href='index.html'>Back to Login</a></center>");
+	    out.println("</body></html>");
 	    
-	    footer.writeFooter(out);
 	}
 	
 }
