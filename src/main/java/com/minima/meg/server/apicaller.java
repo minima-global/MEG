@@ -50,6 +50,7 @@ public class apicaller extends HttpServlet {
 			//NOT FOUND..
 			JSONObject resp = new JSONObject();
 			resp.put("status", false);
+			resp.put("error", "API Endpoint not found");
 			zOut.println(resp.toString());
 			return;
 		}
@@ -81,7 +82,12 @@ public class apicaller extends HttpServlet {
 			String param = request.getParameter(paramname);
 			
 			if(param == null) {
-				
+				//NOT FOUND..
+				JSONObject resp = new JSONObject();
+				resp.put("status", false);
+				resp.put("error", "API Endpoint Param missing : "+paramname);
+				zOut.println(resp.toString());
+				return;
 			}
 			
 			//Now replace..
@@ -94,7 +100,15 @@ public class apicaller extends HttpServlet {
 		//Final Command
 		Log.log("COMMAND : "+newcommand);
 		
+		//Make the call to Minima..
+		//..
 		
+		//And return the result..
+		//..
+		
+		JSONObject resp = new JSONObject();
+		resp.put("status", true);
+		zOut.println(resp.toString());
 	}
 }
 
