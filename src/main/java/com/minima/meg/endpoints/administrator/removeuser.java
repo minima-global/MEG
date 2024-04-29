@@ -1,4 +1,4 @@
-package com.minima.meg.endpoints;
+package com.minima.meg.endpoints.administrator;
 
 import java.io.PrintWriter;
 
@@ -31,5 +31,8 @@ public class removeuser extends BasicPage {
 		MegDB.getDB().getUserDB().removeUser(userid);
 		
 		zOut.println("<center><br><br>User removed</center>");
+		
+		//Add a DB LOG
+		MegDB.getDB().getLogsDB().addLog("REMOVE USER", userid+"", usersesh.getString("username"));
 	}
 }

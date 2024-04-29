@@ -24,15 +24,21 @@ public class MegDB {
 	
 	//The Databases
 	UserDB mUserDB;
+	LogsDB mLogsDB;
 	
 	public MegDB(File zDatabaseFolder) {
 		mDatabaseFolder = zDatabaseFolder;
 		
 		mUserDB = new UserDB();
+		mLogsDB = new LogsDB();
 	}
 	
 	public UserDB getUserDB() {
 		return mUserDB;
+	}
+
+	public LogsDB getLogsDB() {
+		return mLogsDB;
 	}
 	
 	public void loadAllDB() throws SQLException {
@@ -41,11 +47,14 @@ public class MegDB {
 		
 		//Load the UserDB
 		mUserDB.loadDB(new File(mDatabaseFolder,"userdb"));
+		mLogsDB.loadDB(new File(mDatabaseFolder,"logsdb"));
+		
 	}
 	
 	public void saveAllDB() {
 		Log.log("Saving all MEGDB");
 		
 		mUserDB.saveDB(true);
+		mLogsDB.saveDB(true);
 	}
 }

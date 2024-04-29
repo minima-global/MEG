@@ -31,6 +31,7 @@ public abstract class BasicPage extends HttpServlet {
         
 		//Check we are logged in Correctly!
 		JSONObject usersesh = UserSessions.getUserFromSession(session.getId());
+		
 		if(usersesh == null) {
 			
 			out.println("<html><body><center><br><br>");

@@ -7,12 +7,16 @@ import org.eclipse.jetty.server.session.SessionHandler;
 import org.eclipse.jetty.servlet.ServletHandler;
 import org.eclipse.jetty.util.thread.QueuedThreadPool;
 
-import com.minima.meg.endpoints.admin;
+import com.minima.meg.endpoints.apiendpoints;
 import com.minima.meg.endpoints.help;
 import com.minima.meg.endpoints.login;
 import com.minima.meg.endpoints.logoff;
-import com.minima.meg.endpoints.newuser;
-import com.minima.meg.endpoints.removeuser;
+import com.minima.meg.endpoints.logs;
+import com.minima.meg.endpoints.myprofile;
+import com.minima.meg.endpoints.triggers;
+import com.minima.meg.endpoints.administrator.admin;
+import com.minima.meg.endpoints.administrator.newuser;
+import com.minima.meg.endpoints.administrator.removeuser;
 
 public class JettyServer {
 	
@@ -55,6 +59,11 @@ public class JettyServer {
         servletHandler.addServletWithMapping(removeuser.class, "/removeuser.html");
         
         servletHandler.addServletWithMapping(help.class, "/help.html");
+        
+        servletHandler.addServletWithMapping(myprofile.class, "/myprofile.html");
+        servletHandler.addServletWithMapping(triggers.class, "/triggers.html");
+        servletHandler.addServletWithMapping(apiendpoints.class, "/apiendpoints.html");
+        servletHandler.addServletWithMapping(logs.class, "/logs.html");
         
         //Set Servlet handler to Server
         server.setHandler(servletHandler);

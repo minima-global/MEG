@@ -1,4 +1,4 @@
-package com.minima.meg.endpoints;
+package com.minima.meg.endpoints.administrator;
 
 import java.io.PrintWriter;
 
@@ -32,6 +32,9 @@ public class newuser extends BasicPage {
 		MegDB.getDB().getUserDB().addUser(username, password, level);
 		
 		zOut.println("<center><br><br>User "+username+" added</center>"); 
+		
+		//Add a DB LOG
+		MegDB.getDB().getLogsDB().addLog("ADD USER", username+" @ "+level, usersesh.getString("username"));
 	}
 	
 }

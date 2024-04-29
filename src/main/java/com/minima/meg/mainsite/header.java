@@ -2,8 +2,6 @@ package com.minima.meg.mainsite;
 
 import java.io.PrintWriter;
 
-import javax.servlet.http.HttpSession;
-
 public class header {
 
 	public static void writeHeader(String zLevel, PrintWriter zOut) {

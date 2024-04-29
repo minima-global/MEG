@@ -1,4 +1,4 @@
-package com.minima.meg.endpoints;
+package com.minima.meg.endpoints.administrator;
 
 import java.io.PrintWriter;
 import java.util.Date;

