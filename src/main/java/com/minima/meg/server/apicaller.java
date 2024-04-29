@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 
@@ -36,7 +37,10 @@ public class apicaller extends HttpServlet {
 	}
 	
 	public void doAppiCall(String zType, HttpServletRequest request, String zUser, PrintWriter zOut) {
-	
+		
+		//Get the user session
+		HttpSession session = request.getSession();
+		JSONObject usersesh = UserSessions.getUserFromSession(session.getId());
 		
 		String apicall = request.getRequestURI().substring(5);
 		Log.log("API CALL "+zType+" : "+apicall);
@@ -45,12 +49,14 @@ public class apicaller extends HttpServlet {
 		JSONObject ep = MegDB.getDB().getUserDB().getEndpoiont(apicall);
 		if(ep.getInt("count")==0) {
 			
-			Log.log("API CALL NOT FOUND !!");
-
+			//Add a DB LOG
+			MegDB.getDB().getLogsDB().addLog("ENDPOINT NOT FOUND", apicall, usersesh.getString("username"));
+			
 			//NOT FOUND..
 			JSONObject resp = new JSONObject();
 			resp.put("status", false);
 			resp.put("error", "API Endpoint not found");
+			resp.put("endpoint", apicall);
 			zOut.println(resp.toString());
 			return;
 		}
@@ -82,10 +88,15 @@ public class apicaller extends HttpServlet {
 			String param = request.getParameter(paramname);
 			
 			if(param == null) {
+				
+				//Add a DB LOG
+				MegDB.getDB().getLogsDB().addLog("ENDPOINT PARAM MISSING", apicall+" param:"+paramname, usersesh.getString("username"));
+				
 				//NOT FOUND..
 				JSONObject resp = new JSONObject();
 				resp.put("status", false);
 				resp.put("error", "API Endpoint Param missing : "+paramname);
+				resp.put("endpoint", apicall);
 				zOut.println(resp.toString());
 				return;
 			}
@@ -97,9 +108,6 @@ public class apicaller extends HttpServlet {
 			pos = endword;
 		}
 		
-		//Final Command
-		Log.log("COMMAND : "+newcommand);
-		
 		//Make the call to Minima..
 		//..
 		
@@ -109,6 +117,9 @@ public class apicaller extends HttpServlet {
 		JSONObject resp = new JSONObject();
 		resp.put("status", true);
 		zOut.println(resp.toString());
+		
+		//Add a DB LOG
+		MegDB.getDB().getLogsDB().addLog("ENDPOINT CALL", apicall, usersesh.getString("username"));		
 	}
 }
 
