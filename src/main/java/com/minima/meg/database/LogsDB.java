@@ -40,7 +40,7 @@ public class LogsDB extends SqlDB {
 	}
 	
 	public JSONObject getLogs(int zSize, int zOffset){
-		return executeGenericSQL("SELECT * FROM logs LIMIT "+zSize+" OFFSET "+zOffset);
+		return executeGenericSQL("SELECT * FROM logs ORDER BY ID DESC LIMIT "+zSize+" OFFSET "+zOffset);
 	}
 	
 }

@@ -10,8 +10,6 @@ public class triggers extends BasicPage {
 
 	@Override
 	public void writePage(HttpServletRequest request, PrintWriter zOut) {
-		zOut.println("<h2>HELP</h2>");
-		zOut.println("<br>");
-		zOut.println("Welcome to the help Section");
+		zOut.println("<h2>TRIGGERS</h2>");
 	}
 }

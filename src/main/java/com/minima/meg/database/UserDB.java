@@ -32,8 +32,22 @@ public class UserDB extends SqlDB {
 		
 		//Run it..
 		stmt.execute(create);
+		
+		//Create api endpoint table
+		create 		= "CREATE TABLE IF NOT EXISTS `apiendpoints` ("
+						+ "  `id` bigint auto_increment,"
+						+ "  `endpoint` varchar(256) NOT NULL,"
+						+ "  `command` varchar(256) NOT NULL,"
+						+ "  `created` bigint NOT NULL"
+						+ ")";
+		
+		//Run it..
+		stmt.execute(create);
 	}
-
+	
+	/**
+	 * USER FUNCTIONS
+	 */
 	public JSONObject getAllUsers(){
 		return executeGenericSQL("SELECT * FROM users");
 	}
@@ -56,4 +70,26 @@ public class UserDB extends SqlDB {
 	public JSONObject removeUser(int zUserID) {
 		return executeGenericSQL("DELETE FROM users WHERE id="+zUserID);
 	}
+	
+	/**
+	 * API ENDPOINTS
+	 */
+	public JSONObject getAllEndpoionts(){
+		return executeGenericSQL("SELECT * FROM apiendpoints");
+	}
+	
+	public JSONObject getEndpoiont(String zEndpoint){
+		return executeGenericSQL("SELECT * FROM apiendpoints WHERE endpoint='"+zEndpoint+"'");
+	}
+	
+	public JSONObject addendpoint(String zEndpoint, String zCommand) {
+		String sql = "INSERT INTO apiendpoints(endpoint, command, created) VALUES "
+				+ "('"+zEndpoint+"','"+zCommand+"',"+System.currentTimeMillis()+")";
+		return executeGenericSQL(sql);
+	}
+	
+	public JSONObject removeEndpoint(int zEndpointID) {
+		return executeGenericSQL("DELETE FROM apiendpoints WHERE id="+zEndpointID);
+	}
+	
 }

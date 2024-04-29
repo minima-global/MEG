@@ -16,9 +16,8 @@ public class logs extends BasicPage{
 	@Override
 	public void writePage(HttpServletRequest request, PrintWriter zOut) {
 		
-		//Show all current Users..
+		//Show logs..
 		JSONObject users = MegDB.getDB().getLogsDB().getLogs(10, 0);
-		Log.log(users.toString());		
 		
 		zOut.println("<h3>LOGS</h3>");
 		zOut.println("<table border=0 style=\"border-spacing:4;\">"
