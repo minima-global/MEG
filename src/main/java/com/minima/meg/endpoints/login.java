@@ -24,7 +24,7 @@ public class login extends HttpServlet {
 	
 		HttpSession session = request.getSession();
 		if(Log.LOGGING_ENABLED) {
-			Log.log("GET "+request.getRequestURI());
+			Log.log("POST "+request.getRequestURI());
 		}
 		
 		PrintWriter out = response.getWriter();

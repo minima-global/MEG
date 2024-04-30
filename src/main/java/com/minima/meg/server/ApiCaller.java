@@ -14,7 +14,7 @@ import org.json.JSONObject;
 import com.minima.meg.database.MegDB;
 import com.minima.meg.utils.Log;
 
-public class apicaller extends HttpServlet {
+public class ApiCaller extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException, IOException {
@@ -38,13 +38,15 @@ public class apicaller extends HttpServlet {
 	
 	public void doAppiCall(String zType, HttpServletRequest request, String zUser, PrintWriter zOut) {
 		
+		//Check the Auth token is a valid api-caller
+		String auth = request.getHeader("Authorization");
+		
 		//Get the user session
 		HttpSession session = request.getSession();
 		JSONObject usersesh = UserSessions.getUserFromSession(session.getId());
 		
 		String apicall = request.getRequestURI().substring(5);
-		Log.log("API CALL "+zType+" : "+apicall);
-
+		
 		//Find this call..
 		JSONObject ep = MegDB.getDB().getUserDB().getEndpoiont(apicall);
 		if(ep.getInt("count")==0) {

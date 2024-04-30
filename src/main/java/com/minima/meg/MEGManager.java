@@ -10,6 +10,8 @@ public class MEGManager {
 
 	private JettyServer mMainServer;
 	
+	private TriggerProcessor mTriggerProcessor;
+	
 	public MEGManager() {}
 	
 	public void doStartUp() throws Exception {
@@ -25,12 +27,18 @@ public class MEGManager {
 		//Load all the databases
 		MegDB.getDB().loadAllDB();
 		
+		//Create the Trigger Backend Processor
+		mTriggerProcessor = new TriggerProcessor();
+		
 		//Create and start Main server 
         mMainServer = new JettyServer();
         mMainServer.start();
 	}
 	
 	public void doShutDown() throws Exception {
+		
+		//Stop the Trigger Thread
+		mTriggerProcessor.stopMessageProcessor();
 		
 		//Save all the DB
 		MegDB.getDB().saveAllDB();

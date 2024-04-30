@@ -37,7 +37,19 @@ public class UserDB extends SqlDB {
 		create 		= "CREATE TABLE IF NOT EXISTS `apiendpoints` ("
 						+ "  `id` bigint auto_increment,"
 						+ "  `endpoint` varchar(256) NOT NULL,"
-						+ "  `command` varchar(256) NOT NULL,"
+						+ "  `command` varchar(4096) NOT NULL,"
+						+ "  `created` bigint NOT NULL"
+						+ ")";
+		
+		//Run it..
+		stmt.execute(create);
+		
+		//Create trigger table
+		create 		= "CREATE TABLE IF NOT EXISTS `triggers` ("
+						+ "  `id` bigint auto_increment,"
+						+ "  `trigger` varchar(256) NOT NULL,"
+						+ "  `extradata` varchar(256) NOT NULL,"
+						+ "  `url` varchar(1024) NOT NULL,"
 						+ "  `created` bigint NOT NULL"
 						+ ")";
 		
@@ -82,7 +94,7 @@ public class UserDB extends SqlDB {
 		return executeGenericSQL("SELECT * FROM apiendpoints WHERE endpoint='"+zEndpoint+"'");
 	}
 	
-	public JSONObject addendpoint(String zEndpoint, String zCommand) {
+	public JSONObject addEndpoint(String zEndpoint, String zCommand) {
 		String sql = "INSERT INTO apiendpoints(endpoint, command, created) VALUES "
 				+ "('"+zEndpoint+"','"+zCommand+"',"+System.currentTimeMillis()+")";
 		return executeGenericSQL(sql);
@@ -90,6 +102,27 @@ public class UserDB extends SqlDB {
 	
 	public JSONObject removeEndpoint(int zEndpointID) {
 		return executeGenericSQL("DELETE FROM apiendpoints WHERE id="+zEndpointID);
+	}
+	
+	/**
+	 * TRIGGERS
+	 */
+	public JSONObject getAllTriggers(){
+		return executeGenericSQL("SELECT * FROM triggers");
+	}
+	
+	public JSONObject getTrigger(String zTrigger){
+		return executeGenericSQL("SELECT * FROM triggers WHERE trigger='"+zTrigger+"'");
+	}
+	
+	public JSONObject addTrigger(String zTrigger, String zExtraData, String zURL) {
+		String sql = "INSERT INTO triggers(trigger, extradata, url, created) VALUES "
+				+ "('"+zTrigger+"','"+zExtraData+"','"+zURL+"',"+System.currentTimeMillis()+")";
+		return executeGenericSQL(sql);
+	}
+	
+	public JSONObject removeTrigger(int zTriggerID) {
+		return executeGenericSQL("DELETE FROM triggers WHERE id="+zTriggerID);
 	}
 	
 }

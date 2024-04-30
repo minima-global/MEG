@@ -1,4 +1,4 @@
-package com.minima.meg.endpoints.api;
+package com.minima.meg.endpoints.trigger;
 
 import java.io.PrintWriter;
 
@@ -11,7 +11,7 @@ import com.minima.meg.database.MegDB;
 import com.minima.meg.server.BasicPage;
 import com.minima.meg.server.UserSessions;
 
-public class newendpoint extends BasicPage {
+public class removetrigger extends BasicPage {
 	
 	@Override
 	public void writePage(HttpServletRequest request, PrintWriter zOut) {
@@ -24,16 +24,14 @@ public class newendpoint extends BasicPage {
 			return;
 		}
 		
-		String endpoint = request.getParameter("endpoint");
-		String command  = request.getParameter("command");
+		//Delete this endpoint
+		int endid = Integer.parseInt(request.getParameter("triggerid"));
 		
-		//Add to the database
-		MegDB.getDB().getUserDB().addEndpoint(endpoint, command);
+		MegDB.getDB().getUserDB().removeEndpoint(endid);
 		
-		zOut.println("<center><br><br>Endpoint "+endpoint+" added</center>"); 
+		zOut.println("<center><br><br>Trigger removed</center>");
 		
 		//Add a DB LOG
-		MegDB.getDB().getLogsDB().addLog("ADD ENDPOINT", endpoint, usersesh.getString("username"));
+		MegDB.getDB().getLogsDB().addLog("REMOVE TRIGGER", endid+"", usersesh.getString("username"));
 	}
-	
 }

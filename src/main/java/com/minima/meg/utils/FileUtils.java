@@ -1,6 +1,9 @@
 package com.minima.meg.utils;
 
 import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -33,6 +36,36 @@ public class FileUtils {
         }
             
         return outputStream.toByteArray();
+	}
+	
+	public static void writeDataToFile(File zFile, byte[] zData) throws IOException {
+		//Check Parent
+		File parent = zFile.getAbsoluteFile().getParentFile();
+		if(!parent.exists()) {
+			parent.mkdirs();
+		}
+		
+		//Delete the old..
+		if(zFile.exists()) {
+			zFile.delete();
+			zFile.createNewFile();
+		}else {
+			zFile.createNewFile();
+		}
+		
+		//Write it out..
+		FileOutputStream fos = new FileOutputStream(zFile, false);
+		DataOutputStream fdos = new DataOutputStream(fos);
+		
+		//And write it..
+		fdos.write(zData);
+		
+		//flush
+		fdos.flush();
+		fos.flush();
+		
+		fdos.close();
+		fos.close();
 	}
 	
 	public static String getContentType(String zFile) {
