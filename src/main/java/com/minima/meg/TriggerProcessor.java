@@ -92,6 +92,9 @@ public class TriggerProcessor extends MessageProcessor{
 					
 					//And now POST it..
 					HTTPClient.POST("http://127.0.0.1:8080/testpost", fulldata.toString());
+				
+					//Add a log
+					MegDB.getDB().getLogsDB().addLog("TRIGGER EVENT", trigger, "");
 				}
 			}
 		}
