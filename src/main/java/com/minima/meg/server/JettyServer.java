@@ -13,6 +13,7 @@ import com.minima.meg.endpoints.logoff;
 import com.minima.meg.endpoints.logs;
 import com.minima.meg.endpoints.minimanode;
 import com.minima.meg.endpoints.myprofile;
+import com.minima.meg.endpoints.testpost;
 import com.minima.meg.endpoints.webhook;
 import com.minima.meg.endpoints.administrator.admin;
 import com.minima.meg.endpoints.administrator.newuser;
@@ -83,6 +84,8 @@ public class JettyServer {
         servletHandler.addServletWithMapping(logs.class, "/logs.html");
         
         servletHandler.addServletWithMapping(webhook.class, "/webhook");
+        
+        servletHandler.addServletWithMapping(testpost.class, "/testpost");
         
         
         //Set Servlet handler to Server

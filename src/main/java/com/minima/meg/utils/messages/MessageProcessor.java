@@ -139,7 +139,7 @@ public abstract class MessageProcessor extends MessageStack implements Runnable{
             		}
             		
                 }catch(Exception exc){
-                	Log.log("MESSAGE PROCESSING ERROR @ "+msg.getMessageType());
+                	exc.printStackTrace();
                 } 
                 
                 //Are there more messages..

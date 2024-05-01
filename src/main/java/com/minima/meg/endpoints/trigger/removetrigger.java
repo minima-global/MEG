@@ -27,7 +27,7 @@ public class removetrigger extends BasicPage {
 		//Delete this endpoint
 		int endid = Integer.parseInt(request.getParameter("triggerid"));
 		
-		MegDB.getDB().getUserDB().removeEndpoint(endid);
+		MegDB.getDB().getUserDB().removeTrigger(endid);
 		
 		zOut.println("<center><br><br>Trigger removed</center>");
 		
