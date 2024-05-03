@@ -8,5 +8,12 @@ public class PrefsDB extends JsonDB {
 		super();
 	}
 	
+	public void setMinimaNode(String zHost) {
+		setString("minima_node", zHost);
+	}
+	
+	public String getMinimaNode() {
+		return getString("minima_node","");
+	}
 	
 }

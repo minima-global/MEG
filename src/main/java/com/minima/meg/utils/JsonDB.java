@@ -9,6 +9,7 @@ import java.nio.charset.Charset;
 import java.text.ParseException;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class JsonDB {
@@ -27,41 +28,30 @@ public class JsonDB {
 	}
 
 	public boolean exists(String zName) {
-		return mParams.get(zName) != null;
+		return mParams.has(zName);
 	}
 	
 	/**
 	 * Boolean functions
 	 */
 	public boolean getBoolean(String zName, boolean zDefault) {
-		if(mParams.get(zName) == null) {
-			return zDefault;
+		if(exists(zName)) {
+			return mParams.getBoolean(zName);
 		}
 		
-		return (boolean)mParams.get(zName);
+		return zDefault;
 	}
 	
 	public void setBoolean(String zName, boolean zData) {
 		mParams.put(zName, zData);
 	}
 	
-	/**
-	 * String functions
-	 */
-	public String getString(String zName) {
-		if(mParams.get(zName) == null) {
-			return null;
-		}
-		
-		return (String)mParams.get(zName);
-	}
-	
 	public String getString(String zName, String zDefault) {
-		if(mParams.get(zName) == null) {
-			return zDefault;
+		if(exists(zName)) {
+			return mParams.getString(zName);
 		}
 		
-		return (String)mParams.get(zName);
+		return zDefault;
 	}
 	
 	public void setString(String zName, String zData) {
@@ -76,11 +66,11 @@ public class JsonDB {
 	}
 	
 	public JSONObject getJSON(String zName, JSONObject zDefault) {
-		if(mParams.get(zName) == null) {
-			return zDefault;
+		if(exists(zName)) {
+			return mParams.getJSONObject(zName);
 		}
 		
-		return (JSONObject)mParams.get(zName);
+		return zDefault;
 	}
 	
 	/**
@@ -90,12 +80,12 @@ public class JsonDB {
 		mParams.put(zName, zJSONArray);
 	}
 	
-	public JSONArray getJSONArray(String zName ) {
-		if(mParams.get(zName) == null) {
-			return new JSONArray();
+	public JSONArray getJSONArray(String zName, JSONArray zDefault) {
+		if(exists(zName)) {
+			return mParams.getJSONArray(zName);
 		}
 		
-		return (JSONArray)mParams.get(zName);
+		return zDefault;
 	}
 	
 	/**
