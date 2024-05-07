@@ -20,7 +20,7 @@ public class minimanode extends BasicPage {
 		//Add new User
 		zOut.println("<h3>Host Details</h3>");
 		
-		zOut.println("<center>"
+		zOut.println(""
 				+ "<form action=\"setnode.html\" method=\"post\">\r\n"
 				+ "		<table>\r\n"
 				+ "			<tr>\r\n"
@@ -44,6 +44,6 @@ public class minimanode extends BasicPage {
 		zOut.println("<br>"
 				+ ""
 				+ "<button onclick=\"location.href='setnode.html?checkonly=1'\">TEST CONNECTION</button>"
-				+ "</center>");
+				+ "");
 	}
 }
