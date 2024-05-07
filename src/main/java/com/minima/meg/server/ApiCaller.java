@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONObject;
 
 import com.minima.meg.database.MegDB;
-import com.minima.meg.utils.Log;
 
 public class ApiCaller extends HttpServlet {
 

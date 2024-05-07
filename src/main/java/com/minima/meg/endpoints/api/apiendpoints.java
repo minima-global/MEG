@@ -1,7 +1,6 @@
 package com.minima.meg.endpoints.api;
 
 import java.io.PrintWriter;
-import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,7 +8,6 @@ import org.json.JSONObject;
 
 import com.minima.meg.database.MegDB;
 import com.minima.meg.server.BasicPage;
-import com.minima.meg.utils.Log;
 
 public class apiendpoints extends BasicPage {
 
@@ -49,14 +47,26 @@ public class apiendpoints extends BasicPage {
 		
 		JSONObject endpoints = MegDB.getDB().getUserDB().getAllEndpoionts();
 		
+		zOut.println("<center>"
+				+ "<table border=0 style=\"width:100%;border-spacing:4;\">"
+				+ "		<tr>"
+				+ "			<td><b>ENDPOINT</b></td>"
+				+ "			<td><b>COMMAND</b></td>"
+				+ "			<td>&nbsp;</td>"
+				+ "		</tr>");
+		
+		//Now output the rows
 		int rows = endpoints.getInt("count");
 		for(int i=0;i<rows;i++) {
 			JSONObject row = endpoints.getJSONArray("rows").getJSONObject(i);
 			
-			zOut.println("ENDPOINT : "+row.getString("ENDPOINT")+"<br>");
-			zOut.println("COMMAND  : "+row.getString("COMMAND")+"<br>");
-			zOut.println("<a class=menu href='removeendpoint.html?endid="+row.getLong("ID")+"'>REMOVE</a><br><br>");
+			zOut.println("<tr>");
+			zOut.println("<td>"+row.getString("ENDPOINT")+"</td>");
+			zOut.println("<td>"+row.getString("COMMAND")+"</td>");
+			zOut.println("<td><a class=menu href='removeendpoint.html?endid="+row.getLong("ID")+"'>REMOVE</a></td>");
+			zOut.println("</tr>");
 		}
-		
+		zOut.println("</table></center>");
+	
 	}
 }

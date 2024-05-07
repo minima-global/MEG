@@ -31,7 +31,8 @@ public class admin extends BasicPage {
 		JSONObject users = MegDB.getDB().getUserDB().getAllUsers();
 				
 		zOut.println("<h3>All Users</h3>");
-		zOut.println("<table border=0 style=\"border-spacing:4;\">"
+		zOut.println("<center>"
+				+ "<table border=0 style=\"width:100%;border-spacing:4;\">"
 				+ "		<tr>"
 				+ "			<td><b>Username</b></td>"
 				+ "			<td><b>Password</b></td>"
@@ -53,7 +54,7 @@ public class admin extends BasicPage {
 			zOut.println("<td><a class=menu href='removeuser.html?userid="+row.getLong("ID")+"'>REMOVE</a></td>");
 			zOut.println("</tr>");
 		}
-		zOut.println("</table>");
+		zOut.println("</table></center>");
 		
 		//Add new User
 		zOut.println("<h3>Add User</h3>");

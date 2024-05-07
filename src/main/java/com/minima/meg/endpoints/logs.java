@@ -9,7 +9,6 @@ import org.json.JSONObject;
 
 import com.minima.meg.database.MegDB;
 import com.minima.meg.server.BasicPage;
-import com.minima.meg.utils.Log;
 
 public class logs extends BasicPage{
 
@@ -21,13 +20,17 @@ public class logs extends BasicPage{
 			offset = "0";
 		}
 		
+		//How many logs to get in a go
+		int lognum = 10;
+		
 		//Show logs..
-		JSONObject users = MegDB.getDB().getLogsDB().getLogs(10, 0);
+		JSONObject users = MegDB.getDB().getLogsDB().getLogs(lognum, Integer.parseInt(offset));
 		
 		zOut.println("<h3>LOGS</h3>");
 		zOut.println("<center>");
 		zOut.println("<table border=0 style=\"width:100%;border-spacing:4;\">"
 				+ "		<tr>"
+				+ "			<td><b>ID</b></td>"
 				+ "			<td width=100%><b>Event</b></td>"
 				+ "			<td><b>Details</b></td>"
 				+ "			<td><b>User</b></td>"
@@ -40,6 +43,7 @@ public class logs extends BasicPage{
 			JSONObject row = users.getJSONArray("rows").getJSONObject(i);
 			
 			zOut.println("<tr>");
+			zOut.println("<td nowrap>"+row.getString("ID")+"</td>");
 			zOut.println("<td nowrap>"+row.getString("EVENT")+"</td>");
 			zOut.println("<td nowrap>"+row.getString("DETAILS")+"</td>");
 			zOut.println("<td nowrap>"+row.getString("USERNAME")+"</td>");
@@ -47,6 +51,31 @@ public class logs extends BasicPage{
 			zOut.println("</tr>");
 		}
 		zOut.println("</table>");
+		
+		zOut.println("<br>");
+		zOut.println("<script type=\"text/javascript\">\n"
+				+ "	var offset		="+offset+";\n"
+				+ "	var offsetchange="+lognum+";\n"
+				+ "	\n"
+				+ "	function nextPage(){\n"
+				+ "		var newoffset=offset+offsetchange;\n"
+				+ "		location.href='logs.html?offset='+newoffset;\n"
+				+ "	}\n"
+				+ "	\n"
+				+ "	function prevPage(){\n"
+				+ "		var newoffset=offset-offsetchange;\n"
+				+ "		if(newoffset<0){\n"
+				+ "			newoffset=0;\n"
+				+ "		}\n"
+				+ "		location.href='logs.html?offset='+newoffset;\n"
+				+ "	}\n"
+				+ "	\n"
+				+ "</script>\n"
+				+ "	\n"
+				+ "<button onclick=\"prevPage();\">PREVIOUS</button>&nbsp;&nbsp;\n"
+				+ "<button onclick=\"nextPage();\">NEXT</button>\n"
+				+ "");
+		
 		zOut.println("</center>");
 		
 		

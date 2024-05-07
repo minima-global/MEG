@@ -43,16 +43,29 @@
 	<td class=mainview>
 		
 		<br><br>
+
+<script type="text/javascript">
+	var offset		=0;
+	var offsetchange=10;
 	
-		<button onclick="loction.href='setnode.html?checkonly=1'">TEST CONNECTION</button>
-		
-		<pre>
-		
-		{"command":"block","status":true,"pending":false,"response":{"block":"714234","hash":"0x000000099DDEBCD51A2937AFB31C145609803A241D99FB020CCCBC8ED28B1519","timemilli":"1709285625357","date":"Fri Mar 01 09:33:45 GMT 2024"}}
-		
-		
-		</pre>
-		
+	function nextPage(){
+		var newoffset=offset+offsetchange;
+		loction.href='logs.html?offset='+newoffset;
+	}
+	
+	function prevPage(){
+		var newoffset=offset-offsetchange;
+		if(newoffset<0){
+			newoffset=0;
+		}
+		loction.href='logs.html?offset='+newoffset;
+	}
+	
+</script>
+	
+<button onclick="prevPage();">PREVIOUS</button>&nbsp;&nbsp;
+<button onclick="nextPage();">NEXT</button>
+				
 	</td>
 </tr>
 

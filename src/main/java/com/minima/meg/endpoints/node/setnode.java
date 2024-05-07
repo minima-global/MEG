@@ -9,8 +9,10 @@ import org.json.JSONObject;
 
 import com.minima.meg.database.MegDB;
 import com.minima.meg.server.BasicPage;
+import com.minima.meg.server.JettyServer;
 import com.minima.meg.server.UserSessions;
 import com.minima.meg.utils.HTTPClient;
+import com.minima.meg.utils.Log;
 
 public class setnode extends BasicPage {
 	
@@ -29,13 +31,27 @@ public class setnode extends BasicPage {
 		if(request.getParameter("checkonly") != null) {
 			
 		}else {
-			String host = request.getParameter("hostip");
+			String host 	= request.getParameter("hostip");
+			String meghost	= request.getParameter("megip");
+			if(!meghost.endsWith("/")) {
+				meghost=meghost+"/";
+			}
 			
 			//Add to the database
 			MegDB.getDB().getPrefsDB().setMinimaNode(host);
+			MegDB.getDB().getPrefsDB().setMEGNode(meghost);
 		
 			//Add a DB LOG
 			MegDB.getDB().getLogsDB().addLog("SET MINIMA NODE", host, usersesh.getString("username"));
+			
+			//Set the WEBHOOK
+			try {
+				String res = HTTPClient.runMinimaCMD("webhooks action:add "+meghost+"webhook");
+			} catch (Exception e) {
+				Log.log(e+" "+host);
+				
+				return;
+			}
 			
 			zOut.println("<center><br><br>Minima node host set : "+host+"</center>"); 
 		}
@@ -45,7 +61,7 @@ public class setnode extends BasicPage {
 		try {
 			rsp = HTTPClient.runMinimaCMD("block");
 		} catch (Exception e) {
-			e.printStackTrace();
+			Log.log(e.toString());
 		}
 		
 		zOut.println("<center><br><br><div style='word-break:break-all;width:500;'>"+rsp+"</div></center>");

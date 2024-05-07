@@ -8,14 +8,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 
-import com.minima.meg.database.MegDB;
-import com.minima.meg.mainsite.footer;
-import com.minima.meg.mainsite.header;
-import com.minima.meg.server.UserSessions;
 import com.minima.meg.utils.Log;
 
 public class testpost extends HttpServlet {
@@ -37,6 +32,9 @@ public class testpost extends HttpServlet {
 		//Now make a JSON
 		JSONObject json = new JSONObject(tot);
 
+		//SHOW OUTPUT
+		Log.log("TESTPOST REC : "+json.toString());
+		
 		PrintWriter out = response.getWriter();
 		response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_OK);

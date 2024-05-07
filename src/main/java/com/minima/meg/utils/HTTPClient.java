@@ -1,6 +1,5 @@
 package com.minima.meg.utils;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import org.eclipse.jetty.client.HttpClient;

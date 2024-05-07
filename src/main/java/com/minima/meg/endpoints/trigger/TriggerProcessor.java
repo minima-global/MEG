@@ -1,4 +1,4 @@
-package com.minima.meg;
+package com.minima.meg.endpoints.trigger;
 
 import org.json.JSONObject;
 
@@ -34,12 +34,14 @@ public class TriggerProcessor extends MessageProcessor{
 			JSONObject data = (JSONObject) zMessage.getObject("data");
 			String datastr	= data.toString();
 			
+			//Log.log("WEBHOOK : "+datastr);
+			
 			//Get all the events we are listening for..
 			JSONObject alltriggers = MegDB.getDB().getUserDB().getAllTriggers();
 			
 			int rows = alltriggers.getInt("count");
 			for(int i=0;i<rows;i++) {
-				JSONObject row = alltriggers.getJSONArray("rows").getJSONObject(i);
+				JSONObject row 		= alltriggers.getJSONArray("rows").getJSONObject(i);
 			
 				String trigger 		= row.getString("TRIGGER");
 				String extradata 	= row.getString("EXTRADATA");
@@ -69,6 +71,13 @@ public class TriggerProcessor extends MessageProcessor{
 					if(datastr.contains(extradata)) {
 						callit = true;
 					}
+				
+				}else if(trigger.equals("STATEVAR_USED") && event.equals("NEWTXPOW")) {
+					
+					//Check for ExtraData
+					if(datastr.contains(extradata)) {
+						callit = true;
+					}
 				}
 				
 				//Valid trigger ?
@@ -90,11 +99,18 @@ public class TriggerProcessor extends MessageProcessor{
 					fulldata.put("meg", triggerjson);
 					fulldata.put("minima", minima);
 					
-					//And now POST it..
-					HTTPClient.POST("http://127.0.0.1:8080/testpost", fulldata.toString());
-				
-					//Add a log
-					MegDB.getDB().getLogsDB().addLog("TRIGGER EVENT", trigger, "");
+					try {
+						//And now POST it..
+						HTTPClient.POST(url, fulldata.toString());
+						
+						//Add a log
+						MegDB.getDB().getLogsDB().addLog("TRIGGER EVENT", trigger, "Minima");
+						
+					}catch(Exception exc) {
+						
+						//Add a log
+						MegDB.getDB().getLogsDB().addLog("TRIGGER EVENT FAIL", trigger+" "+exc+" "+url, "Minima");
+					}
 				}
 			}
 		}

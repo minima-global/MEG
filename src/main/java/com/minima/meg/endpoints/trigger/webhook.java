@@ -1,4 +1,4 @@
-package com.minima.meg.endpoints;
+package com.minima.meg.endpoints.trigger;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,16 +8,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 
-import com.minima.meg.TriggerProcessor;
-import com.minima.meg.database.MegDB;
-import com.minima.meg.mainsite.footer;
-import com.minima.meg.mainsite.header;
-import com.minima.meg.server.UserSessions;
-import com.minima.meg.utils.Log;
 import com.minima.meg.utils.messages.Message;
 
 public class webhook extends HttpServlet {

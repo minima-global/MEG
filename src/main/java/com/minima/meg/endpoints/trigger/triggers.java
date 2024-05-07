@@ -9,7 +9,6 @@ import org.json.JSONObject;
 
 import com.minima.meg.database.MegDB;
 import com.minima.meg.server.BasicPage;
-import com.minima.meg.utils.Log;
 
 public class triggers extends BasicPage {
 
@@ -31,6 +30,7 @@ public class triggers extends BasicPage {
 				+ "					  <option value=\"NEWTXPOW\">NEWTXPOW</option>\r\n"
 				+ "					  <option value=\"ADDRESS_USED\">ADDRESS_USED (use extra data..)</option>\r\n"
 				+ "					  <option value=\"TOKEN_USED\">TOKEN_USED (use extra data..)</option>\r\n"
+				+ "					  <option value=\"STATEVAR_USED\">STATEVAR_USED (use extra data..)</option>\r\n"
 				+ "					</select>\r\n"
 				+ "				</td>\r\n"
 				+ "			</tr>\r\n"
@@ -50,7 +50,7 @@ public class triggers extends BasicPage {
 				+ "		</form>");
 		
 		//Some info
-		zOut.println("On a trigger event a POST request is made with the relevant JSON data<br>");
+		zOut.println("On a trigger event a POST request is made with the relevant JSON data to the specified URL<br>");
 		zOut.println("You can add multiple triggers for the same event");
 		
 		//All endpoints
@@ -58,15 +58,28 @@ public class triggers extends BasicPage {
 		
 		JSONObject endpoints = MegDB.getDB().getUserDB().getAllTriggers();
 		
+		zOut.println("<center>"
+				+ "<table border=0 style=\"width:100%;border-spacing:4;\">"
+				+ "		<tr>"
+				+ "			<td><b>TRIGGER</b></td>"
+				+ "			<td><b>EXTRADATA</b></td>"
+				+ "			<td><b>URL</b></td>"
+				+ "			<td>&nbsp;</td>"
+				+ "		</tr>");
+		
+		//Now output the rows
 		int rows = endpoints.getInt("count");
 		for(int i=0;i<rows;i++) {
 			JSONObject row = endpoints.getJSONArray("rows").getJSONObject(i);
 			
-			zOut.println("TRIGGER : "+row.getString("TRIGGER")+"<br>");
-			zOut.println("EXTRADATA : "+row.getString("EXTRADATA")+"<br>");
-			zOut.println("URL  : "+row.getString("URL")+"<br>");
-			zOut.println("<a class=menu href='removetrigger.html?triggerid="+row.getLong("ID")+"'>REMOVE</a><br><br>");
+			zOut.println("<tr>");
+			zOut.println("<td>"+row.getString("TRIGGER")+"</td>");
+			zOut.println("<td>"+row.getString("EXTRADATA")+"</td>");
+			zOut.println("<td>"+row.getString("URL")+"</td>");
+			zOut.println("<td><a class=menu href='removetrigger.html?triggerid="+row.getLong("ID")+"'>REMOVE</a></td>");
+			zOut.println("</tr>");
 		}
-		
+		zOut.println("</table></center>");
+				
 	}
 }

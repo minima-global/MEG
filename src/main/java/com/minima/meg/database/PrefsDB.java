@@ -15,5 +15,12 @@ public class PrefsDB extends JsonDB {
 	public String getMinimaNode() {
 		return getString("minima_node","");
 	}
+
+	public void setMEGNode(String zHost) {
+		setString("meg_node", zHost);
+	}
 	
+	public String getMEGNode() {
+		return getString("meg_node","");
+	}
 }

@@ -12,7 +12,6 @@ import com.minima.meg.endpoints.login;
 import com.minima.meg.endpoints.logoff;
 import com.minima.meg.endpoints.logs;
 import com.minima.meg.endpoints.testpost;
-import com.minima.meg.endpoints.webhook;
 import com.minima.meg.endpoints.administrator.admin;
 import com.minima.meg.endpoints.administrator.newuser;
 import com.minima.meg.endpoints.administrator.removeuser;
@@ -26,8 +25,11 @@ import com.minima.meg.endpoints.profile.updatepassword;
 import com.minima.meg.endpoints.trigger.newtrigger;
 import com.minima.meg.endpoints.trigger.removetrigger;
 import com.minima.meg.endpoints.trigger.triggers;
+import com.minima.meg.endpoints.trigger.webhook;
 
 public class JettyServer {
+	
+	public static final int MEG_PORT = 8080;
 	
 	private Server server;
 
@@ -48,7 +50,7 @@ public class JettyServer {
         
         //Create  Connector on a port
         ServerConnector connector = new ServerConnector(server);
-        connector.setPort(8080);
+        connector.setPort(MEG_PORT);
         server.addConnector(connector);
 
         //Create a session handler

@@ -20,6 +20,7 @@ public class UserSessions {
 		JSONObject usersesh = mUserSessions.get(zSessionid);
 		if(usersesh == null) {
 			usersesh = new JSONObject();
+			usersesh.put("userid", -1);
 			usersesh.put("username", "admin");
 			usersesh.put("level", "admin");
 		}
