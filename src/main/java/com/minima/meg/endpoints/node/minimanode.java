@@ -30,5 +30,9 @@ public class minimanode extends BasicPage {
 				+ "			</tr>\r\n"
 				+ "		</table>\r\n"
 				+ "		</form>");
+		
+		zOut.println("<br>"
+				+ ""
+				+ "<button onclick=\"location.href='setnode.html?checkonly=1'\">TEST CONNECTION</button>");
 	}
 }

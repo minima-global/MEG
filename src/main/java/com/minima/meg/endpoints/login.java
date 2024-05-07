@@ -37,6 +37,7 @@ public class login extends HttpServlet {
 		
 		int count	 = user.getInt("count");
 		String level = "";
+		int userid  = -1;
 		
 		//Command line
 		if(username.equals("admin") && password.equals("root")) {
@@ -60,9 +61,11 @@ public class login extends HttpServlet {
 			//Create a session object
 			JSONObject userjson = user.getJSONArray("rows").getJSONObject(0);
 			level 				= userjson.getString("LEVEL");
+			userid				= userjson.getInt("ID");
 		}
 		
 		JSONObject userobj  = new JSONObject();
+		userobj.put("userid", userid);
 		userobj.put("username", username);
 		userobj.put("level", level);
 		

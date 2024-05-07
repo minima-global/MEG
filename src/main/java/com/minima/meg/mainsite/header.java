@@ -37,7 +37,7 @@ public class header {
 				+ "			<tr><td>&nbsp;</td></tr>\r\n"
 				+ "			<tr><td nowrap>&nbsp;<a class=menu href='minimanode.html'>Minima Node</a>&nbsp;</td></tr>\r\n"
 				+ "			<tr><td nowrap>&nbsp;<a class=menu href='triggers.html'>Triggers</a>&nbsp;</td></tr>\r\n"
-				+ "			<tr><td nowrap>&nbsp;<a class=menu href='apiendpoints.html'>API Endpoints</a>&nbsp;</td></tr>\r\n"
+				+ "			<tr><td nowrap>&nbsp;<a class=menu href='apiendpoints.html'>Endpoints</a>&nbsp;</td></tr>\r\n"
 				+ "			<tr><td nowrap>&nbsp;<a class=menu href='logs.html'>Logs</a>&nbsp;</td></tr>\r\n"
 				+ "			<tr><td>&nbsp;</td></tr>\r\n");
 		

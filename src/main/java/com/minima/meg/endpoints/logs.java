@@ -22,7 +22,7 @@ public class logs extends BasicPage{
 		}
 		
 		//Show logs..
-		JSONObject users = MegDB.getDB().getLogsDB().getLogs(20, 0);
+		JSONObject users = MegDB.getDB().getLogsDB().getLogs(10, 0);
 		
 		zOut.println("<h3>LOGS</h3>");
 		zOut.println("<center>");

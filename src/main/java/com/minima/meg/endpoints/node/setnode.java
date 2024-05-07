@@ -25,15 +25,23 @@ public class setnode extends BasicPage {
 			return;
 		}
 		
-		String host = request.getParameter("hostip");
+		//Is this a check connection
+		if(request.getParameter("checkonly") != null) {
+			
+		}else {
+			String host = request.getParameter("hostip");
+			
+			//Add to the database
+			MegDB.getDB().getPrefsDB().setMinimaNode(host);
 		
-		//Add to the database
-		MegDB.getDB().getPrefsDB().setMinimaNode(host);
-		
-		zOut.println("<center><br><br>Minima node host set : "+host+"</center>"); 
+			//Add a DB LOG
+			MegDB.getDB().getLogsDB().addLog("SET MINIMA NODE", host, usersesh.getString("username"));
+			
+			zOut.println("<center><br><br>Minima node host set : "+host+"</center>"); 
+		}
 		
 		//Test a function..
-		String rsp = "Error..";
+		String rsp = "Could not connect to to Minima node..";
 		try {
 			rsp = HTTPClient.runMinimaCMD("block");
 		} catch (Exception e) {
@@ -41,8 +49,5 @@ public class setnode extends BasicPage {
 		}
 		
 		zOut.println("<center><br><br><div style='word-break:break-all;width:500;'>"+rsp+"</div></center>");
-
-		//Add a DB LOG
-		MegDB.getDB().getLogsDB().addLog("SET MINIMA NODE", host, usersesh.getString("username"));
 	}
 }

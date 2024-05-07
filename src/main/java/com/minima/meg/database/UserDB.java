@@ -83,6 +83,11 @@ public class UserDB extends SqlDB {
 		return executeGenericSQL("DELETE FROM users WHERE id="+zUserID);
 	}
 	
+	public JSONObject updatePassword(int zUserID, String zPassword) {
+		String sql = "UPDATE users SET password='"+zPassword+"' WHERE id="+zUserID;
+		return executeGenericSQL(sql);
+	}
+	
 	/**
 	 * API ENDPOINTS
 	 */

@@ -11,7 +11,6 @@ import com.minima.meg.endpoints.help;
 import com.minima.meg.endpoints.login;
 import com.minima.meg.endpoints.logoff;
 import com.minima.meg.endpoints.logs;
-import com.minima.meg.endpoints.myprofile;
 import com.minima.meg.endpoints.testpost;
 import com.minima.meg.endpoints.webhook;
 import com.minima.meg.endpoints.administrator.admin;
@@ -22,6 +21,8 @@ import com.minima.meg.endpoints.api.newendpoint;
 import com.minima.meg.endpoints.api.removeendpoint;
 import com.minima.meg.endpoints.node.minimanode;
 import com.minima.meg.endpoints.node.setnode;
+import com.minima.meg.endpoints.profile.myprofile;
+import com.minima.meg.endpoints.profile.updatepassword;
 import com.minima.meg.endpoints.trigger.newtrigger;
 import com.minima.meg.endpoints.trigger.removetrigger;
 import com.minima.meg.endpoints.trigger.triggers;
@@ -82,6 +83,7 @@ public class JettyServer {
         servletHandler.addServletWithMapping(setnode.class, "/setnode.html");
         
         servletHandler.addServletWithMapping(myprofile.class, "/myprofile.html");
+        servletHandler.addServletWithMapping(updatepassword.class, "/updatepassword.html");
         
         servletHandler.addServletWithMapping(logs.class, "/logs.html");
         
