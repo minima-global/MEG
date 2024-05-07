@@ -12,6 +12,8 @@ import com.minima.meg.endpoints.login;
 import com.minima.meg.endpoints.logoff;
 import com.minima.meg.endpoints.logs;
 import com.minima.meg.endpoints.testpost;
+import com.minima.meg.endpoints.wallet;
+import com.minima.meg.endpoints.walletapi;
 import com.minima.meg.endpoints.administrator.admin;
 import com.minima.meg.endpoints.administrator.newuser;
 import com.minima.meg.endpoints.administrator.removeuser;
@@ -62,6 +64,7 @@ public class JettyServer {
         
         //Add all the handlers
         servletHandler.addServletWithMapping(ApiCaller.class, "/api/*");
+        servletHandler.addServletWithMapping(walletapi.class, "/wallet/*");
         
         servletHandler.addServletWithMapping(DefaultLoader.class, "/");
         servletHandler.addServletWithMapping(login.class, "/login.html");
@@ -86,6 +89,8 @@ public class JettyServer {
         
         servletHandler.addServletWithMapping(myprofile.class, "/myprofile.html");
         servletHandler.addServletWithMapping(updatepassword.class, "/updatepassword.html");
+        
+        servletHandler.addServletWithMapping(wallet.class, "/wallet.html");
         
         servletHandler.addServletWithMapping(logs.class, "/logs.html");
         
