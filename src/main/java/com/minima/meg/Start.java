@@ -105,7 +105,7 @@ public class Start
   	            	input = input.trim();
   	            	       	
   	            	//Print it out
-  	            	if(input.equals("quit")) {
+  	            	if(input.equals("quit") || input.equals("exit")) {
   	            		Log.log("Shutdown initiated..");
   	            		break;
   	            	}else {

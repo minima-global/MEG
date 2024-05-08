@@ -39,6 +39,8 @@ public class MEGManager {
 		//Create and start Main server 
         mMainServer = new JettyServer();
         mMainServer.start(zPort);
+        
+        Log.log("NB : You can use CTRL+C or type 'quit' / 'exit' to cleanly shutdown MEG");
 	}
 	
 	public void doShutDown() throws Exception {
