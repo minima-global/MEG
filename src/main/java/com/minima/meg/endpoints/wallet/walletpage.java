@@ -12,8 +12,8 @@ public class walletpage extends BasicPage {
 	public void writePage(HttpServletRequest request, PrintWriter zOut) {
 		zOut.println("<h1>WALLET API</h1>\r\n"
 				+ "	\r\n"
-				+ "	The Wallet API allows you to perform simple Wallet functionality for any number of Users. This does \r\n"
-				+ "	NOT access the main Wallet of the Minima node.<br>\r\n"
+				+ "	The Wallet API allows you to perform simple Wallet functionality for any number of Users."
+				+ " This does NOT access the main Wallet of the Minima node and does not save any of the private keys.<br>\r\n"
 				+ "	<br>\r\n"
 				+ "	You MUST be running Minima with -megammr for this to work.<br>\r\n"
 				+ "	<br>\r\n"

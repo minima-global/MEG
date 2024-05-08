@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import com.minima.meg.database.MegDB;
 import com.minima.meg.server.BasicPage;
+import com.minima.meg.server.JettyServer;
 
 public class triggers extends BasicPage {
 
@@ -50,7 +51,8 @@ public class triggers extends BasicPage {
 		
 		//Some info
 		zOut.println("On a trigger event a POST request is made with the relevant JSON data to the specified URL<br>");
-		zOut.println("You can add multiple triggers for the same event");
+		zOut.println("You can add multiple triggers for the same event<br>");
+		zOut.println("<br>You can use a 'test' receiver that outputs to stdout at http://127.0.0.1:"+JettyServer.MEG_PORT+"/testpost	");
 		
 		//All endpoints
 		zOut.println("<h3>All Triggers</h3>");

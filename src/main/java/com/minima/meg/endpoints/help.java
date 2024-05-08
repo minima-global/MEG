@@ -10,7 +10,7 @@ public class help extends BasicPage {
 
 	@Override
 	public void writePage(HttpServletRequest request, PrintWriter zOut) {
-		zOut.println("<h2>WALLET ENDPOINTS</h2>");
+		zOut.println("<h2>HELP</h2>");
 		zOut.println("<br>");
 		zOut.println("Welcome to the help Section");
 	}

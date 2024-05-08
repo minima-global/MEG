@@ -33,7 +33,7 @@ public class testpost extends HttpServlet {
 		JSONObject json = new JSONObject(tot);
 
 		//SHOW OUTPUT
-		Log.log("TESTPOST REC : "+json.toString());
+		Log.log("TESTPOST RECEIVED : "+json.toString());
 		
 		PrintWriter out = response.getWriter();
 		response.setContentType("application/json");
