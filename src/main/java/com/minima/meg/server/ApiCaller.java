@@ -2,6 +2,7 @@ package com.minima.meg.server;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Base64;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,8 +13,11 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONObject;
 
 import com.minima.meg.database.MegDB;
+import com.minima.meg.server.UserSessions;
+import com.minima.meg.utils.HTTPClientUtil;
+import com.minima.meg.utils.Log;
 
-public class ApiCaller extends HttpServlet {
+public abstract class ApiCaller extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException, IOException {
@@ -22,7 +26,16 @@ public class ApiCaller extends HttpServlet {
         response.setStatus(HttpServletResponse.SC_OK);
         PrintWriter out = response.getWriter();
         
-        doAppiCall("GET",request, "user", out);
+        //Check the AUTH Credentials
+        String user = "";
+        try {
+        	user = getAuthUser(request.getHeader("Authorization"));
+        }catch(Exception exc) {
+        	HTTPClientUtil.writeJSONError(out,exc.toString());
+        	return;
+        }
+        
+        doAppiCall("GET",request, user, out);
 	}
 	
 	protected void doPost(HttpServletRequest request,HttpServletResponse response)
@@ -32,95 +45,57 @@ public class ApiCaller extends HttpServlet {
         response.setStatus(HttpServletResponse.SC_OK);
         PrintWriter out = response.getWriter();
         
-        doAppiCall("POST",request, "user", out);
+        //Check the AUTH Credentials
+        String user = "";
+        try {
+        	user = getAuthUser(request.getHeader("Authorization"));
+        }catch(Exception exc) {
+        	HTTPClientUtil.writeJSONError(out,exc.toString());
+        	return;
+        }
+        
+        doAppiCall("POST",request, user, out);
 	}
 	
-	public void doAppiCall(String zType, HttpServletRequest request, String zUser, PrintWriter zOut) {
+	public String getAuthUser(String zAuth) throws Exception {
 		
-		//Check the Auth token is a valid api-caller
-		String auth = request.getHeader("Authorization");
-		
-		//Get the user session
-		HttpSession session = request.getSession();
-		JSONObject usersesh = UserSessions.getUserFromSession(session.getId());
-		
-		String apicall = request.getRequestURI().substring(5);
-		
-		//Find this call..
-		JSONObject ep = MegDB.getDB().getUserDB().getEndpoiont(apicall);
-		if(ep.getInt("count")==0) {
-			
-			//Add a DB LOG
-			MegDB.getDB().getLogsDB().addLog("ENDPOINT NOT FOUND", apicall, usersesh.getString("username"));
-			
-			//NOT FOUND..
-			JSONObject resp = new JSONObject();
-			resp.put("status", false);
-			resp.put("error", "API Endpoint not found");
-			resp.put("endpoint", apicall);
-			zOut.println(resp.toString());
-			return;
+		//Check valid
+		if(zAuth == null) {
+			throw new Exception("No Authorization Header.. ");
 		}
 		
-		//Get it..
-		JSONObject row = ep.getJSONArray("rows").getJSONObject(0);
-		String command = row.getString("COMMAND");
-		
-		//Now replace the parameters
-		String newcommand = new String(command+"");
-		int pos=0;
-		while(true) {
-			int index = command.indexOf("$",pos);
-			if(index == -1) {
-				break;
-			}
-			
-			//Find end space or end of sentence
-			int endword = command.indexOf(" ",index);
-			if(endword == -1) {
-				endword = command.length();
-			}
-			
-			//Now make the word
-			String word = command.substring(index,endword);
-			
-			//Param name has no $
-			String paramname = word.substring(1);
-			String param = request.getParameter(paramname);
-			
-			if(param == null) {
-				
-				//Add a DB LOG
-				MegDB.getDB().getLogsDB().addLog("ENDPOINT PARAM MISSING", apicall+" param:"+paramname, usersesh.getString("username"));
-				
-				//NOT FOUND..
-				JSONObject resp = new JSONObject();
-				resp.put("status", false);
-				resp.put("error", "API Endpoint Param missing : "+paramname);
-				resp.put("endpoint", apicall);
-				zOut.println(resp.toString());
-				return;
-			}
-			
-			//Now replace..
-			newcommand = newcommand.replace(word, ""+param);
-			
-			//Move counter along..
-			pos = endword;
+		//Only BASIC Auth accepted..
+		int index 		 = zAuth.indexOf("Basic");
+		if(index == -1) {
+			throw new Exception("Only Basic Authorization allowed.. ");
 		}
 		
-		//Make the call to Minima..
-		//..
+		String authtoken = zAuth.substring(index+5).trim();
 		
-		//And return the result..
-		//..
+		//Base64..
+		String unencode = new String(Base64.getDecoder().decode(authtoken));
 		
-		JSONObject resp = new JSONObject();
-		resp.put("status", true);
-		zOut.println(resp.toString());
+		//Now split..
+		String[] userpass = unencode.split(":");
 		
-		//Add a DB LOG
-		MegDB.getDB().getLogsDB().addLog("ENDPOINT CALL", apicall, usersesh.getString("username"));		
+		//Now check for this user..
+		JSONObject user = MegDB.getDB().getUserDB().getUser(userpass[0], userpass[1]);
+		if(user.getInt("count") == 0) {
+			throw new Exception("Invalid User - not found");
+		}
+		
+		//Get the user
+		JSONObject uu = user.getJSONArray("rows").getJSONObject(0);
+		
+		//Now check he is an apicaller..
+		if(!uu.getString("LEVEL").equals("apicaller")) {
+			throw new Exception("Invalid User - not an apicaller");
+		}
+		
+		return uu.getString("USERNAME");
 	}
+	
+	//Process the request..
+	public abstract void doAppiCall(String zType, HttpServletRequest request, String zUser, PrintWriter zOut);
 }
 

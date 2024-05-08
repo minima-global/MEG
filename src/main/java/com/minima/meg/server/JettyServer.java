@@ -12,14 +12,13 @@ import com.minima.meg.endpoints.login;
 import com.minima.meg.endpoints.logoff;
 import com.minima.meg.endpoints.logs;
 import com.minima.meg.endpoints.testpost;
-import com.minima.meg.endpoints.wallet;
-import com.minima.meg.endpoints.walletapi;
 import com.minima.meg.endpoints.administrator.admin;
 import com.minima.meg.endpoints.administrator.newuser;
 import com.minima.meg.endpoints.administrator.removeuser;
 import com.minima.meg.endpoints.api.apiendpoints;
 import com.minima.meg.endpoints.api.newendpoint;
 import com.minima.meg.endpoints.api.removeendpoint;
+import com.minima.meg.endpoints.api.userapi;
 import com.minima.meg.endpoints.node.minimanode;
 import com.minima.meg.endpoints.node.setnode;
 import com.minima.meg.endpoints.profile.myprofile;
@@ -28,6 +27,8 @@ import com.minima.meg.endpoints.trigger.newtrigger;
 import com.minima.meg.endpoints.trigger.removetrigger;
 import com.minima.meg.endpoints.trigger.triggers;
 import com.minima.meg.endpoints.trigger.webhook;
+import com.minima.meg.endpoints.wallet.walletapi;
+import com.minima.meg.endpoints.wallet.walletpage;
 
 public class JettyServer {
 	
@@ -63,7 +64,7 @@ public class JettyServer {
         servletHandler.setHandler(seshhandler);
         
         //Add all the handlers
-        servletHandler.addServletWithMapping(ApiCaller.class, "/api/*");
+        servletHandler.addServletWithMapping(userapi.class, "/api/*");
         servletHandler.addServletWithMapping(walletapi.class, "/wallet/*");
         
         servletHandler.addServletWithMapping(DefaultLoader.class, "/");
@@ -90,7 +91,7 @@ public class JettyServer {
         servletHandler.addServletWithMapping(myprofile.class, "/myprofile.html");
         servletHandler.addServletWithMapping(updatepassword.class, "/updatepassword.html");
         
-        servletHandler.addServletWithMapping(wallet.class, "/wallet.html");
+        servletHandler.addServletWithMapping(walletpage.class, "/wallet.html");
         
         servletHandler.addServletWithMapping(logs.class, "/logs.html");
         

@@ -9,9 +9,8 @@ import org.json.JSONObject;
 
 import com.minima.meg.database.MegDB;
 import com.minima.meg.server.BasicPage;
-import com.minima.meg.server.JettyServer;
 import com.minima.meg.server.UserSessions;
-import com.minima.meg.utils.HTTPClient;
+import com.minima.meg.utils.HTTPClientUtil;
 import com.minima.meg.utils.Log;
 
 public class setnode extends BasicPage {
@@ -46,7 +45,7 @@ public class setnode extends BasicPage {
 			
 			//Set the WEBHOOK
 			try {
-				String res = HTTPClient.runMinimaCMD("webhooks action:add "+meghost+"webhook");
+				String res = HTTPClientUtil.runMinimaCMD("webhooks action:add "+meghost+"webhook");
 			} catch (Exception e) {
 				Log.log(e+" "+host);
 				
@@ -59,7 +58,7 @@ public class setnode extends BasicPage {
 		//Test a function..
 		String rsp = "Could not connect to to Minima node..";
 		try {
-			rsp = HTTPClient.runMinimaCMD("block");
+			rsp = HTTPClientUtil.runMinimaCMD("block");
 		} catch (Exception e) {
 			Log.log(e.toString());
 		}

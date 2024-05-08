@@ -1,4 +1,4 @@
-package com.minima.meg.endpoints;
+package com.minima.meg.endpoints.wallet;
 
 import java.io.PrintWriter;
 
@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.minima.meg.server.BasicPage;
 
-public class wallet extends BasicPage {
+public class walletpage extends BasicPage {
 
 	@Override
 	public void writePage(HttpServletRequest request, PrintWriter zOut) {

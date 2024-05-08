@@ -62,6 +62,15 @@ public class login extends HttpServlet {
 			JSONObject userjson = user.getJSONArray("rows").getJSONObject(0);
 			level 				= userjson.getString("LEVEL");
 			userid				= userjson.getInt("ID");
+			
+			//Check level..
+			if(!level.equals("admin") && !level.equals("basic")) {
+				out.println("<html><body><center><br><br>");
+			    out.println("User not ADMIN or BASIC level..<br><br>");
+			    out.println("<a href='index.html'>Back to Login</a></center>");
+			    out.println("</body></html>");
+			    return;
+			}
 		}
 		
 		JSONObject userobj  = new JSONObject();

@@ -1,16 +1,20 @@
 package com.minima.meg.utils;
 
+import java.io.PrintWriter;
 import java.net.URLEncoder;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.client.api.ContentResponse;
 import org.eclipse.jetty.client.api.Request;
 import org.eclipse.jetty.client.util.StringContentProvider;
 import org.eclipse.jetty.http.HttpHeader;
+import org.json.JSONObject;
 
 import com.minima.meg.database.MegDB;
 
-public class HTTPClient {
+public class HTTPClientUtil {
 
 	public static void POST(String zURL, String zData) throws Exception {
 		
@@ -62,5 +66,20 @@ public class HTTPClient {
 		String fullurl = mhost+cmd;
 		
 		return GET(fullurl);
+	}
+	
+	public static void writeJSONError(PrintWriter zOut, String zError) {
+		JSONObject resp = new JSONObject();
+		resp.put("status", false);
+		resp.put("error", zError);
+		zOut.println(resp.toString());
+	}
+	
+	public static String getValidParam(HttpServletRequest request, String zParam) throws Exception {
+		String param = request.getParameter(zParam);
+		if(param == null) {
+			throw new Exception("Param missing : "+zParam);
+		}
+		return param;
 	}
 }

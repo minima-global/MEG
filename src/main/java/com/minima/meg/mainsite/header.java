@@ -33,9 +33,8 @@ public class header {
 				+ "<tr>\r\n"
 				+ "	<td style=\"vertical-align:top;\">\r\n"
 				+ "		<table class=menutable height=100%>\r\n"
-				+ "			<tr><td nowrap>&nbsp;<a class=menu href='myprofile.html'>My Profile</a>&nbsp;</td></tr>\r\n"
-				+ "			<tr><td>&nbsp;</td></tr>\r\n"
 				+ "			<tr><td nowrap>&nbsp;<a class=menu href='minimanode.html'>Minima Node</a>&nbsp;</td></tr>\r\n"
+				+ "			<tr><td>&nbsp;</td></tr>\r\n"
 				+ "			<tr><td nowrap>&nbsp;<a class=menu href='triggers.html'>Triggers</a>&nbsp;</td></tr>\r\n"
 				+ "			<tr><td nowrap>&nbsp;<a class=menu href='apiendpoints.html'>Endpoints</a>&nbsp;</td></tr>\r\n"
 				+ "			<tr><td nowrap>&nbsp;<a class=menu href='wallet.html'>Wallet API</a>&nbsp;</td></tr>\r\n"
@@ -44,8 +43,14 @@ public class header {
 		
 		//ONLY Admin gets the ADMIN tag
 		if(zLevel.equals("admin")) {
-			zOut.write("	<tr><td nowrap>&nbsp;<a class=menu href='admin.html'>Admin</a>&nbsp;</td></tr>\r\n"
-					+ "		<tr><td>&nbsp;</td></tr>\r\n");
+			zOut.write(""
+					+ "	<tr><td nowrap>&nbsp;<a class=menu href='myprofile.html'>Profile</a>&nbsp;</td></tr>\r\n"
+					+ "	<tr><td nowrap>&nbsp;<a class=menu href='admin.html'>Admin</a>&nbsp;</td></tr>\r\n"
+					+ "	<tr><td>&nbsp;</td></tr>\r\n");
+		}else {
+			zOut.write(""
+					+ "	<tr><td nowrap>&nbsp;<a class=menu href='myprofile.html'>My Profile</a>&nbsp;</td></tr>\r\n"
+					+ " <tr><td>&nbsp;</td></tr>\r\n");
 		}
 				
 		zOut.write(

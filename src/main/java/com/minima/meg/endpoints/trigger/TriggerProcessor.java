@@ -3,8 +3,7 @@ package com.minima.meg.endpoints.trigger;
 import org.json.JSONObject;
 
 import com.minima.meg.database.MegDB;
-import com.minima.meg.utils.HTTPClient;
-import com.minima.meg.utils.Log;
+import com.minima.meg.utils.HTTPClientUtil;
 import com.minima.meg.utils.messages.Message;
 import com.minima.meg.utils.messages.MessageProcessor;
 
@@ -101,7 +100,7 @@ public class TriggerProcessor extends MessageProcessor{
 					
 					try {
 						//And now POST it..
-						HTTPClient.POST(url, fulldata.toString());
+						HTTPClientUtil.POST(url, fulldata.toString());
 						
 						//Add a log
 						MegDB.getDB().getLogsDB().addLog("TRIGGER EVENT", trigger, "Minima");

@@ -45,7 +45,7 @@ public class logs extends BasicPage{
 			zOut.println("<tr>");
 			zOut.println("<td nowrap>"+row.getString("ID")+"</td>");
 			zOut.println("<td nowrap>"+row.getString("EVENT")+"</td>");
-			zOut.println("<td nowrap>"+row.getString("DETAILS")+"</td>");
+			zOut.println("<td nowrap>"+getValueCheckLength(row,"DETAILS")+"</td>");
 			zOut.println("<td nowrap>"+row.getString("USERNAME")+"</td>");
 			zOut.println("<td nowrap>"+new Date(row.getLong("CREATED"))+"</td>");
 			zOut.println("</tr>");
@@ -77,8 +77,13 @@ public class logs extends BasicPage{
 				+ "");
 		
 		zOut.println("</center>");
-		
-		
 	}
 
+	public String getValueCheckLength(JSONObject zJSON, String zValue) {
+		String value = zJSON.getString(zValue);
+		if(value.length() > 40) {
+			value = value.substring(0,40)+"..";
+		}
+		return value;
+	}
 }

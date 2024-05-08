@@ -1,7 +1,6 @@
 package com.minima.meg.endpoints.trigger;
 
 import java.io.PrintWriter;
-import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
