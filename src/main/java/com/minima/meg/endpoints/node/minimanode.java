@@ -36,14 +36,14 @@ public class minimanode extends BasicPage {
 				+ "			<tr><td colspan=2 style='text-align:right;'>Minima RPC port</td></tr>"
 				+ "			<tr><td>&nbsp;</td></tr>"
 				+ "			<tr>\r\n"
-				+ "				<td colspan=2 class=newuserform><input type=submit value=\"Update\"></td>\r\n"
+				+ "				<td colspan=2 class=newuserform><input class='solobutton' type=submit value=\"Update Node Details\"></td>\r\n"
 				+ "			</tr>\r\n"
 				+ "		</table>\r\n"
 				+ "		</form>");
 		
 		zOut.println("<br>"
-				+ ""
-				+ "<button onclick=\"location.href='setnode.html?checkonly=1'\">TEST CONNECTION</button>"
-				+ "");
+				+ "<center>"
+				+ "<button class='solobutton' onclick=\"location.href='setnode.html?checkonly=1'\">TEST CONNECTION</button>"
+				+ "</center>");
 	}
 }

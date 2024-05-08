@@ -79,7 +79,7 @@ public class admin extends BasicPage {
 				+ "				</td>\r\n"
 				+ "			</tr>\r\n"
 				+ "			<tr>\r\n"
-				+ "				<td colspan=2 class=newuserform><input type=submit value=\"Add New User\"></td>\r\n"
+				+ "				<td colspan=2 class=newuserform><input class='solobutton' type=submit value=\"Add New User\"></td>\r\n"
 				+ "			</tr>\r\n"
 				+ "		</table>\r\n"
 				+ "		</form>");

@@ -72,8 +72,8 @@ public class logs extends BasicPage{
 				+ "	\n"
 				+ "</script>\n"
 				+ "	\n"
-				+ "<button onclick=\"prevPage();\">PREVIOUS</button>&nbsp;&nbsp;\n"
-				+ "<button onclick=\"nextPage();\">NEXT</button>\n"
+				+ "<button class='solobutton' onclick=\"prevPage();\">PREVIOUS</button>&nbsp;&nbsp;\n"
+				+ "<button class='solobutton' onclick=\"nextPage();\">NEXT</button>\n"
 				+ "");
 		
 		zOut.println("</center>");
