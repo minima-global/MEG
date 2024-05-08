@@ -15,25 +15,30 @@ public class MEGManager {
 	
 	public MEGManager() {}
 	
-	public void doStartUp() throws Exception {
+	public void doStartUp(int zPort, String zAdminPassword, File zDataFolder) throws Exception {
 		
-		//Get the user folder
-		File dataFolder   = new File(System.getProperty("user.home"),".meg");
-		
-		Log.log("MEG Startup data folder:"+dataFolder.getAbsolutePath());
+		Log.log("MEG data folder:"+zDataFolder.getAbsolutePath());
 		
 		//Create the MegDB
-		MegDB.createDB(dataFolder);
+		MegDB.createDB(zDataFolder);
 		
 		//Load all the databases
 		MegDB.getDB().loadAllDB();
+		
+		//Is Admin account enabled
+		if(!zAdminPassword.equals("")) {
+			MegDB.getDB().setAdminEnabled(true, zAdminPassword);
+			Log.log("Default Admin account enabled");
+		}else {
+			Log.log("Default Admin account NOT enabled");
+		}
 		
 		//Create the Trigger Backend Processor
 		mTriggerProcessor = new TriggerProcessor();
 		
 		//Create and start Main server 
         mMainServer = new JettyServer();
-        mMainServer.start();
+        mMainServer.start(zPort);
 	}
 	
 	public void doShutDown() throws Exception {

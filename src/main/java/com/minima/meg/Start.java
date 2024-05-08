@@ -1,6 +1,7 @@
 package com.minima.meg;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -19,20 +20,53 @@ public class Start
 	
 	private static boolean mUseShutdownHook;
 	
-	public static void main( String[] args ) throws Exception
+	public static void main( String[] zArgs ) throws Exception
     {
-    	/*HttpClient client = new HttpClient();
-        client.start();
-        ContentResponse res = client.GET("http://127.0.0.1:10005/block");
-        System.out.println(res.getContentAsString());
-        client.stop();*/
-    	
+		//Default..
+		int meg_port 		= 8080;
+		String adminpass 	= "";
+		File dataFolder   	= new File(System.getProperty("user.home"),".meg");
+				
+    	//Get the start params..
+		int arglen 	= zArgs.length;
+		if(arglen > 0) {
+			int counter	= 0;
+			while(counter<arglen) {
+				String arg 	= zArgs[counter];
+				counter++;
+				
+				if(arg.equals("-port")) {
+					meg_port = Integer.parseInt(zArgs[counter++]);
+					
+				}else if(arg.equals("-adminpassword")) {
+					adminpass = zArgs[counter++];
+				
+				}else if(arg.equals("-data")) {
+					dataFolder = new File(zArgs[counter++]);
+				
+				}else if(arg.equals("-help")) {
+					
+					System.out.println("MEG Help");
+					System.out.println(" -port            : Specify the port to listen on");
+					System.out.println(" -data            : Specify the datafolder");
+					System.out.println(" -adminpassword   : Specify the 'admin' password (use to add initial accounts)");
+					System.out.println(" -help       : Print this help");
+					
+					System.exit(1);
+					
+				}else {
+					System.out.println("Unknown parameter : "+arg);
+					System.exit(1);
+				}
+			}
+		}
+		
 		//Use shutdown hook
 		mUseShutdownHook = true;
 		
         //Create and start server 
 		mMEG = new MEGManager();
-		mMEG.doStartUp();
+		mMEG.doStartUp(meg_port,adminpass,dataFolder);
 		
         //Add a shutdown hook..
         Runtime.getRuntime().addShutdownHook(new Thread(){

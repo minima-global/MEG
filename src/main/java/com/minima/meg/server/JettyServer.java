@@ -29,14 +29,17 @@ import com.minima.meg.endpoints.trigger.triggers;
 import com.minima.meg.endpoints.trigger.webhook;
 import com.minima.meg.endpoints.wallet.walletapi;
 import com.minima.meg.endpoints.wallet.walletpage;
+import com.minima.meg.utils.Log;
 
 public class JettyServer {
 	
-	public static final int MEG_PORT = 8080;
+	public static int MEG_PORT = 8080;
 	
 	private Server server;
 
-    public void start() throws Exception {
+    public void start(int zPort) throws Exception {
+    	
+    	MEG_PORT = zPort;
     	
     	int maxThreads = 20;
         int minThreads = 10;
@@ -53,9 +56,11 @@ public class JettyServer {
         
         //Create  Connector on a port
         ServerConnector connector = new ServerConnector(server);
-        connector.setPort(MEG_PORT);
+        connector.setPort(zPort);
         server.addConnector(connector);
 
+        Log.log("MEG Server started on port : "+zPort);
+        
         //Create a session handler
         SessionHandler seshhandler = new SessionHandler();
         

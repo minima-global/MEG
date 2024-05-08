@@ -15,17 +15,11 @@ public class UserSessions {
 	}
 	
 	public static JSONObject getUserFromSession(String zSessionid) {
-		
-		//HACK
-		JSONObject usersesh = mUserSessions.get(zSessionid);
-		if(usersesh == null) {
-			usersesh = new JSONObject();
-			usersesh.put("userid", -1);
-			usersesh.put("username", "admin");
-			usersesh.put("level", "admin");
+		try {
+			return mUserSessions.get(zSessionid);
+		}catch(Exception exc) {
+			return null;
 		}
-		
-		return usersesh;
 	}
 	
 	public static void clearSession(String zSessionid) {

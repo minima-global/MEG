@@ -40,8 +40,38 @@ public class login extends HttpServlet {
 		int userid  = -1;
 		
 		//Command line
-		if(username.equals("admin") && password.equals("root")) {
-			level 		= "admin";
+		if(username.equals("admin")) {
+			
+			//Is admin enabled..
+			if(MegDB.getDB().getAdminEnabled()) {
+				
+				if(MegDB.getDB().checkAdminPassword(password)) {
+					level 	= "admin";
+				}else{
+					//User Not found..
+					response.setContentType("text/html");
+			        response.setStatus(HttpServletResponse.SC_OK);
+			        
+			        out.println("<html><body><center><br><br>");
+			        out.println("User / Password NOT Found..<br><br>");
+				    out.println("<a href='index.html'>Back to Login</a></center>");
+				    out.println("</body></html>");
+				    
+				    return;
+				}
+			}else {
+				
+				//User Not found..
+				response.setContentType("text/html");
+		        response.setStatus(HttpServletResponse.SC_OK);
+		        
+		        out.println("<html><body><center><br><br>");
+			    out.println("Default Admin account NOT enabled..<br><br>");
+			    out.println("<a href='index.html'>Back to Login</a></center>");
+			    out.println("</body></html>");
+			    
+			    return;
+			}
 			
 		}else if(count==0){
 			

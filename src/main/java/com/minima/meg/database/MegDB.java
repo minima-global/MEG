@@ -28,6 +28,10 @@ public class MegDB {
 	LogsDB mLogsDB;
 	PrefsDB mPrefsDB;
 	
+	//Is the admin account enabled..
+	boolean mAdminEnabled = false;
+	String mAdminPassword = "";
+	
 	public MegDB(File zDatabaseFolder) {
 		mDatabaseFolder = zDatabaseFolder;
 		
@@ -35,6 +39,19 @@ public class MegDB {
 		mLogsDB = new LogsDB();
 		
 		mPrefsDB = new PrefsDB();
+	}
+	
+	public void setAdminEnabled(boolean zEnable, String zPassword) {
+		mAdminEnabled 	= zEnable;
+		mAdminPassword 	= zPassword;
+	}
+	
+	public boolean getAdminEnabled() {
+		return mAdminEnabled;
+	}
+	
+	public boolean checkAdminPassword(String zPassword) {
+		return mAdminPassword.equals(zPassword);
 	}
 	
 	public UserDB getUserDB() {
