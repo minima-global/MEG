@@ -51,8 +51,37 @@ public class walletapi extends ApiCaller {
 			}else if(apicall.equals("send")) {
 				
 				//Get all the parameters
+				String tokenid="0x00";
+				if(request.getParameter("tokenid") != null) {
+					tokenid=request.getParameter("tokenid");
+				}
 				
+				String amount 		= HTTPClientUtil.getValidParam(request, "amount");
+				String toaddress 	= HTTPClientUtil.getValidParam(request, "toaddress");
+				String fromaddress 	= HTTPClientUtil.getValidParam(request, "fromaddress");
+				String privatekey 	= HTTPClientUtil.getValidParam(request, "privatekey");
+				String script 		= HTTPClientUtil.getValidParam(request, "script");
+				String keyuses 		= HTTPClientUtil.getValidParam(request, "keyuses");
 				
+				//Create the call
+				cmdtocall = "sendfrom"
+							+" mine:true"
+							+" fromaddress:"+fromaddress
+							+" address:"+toaddress
+							+" amount:"+amount
+							+" tokenid:"+tokenid
+							+" script:\""+script+"\""
+							+" privatekey:"+privatekey
+							+" keyuses:"+keyuses;
+			
+			
+			}else if(apicall.equals("checktxpow")) {
+				
+				//Which transaction
+				String txpowid 	= HTTPClientUtil.getValidParam(request, "txpowid");
+				
+				//Create the call
+				cmdtocall = "txpow onchain:"+txpowid;
 			}
 		
 			//Run it..

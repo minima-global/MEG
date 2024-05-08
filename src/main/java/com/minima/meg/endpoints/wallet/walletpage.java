@@ -40,11 +40,19 @@ public class walletpage extends BasicPage {
 				+ "	Send an amount from an address<br>\r\n"
 				+ "	<br>\r\n"
 				+ "	Params : <br>\r\n"
-				+ "	&nbsp;&nbsp;&nbsp;tokenid : The TokenID of the token (defaults to Minima)<br>\r\n"
-				+ "	&nbsp;&nbsp;&nbsp;toaddress : Address to send to<br>\r\n"
-				+ "	&nbsp;&nbsp;&nbsp;fromaddress : Address to send from<br>\r\n"
+				+ "	&nbsp;&nbsp;&nbsp;tokenid : TokenID of the token (defaults to Minima)<br>\r\n"
+				+ "	&nbsp;&nbsp;&nbsp;amount : Amount to send<br>\r\n"
+				+ "	&nbsp;&nbsp;&nbsp;toaddress : Address to send <b>to</b><br>\r\n"
+				+ "	&nbsp;&nbsp;&nbsp;fromaddress : Address to send <b>from</b><br>\r\n"
 				+ "	&nbsp;&nbsp;&nbsp;privatekey : Private Key of the FROM Address<br>\r\n"
 				+ "	&nbsp;&nbsp;&nbsp;script : The script of the FROM Address <br>\r\n"
+				+ "	&nbsp;&nbsp;&nbsp;keyuses : The number of times this address has been used (nonce) <br>\r\n"
+				+ "	\r\n"
+				+ "	<h3>/wallet/checktxpow</h3>\r\n"
+				+ "	Check status of transaction (only works for 12 hours.. then pruned)<br>\r\n"
+				+ "	<br>\r\n"
+				+ "	Params : <br>\r\n"
+				+ "	&nbsp;&nbsp;&nbsp;txpowid : TxPoWID of transaction<br>\r\n"
 				+ "	");
 	}
 }
