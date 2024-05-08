@@ -8,14 +8,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 
 import com.minima.meg.database.MegDB;
-import com.minima.meg.server.UserSessions;
 import com.minima.meg.utils.HTTPClientUtil;
-import com.minima.meg.utils.Log;
 
 public abstract class ApiCaller extends HttpServlet {
 
