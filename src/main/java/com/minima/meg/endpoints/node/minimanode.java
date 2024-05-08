@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.minima.meg.database.MegDB;
 import com.minima.meg.server.BasicPage;
+import com.minima.meg.server.JettyServer;
 
 public class minimanode extends BasicPage {
 
@@ -27,7 +28,7 @@ public class minimanode extends BasicPage {
 				+ "				<td class=newuserform>MEG Host : </td>\r\n"
 				+ "				<td><input size=50 value='"+meghost+"' type=text name=megip></td>\r\n"
 				+ "			</tr>\r\n"
-				+ "			<tr><td colspan=2 style='text-align:right;'>Required for the Minima webhooks</td></tr>"
+				+ "			<tr><td colspan=2 style='text-align:right;'>Your local address is http://127.0.0.1:"+JettyServer.MEG_PORT+"/</td></tr>"
 				+ "			<tr><td>&nbsp;</td></tr>"
 				+ "			<tr>\r\n"
 				+ "				<td class=newuserform>MINIMA Host : </td>\r\n"
