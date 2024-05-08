@@ -4,6 +4,7 @@ import org.json.JSONObject;
 
 import com.minima.meg.database.MegDB;
 import com.minima.meg.utils.HTTPClientUtil;
+import com.minima.meg.utils.Log;
 import com.minima.meg.utils.messages.Message;
 import com.minima.meg.utils.messages.MessageProcessor;
 
@@ -42,9 +43,9 @@ public class TriggerProcessor extends MessageProcessor{
 			for(int i=0;i<rows;i++) {
 				JSONObject row 		= alltriggers.getJSONArray("rows").getJSONObject(i);
 			
-				String trigger 		= row.getString("TRIGGER");
-				String extradata 	= row.getString("EXTRADATA");
-				String url 			= row.getString("URL");
+				String trigger 		= row.getString("TRIGGER").trim();
+				String extradata 	= row.getString("EXTRADATA").trim();
+				String url 			= row.getString("URL").trim();
 						
 				boolean callit = false;
 				
@@ -103,18 +104,17 @@ public class TriggerProcessor extends MessageProcessor{
 						HTTPClientUtil.POST(url, fulldata.toString());
 						
 						//Add a log
-						MegDB.getDB().getLogsDB().addLog("TRIGGER EVENT", trigger, "Minima");
+						MegDB.getDB().getLogsDB().addLog("TRIGGER EVENT", trigger+" "+extradata, "Minima");
 						
 					}catch(Exception exc) {
+						Log.log("ERROR : "+fulldata.toString());
+						exc.printStackTrace();
 						
 						//Add a log
-						MegDB.getDB().getLogsDB().addLog("TRIGGER EVENT FAIL", trigger+" "+exc+" "+url, "Minima");
+						MegDB.getDB().getLogsDB().addLog("TRIGGER EVENT FAIL", trigger+" "+extradata+" "+exc+" "+url, "Minima");
 					}
 				}
 			}
 		}
 	}
-	
-	
-
 }

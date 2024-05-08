@@ -24,9 +24,9 @@ public class newtrigger extends BasicPage {
 			return;
 		}
 		
-		String trigger 		= request.getParameter("trigger");
-		String extradata  	= request.getParameter("extradata");
-		String url  		= request.getParameter("url");
+		String trigger 		= request.getParameter("trigger").trim();
+		String extradata  	= request.getParameter("extradata").trim();
+		String url  		= request.getParameter("url").trim();
 		
 		//Add to the database
 		MegDB.getDB().getUserDB().addTrigger(trigger, extradata, url);

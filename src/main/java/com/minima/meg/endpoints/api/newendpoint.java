@@ -24,8 +24,8 @@ public class newendpoint extends BasicPage {
 			return;
 		}
 		
-		String endpoint = request.getParameter("endpoint");
-		String command  = request.getParameter("command");
+		String endpoint = request.getParameter("endpoint").trim();
+		String command  = request.getParameter("command").trim();
 		
 		//Add to the database
 		MegDB.getDB().getUserDB().addEndpoint(endpoint, command);

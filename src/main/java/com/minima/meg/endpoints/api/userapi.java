@@ -33,7 +33,7 @@ public class userapi extends ApiCaller {
 			
 			//Get it..
 			JSONObject row = ep.getJSONArray("rows").getJSONObject(0);
-			String command = row.getString("COMMAND");
+			String command = row.getString("COMMAND").trim();
 			
 			//Now replace the parameters
 			String newcommand = new String(command+"");
