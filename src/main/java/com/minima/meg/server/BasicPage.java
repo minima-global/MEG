@@ -33,21 +33,14 @@ public abstract class BasicPage extends HttpServlet {
 		JSONObject usersesh = UserSessions.getUserFromSession(session.getId());
 		
 		if(usersesh == null) {
-			
-			out.println("<html><body><center><br><br>");
-		    out.println("Session Expired..<br><br>");
-		    out.println("<a href='index.html'>Back to Login</a></center>");
-		    out.println("</body></html>");
+			printSessionExpired(out);
 			
 		}else {
 			String level = usersesh.getString("level");
 		
 			if(!level.equals("basic") && !level.equals("admin")) {
-				out.println("<html><body><center><br><br>");
-			    out.println("Session Expired..<br><br>");
-			    out.println("<a href='index.html'>Back to Login</a></center>");
-			    out.println("</body></html>");
-			    
+				printSessionExpired(out);
+				
 			}else {
 				header.writeHeader(level,out);
 				writePage(request,out);
@@ -71,18 +64,25 @@ public abstract class BasicPage extends HttpServlet {
 		//Check we are logged in Correctly!
 		JSONObject usersesh = UserSessions.getUserFromSession(session.getId());
 		if(usersesh == null) {
-			
-			out.println("<html><body><center><br><br>");
-		    out.println("Session Expired..<br><br>");
-		    out.println("<a href='index.html'>Back to Login</a></center>");
-		    out.println("</body></html>");
-			
+			printSessionExpired(out);
 		}else {
 			String level = usersesh.getString("level");
 			header.writeHeader(level,out);
 			writePage(request,out);
 		    footer.writeFooter(out);
 		}
+	}
+	
+	public void printSessionExpired(PrintWriter zOut) {
+		zOut.println("<html>"
+				+ "<head>"
+				+ "<link rel=\"stylesheet\" href=\"style.css\">"
+				+ "</head>"
+				+ "<body>"
+				+ "<center><br><br>");
+		zOut.println("Session Expired<br><br>");
+		zOut.println("<button class=solobutton onclick='location.href=\"index.html\"'>Back to Login</button>");
+		zOut.println("</body></html>");
 	}
 	
 	public abstract void writePage(HttpServletRequest request, PrintWriter zOut);
