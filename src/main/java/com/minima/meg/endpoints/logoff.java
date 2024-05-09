@@ -32,9 +32,15 @@ public class logoff extends HttpServlet {
         
 		PrintWriter out = response.getWriter();
 		
-		out.println("<html><body><center><br><br>");
+		out.println("<html>"
+				+ "<head>"
+				+ "<link rel=\"stylesheet\" href=\"style.css\">"
+				+ "</head>"
+				+ "<body>"
+				+ "<center><br><br>");
 	    out.println("Log Off Success<br><br>");
-	    out.println("<a href='index.html'>Back to Login</a></center>");
+	    out.println("<button class=solobutton onclick='location.href=\"index.html\"'>Back to Login</button>");
+	    //out.println("<a href='index.html'>Back to Login</a></center>");
 	    out.println("</body></html>");
 	}
 	

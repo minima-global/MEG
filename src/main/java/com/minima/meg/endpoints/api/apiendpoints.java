@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import com.minima.meg.database.MegDB;
 import com.minima.meg.server.BasicPage;
+import com.minima.meg.server.JettyServer;
 
 public class apiendpoints extends BasicPage {
 
@@ -20,12 +21,15 @@ public class apiendpoints extends BasicPage {
 		int index  = url.indexOf("apiendpoints.html");
 		url = url.substring(0,index);
 		
-		//Add new User
+		
+		zOut.println("Adding an 'Endpoint' to 'sendmoney' enables "+url+"api/sendmoney<br>");
+		zOut.println("<br>'$param' in the 'Command' will be replaced with the GET or POST parameters<br>");
+		zOut.println("<br>Enpoints can only be called by 'apicaller' level Users - using Basic Authorization Header<br>");
+		zOut.println("<br>For example : <br>");
+		zOut.println("<br><code>curl http://127.0.0.1:"+JettyServer.MEG_PORT+"/api/sendtoken -X POST "
+					+ "--user aoicalleruser:password -d \"address=0xEE&amount=100\"</code><br>");
+		
 		zOut.println("<h3>Add Endpoint</h3>");
-		
-		zOut.println("Add an <b>endpoint</b> to <b>sendmoney</b> and call "+url+"api/sendmoney<br>");
-		zOut.println("<b>$param_name</b> in the command will be replaced with GET or POST parameters<br><br>");
-		
 		zOut.println("<form action=\"newendpoint.html\" method=\"post\">\r\n"
 				+ "		<table>\r\n"
 				+ "			<tr>\r\n"
@@ -43,7 +47,7 @@ public class apiendpoints extends BasicPage {
 				+ "		</form>");
 		
 		//All endpoints
-		zOut.println("<h3>User Endpoints</h3>");
+		zOut.println("<h3>All Endpoints</h3>");
 		
 		JSONObject endpoints = MegDB.getDB().getUserDB().getAllEndpoionts();
 		

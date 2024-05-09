@@ -41,9 +41,18 @@ public abstract class BasicPage extends HttpServlet {
 			
 		}else {
 			String level = usersesh.getString("level");
-			header.writeHeader(level,out);
-			writePage(request,out);
-		    footer.writeFooter(out);
+		
+			if(!level.equals("basic") && !level.equals("admin")) {
+				out.println("<html><body><center><br><br>");
+			    out.println("Session Expired..<br><br>");
+			    out.println("<a href='index.html'>Back to Login</a></center>");
+			    out.println("</body></html>");
+			    
+			}else {
+				header.writeHeader(level,out);
+				writePage(request,out);
+			    footer.writeFooter(out);
+			}
 		}
 	}
 	

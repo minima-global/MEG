@@ -26,7 +26,7 @@ public class logs extends BasicPage{
 		//Show logs..
 		JSONObject users = MegDB.getDB().getLogsDB().getLogs(lognum, Integer.parseInt(offset));
 		
-		zOut.println("<h3>LOGS</h3>");
+		zOut.println("<h2>LOGS</h2>");
 		zOut.println("<center>");
 		zOut.println("<table border=0 style=\"width:100%;border-spacing:4;\">"
 				+ "		<tr>"

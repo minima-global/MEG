@@ -16,7 +16,11 @@ public class triggers extends BasicPage {
 	public void writePage(HttpServletRequest request, PrintWriter zOut) {
 		zOut.println("<h2>TRIGGERS</h2>");
 		
-		
+		//Some info
+		zOut.println("Minima posts data to MEG when certain events occur.<br>");
+		zOut.println("<br>On a 'Trigger' event a POST request is made with the relevant JSON data to the specified URL<br>");
+		zOut.println("<br>You can use a <i>test</i> URL that simply outputs to stdout at http://127.0.0.1:"+JettyServer.MEG_PORT+"/testpost	");
+				
 		//Add new User
 		zOut.println("<h3>Add Trigger</h3>");
 		zOut.println("<form action=\"newtrigger.html\" method=\"post\">\r\n"
@@ -49,10 +53,6 @@ public class triggers extends BasicPage {
 				+ "		</table>\r\n"
 				+ "		</form>");
 		
-		//Some info
-		zOut.println("On a trigger event a POST request is made with the relevant JSON data to the specified URL<br>");
-		zOut.println("You can add multiple triggers for the same event<br>");
-		zOut.println("<br>You can use a 'test' receiver that outputs to stdout at http://127.0.0.1:"+JettyServer.MEG_PORT+"/testpost	");
 		
 		//All endpoints
 		zOut.println("<h3>All Triggers</h3>");

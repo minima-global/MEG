@@ -75,6 +75,14 @@ public class walletapi extends ApiCaller {
 				
 				//Create the call
 				cmdtocall = "txpow onchain:"+txpowid;
+			
+			}else if(apicall.equals("gettxpow")) {
+				
+				//Which transaction
+				String txpowid 	= HTTPClientUtil.getValidParam(request, "txpowid");
+				
+				//Create the call
+				cmdtocall = "txpow txpowid:"+txpowid;
 			}
 		
 			//Run it..

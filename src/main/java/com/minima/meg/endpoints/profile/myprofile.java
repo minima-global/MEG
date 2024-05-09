@@ -22,6 +22,7 @@ public class myprofile extends BasicPage {
 		zOut.println("UserID : "+usersesh.getInt("userid"));
 		zOut.println("<br>Username : "+usersesh.getString("username"));
 		zOut.println("<br>Password : ****");
+		zOut.println("<br>Level : "+usersesh.getString("level"));
 		zOut.println("<br>");
 		
 		zOut.println("<h3>Update Password</h3>");
