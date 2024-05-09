@@ -27,7 +27,7 @@ public class apiendpoints extends BasicPage {
 		zOut.println("<br>Enpoints can only be called by 'apicaller' level Users - using Basic Authorization Header<br>");
 		zOut.println("<br>For example : <br>");
 		zOut.println("<br><code>curl http://127.0.0.1:"+JettyServer.MEG_PORT+"/api/sendtoken -X POST "
-					+ "--user aoicalleruser:password -d \"address=0xEE&amount=100\"</code><br>");
+					+ "--user apicalleruser:password -d \"address=0xEE&amount=100\"</code><br>");
 		
 		zOut.println("<h3>Add Endpoint</h3>");
 		zOut.println("<form action=\"newendpoint.html\" method=\"post\">\r\n"
