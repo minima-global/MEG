@@ -60,7 +60,8 @@ public class setnode extends BasicPage {
 		try {
 			rsp = HTTPClientUtil.runMinimaCMD("block");
 		} catch (Exception e) {
-			Log.log(e.toString());
+			//e.printStackTrace();
+			Log.log("Error Minima CMD : "+e.toString());
 		}
 		
 		zOut.println("<center><br><br><div style='word-break:break-all;width:500;'>"+rsp+"</div></center>");
