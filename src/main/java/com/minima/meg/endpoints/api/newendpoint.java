@@ -17,10 +17,8 @@ public class newendpoint extends BasicPage {
 	public void writePage(HttpServletRequest request, PrintWriter zOut) {
 		
 		//Check ADMIN
-		HttpSession session = request.getSession();
-		JSONObject usersesh = UserSessions.getUserFromSession(session.getId());
-		if(!usersesh.getString("level").equals("admin")) {
-			zOut.println("<center><br><br>ACCESS DENIED (Not admin user)..</center>");
+		JSONObject usersesh = UserSessions.getUserFromSession(request.getSession().getId());
+		if(!checkAdminUser(request,zOut)) {
 			return;
 		}
 		

@@ -66,7 +66,7 @@ public class apiendpoints extends BasicPage {
 			
 			zOut.println("<tr>");
 			zOut.println("<td>"+row.getString("ENDPOINT")+"</td>");
-			zOut.println("<td>"+row.getString("COMMAND")+"</td>");
+			zOut.println("<td><code>"+row.getString("COMMAND")+"</code></td>");
 			zOut.println("<td><a class=menu href='removeendpoint.html?endid="+row.getLong("ID")+"'>REMOVE</a></td>");
 			zOut.println("</tr>");
 		}

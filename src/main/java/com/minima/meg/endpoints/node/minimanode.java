@@ -18,6 +18,9 @@ public class minimanode extends BasicPage {
 		String mhost 	= MegDB.getDB().getPrefsDB().getMinimaNode();
 		String meghost 	= MegDB.getDB().getPrefsDB().getMEGNode();
 		
+		zOut.println("Minima needs to talk to MEG and vice versa<br>");
+		zOut.println("<br>You can enable SSL via STUNNEL or any other SSL Proxy<br>");
+		
 		//Add new User
 		zOut.println("<h3>Host Details</h3>");
 		

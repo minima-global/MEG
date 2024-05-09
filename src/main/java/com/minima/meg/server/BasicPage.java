@@ -73,6 +73,16 @@ public abstract class BasicPage extends HttpServlet {
 		}
 	}
 	
+	public boolean checkAdminUser(HttpServletRequest zRequest, PrintWriter zOut) {
+		HttpSession session = zRequest.getSession();
+		JSONObject usersesh = UserSessions.getUserFromSession(session.getId());
+		if(!usersesh.getString("level").equals("admin")) {
+			zOut.println("<center><br><br>ACCESS DENIED (Not admin user)..</center>");
+			return false;
+		}
+		return true;
+	}
+	
 	public void printSessionExpired(PrintWriter zOut) {
 		zOut.println("<html>"
 				+ "<head>"
