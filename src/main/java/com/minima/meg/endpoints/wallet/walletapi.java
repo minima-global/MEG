@@ -83,6 +83,48 @@ public class walletapi extends ApiCaller {
 				
 				//Create the call
 				cmdtocall = "txpow txpowid:"+txpowid;
+			
+				//Advanced APIs..
+			}else if(apicall.equals("unsignedtxn")) {
+				
+				//Get all the parameters
+				String tokenid="0x00";
+				if(request.getParameter("tokenid") != null) {
+					tokenid=request.getParameter("tokenid");
+				}
+				
+				String amount 		= HTTPClientUtil.getValidParam(request, "amount");
+				String toaddress 	= HTTPClientUtil.getValidParam(request, "toaddress");
+				String fromaddress 	= HTTPClientUtil.getValidParam(request, "fromaddress");
+				String script 		= HTTPClientUtil.getValidParam(request, "script");
+				
+				//Create the call
+				cmdtocall = "createfrom"
+							+" fromaddress:"+fromaddress
+							+" address:"+toaddress
+							+" amount:"+amount
+							+" tokenid:"+tokenid
+							+" script:\""+script+"\"";
+				
+			}else if(apicall.equals("signtxn")) {
+				
+				String data 		= HTTPClientUtil.getValidParam(request, "data");
+				String privatekey 	= HTTPClientUtil.getValidParam(request, "privatekey");
+				String keyuses 		= HTTPClientUtil.getValidParam(request, "keyuses");
+				
+				//Create the call
+				cmdtocall = "signfrom"
+							+" data:"+data
+							+" privatekey:"+privatekey
+							+" keyuses:"+keyuses;
+				
+				
+			}else if(apicall.equals("posttxn")) {
+				
+				String data 		= HTTPClientUtil.getValidParam(request, "data");
+				
+				//Create the call
+				cmdtocall = "postfrom data:"+data+" mine:true";
 			}
 		
 			//Run it..
