@@ -34,21 +34,36 @@ public class setnode extends BasicPage {
 				meghost=meghost+"/";
 			}
 			
+			//Set the WEBHOOK
+			try {
+				String cmd = "webhooks action:add hook:"+meghost+"webhook";
+				String res = HTTPClientUtil.runMinimaCMD(cmd);
+				
+				JSONObject hook = new JSONObject(res);
+				if(!hook.getBoolean("status")) {
+					Log.log("ERROR setting webhook on Minima "+res);
+					
+					//Add a DB LOG
+					MegDB.getDB().getLogsDB().addLog("ERROR SET MINIMA NODE WEBHOOK", host, usersesh.getString("username"));
+					
+					return;
+				}
+				
+			} catch (Exception e) {
+				Log.log(e+" "+host);
+				
+				//Add a DB LOG
+				MegDB.getDB().getLogsDB().addLog("ERROR SET MINIMA NODE WEBHOOK", host, usersesh.getString("username"));
+				
+				return;
+			}
+			
 			//Add to the database
 			MegDB.getDB().getPrefsDB().setMinimaNode(host);
 			MegDB.getDB().getPrefsDB().setMEGNode(meghost);
 		
 			//Add a DB LOG
 			MegDB.getDB().getLogsDB().addLog("SET MINIMA NODE", host, usersesh.getString("username"));
-			
-			//Set the WEBHOOK
-			try {
-				String res = HTTPClientUtil.runMinimaCMD("webhooks action:add "+meghost+"webhook");
-			} catch (Exception e) {
-				Log.log(e+" "+host);
-				
-				return;
-			}
 			
 			zOut.println("<center><br><br>Minima node host set : "+host+"</center>"); 
 		}
