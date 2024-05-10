@@ -54,7 +54,7 @@ public class userapi extends ApiCaller {
 			  String param = HTTPClientUtil.getValidParam(request,paramname);
 			  
 			  //Now replace that
-			  newcommand = newcommand.replace(paramname, param); 
+			  newcommand = newcommand.replace(word, param); 
 			}
 			
 			//Make the call to Minima..
