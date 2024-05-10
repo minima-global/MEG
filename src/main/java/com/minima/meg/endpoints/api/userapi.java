@@ -1,6 +1,8 @@
 package com.minima.meg.endpoints.api;
 
 import java.io.PrintWriter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -30,40 +32,31 @@ public class userapi extends ApiCaller {
 		}
 		
 		try {
-			
 			//Get it..
 			JSONObject row = ep.getJSONArray("rows").getJSONObject(0);
 			String command = row.getString("COMMAND").trim();
 			
-			//Now replace the parameters
-			String newcommand = new String(command+"");
-			int pos=0;
-			while(true) {
-				int index = command.indexOf("$",pos);
-				if(index == -1) {
-					break;
-				}
-				
-				//Find end space or end of sentence
-				int endword = command.indexOf(" ",index);
-				if(endword == -1) {
-					endword = command.length();
-				}
-				
-				//Now make the word
-				String word = command.substring(index,endword);
-				
-				//Param name has no $
-				String paramname 	= word.substring(1);
-				String param 		= HTTPClientUtil.getValidParam(request,paramname);
-				
-				//Now replace..
-				newcommand = newcommand.replace(word, ""+param);
-				
-				//Move counter along..
-				pos = endword;
+			//Convert all the params
+			String pattern 	= "(\\$[a-zA-Z0-9]+)";
+			
+			//Create a regex matcher 
+			Matcher matcher = Pattern.compile(pattern).matcher(command);
+
+			//Create a new copy..
+			String newcommand = command+"";
+			while (matcher.find()) {
+			  String word = matcher.group(1);
+			  
+			  //Remove the front $
+			  String paramname = word.substring(1);
+			  
+			  //Get the param of that name..
+			  String param = HTTPClientUtil.getValidParam(request,paramname);
+			  
+			  //Now replace that
+			  newcommand = newcommand.replace(paramname, param); 
 			}
-		
+			
 			//Make the call to Minima..
 			String res = HTTPClientUtil.runMinimaCMD(newcommand);
 			zOut.println(res);
@@ -77,6 +70,28 @@ public class userapi extends ApiCaller {
 			//Add a DB LOG
 			MegDB.getDB().getLogsDB().addLog("ENDPOINT CALL FAIL "+e, apicall, zUser);
 		}
+	}
+	
+	public static void main(String[] zArgs) {
+		
+		String input 	= "lets find [$message{}] $hello $method}";
+		//input 	= java.util.regex.Pattern.quote(input);
+
+		String pattern 	= "(\\$[a-zA-Z0-9]+)";
+		//pattern 		= java.util.regex.Pattern.quote(pattern);
+		
+		Matcher matcher = Pattern.compile(pattern).matcher(input);
+
+		String newstring = input;
+		while (matcher.find()) {
+		  String word = matcher.group(1);
+		  System.out.println("FOUND:"+word);
+		  
+		  newstring = newstring.replace(word, word+word); 
+			
+		  System.out.println("NEW STRING:"+newstring);
+		}
+		
 	}
 }
 

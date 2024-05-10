@@ -96,8 +96,8 @@ public class TriggerProcessor extends MessageProcessor{
 					
 					//The full packet
 					JSONObject fulldata = new JSONObject();
-					fulldata.put("meg", triggerjson);
 					fulldata.put("minima", minima);
+					fulldata.put("meg", triggerjson);
 					
 					try {
 						//And now POST it..
