@@ -7,6 +7,11 @@
 body {
 	font-family: Manrope; 
     margin: 0;   /* Remove body margins */
+    color: #F4F4F5;
+}
+
+hr {
+	background-color: #282B2E; height: 1px; border: 0;
 }
 
 .maintable{
@@ -57,16 +62,20 @@ body {
 }
 
 .menutable{
-	background: #17191C;
+	background: #08090B;
 	padding: 24px 20px 24px 120px;
 	border-spacing: 10px;
 }
 
 .mainview{
+	background: #17191C;
+	color: #F4F4F5;
+	
 	vertical-align:top;
 	width:100%;
 	height:100%;
-	padding:4px;
+	padding:10px;
+	
 }
 
 .newuserform{

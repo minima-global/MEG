@@ -14,7 +14,7 @@ public class triggers extends BasicPage {
 
 	@Override
 	public void writePage(HttpServletRequest request, PrintWriter zOut) {
-		zOut.println("<h2>TRIGGERS</h2>");
+		zOut.println("<h2>Triggers</h2>");
 		
 		//Some info
 		zOut.println("Minima posts data to MEG when certain events occur.<br>");
@@ -68,6 +68,8 @@ public class triggers extends BasicPage {
 				+ "			<td>&nbsp;</td>"
 				+ "		</tr>");
 		
+		zOut.println("<tr><td colspan=4><hr></td></tr>");
+		
 		//Now output the rows
 		int rows = endpoints.getInt("count");
 		for(int i=0;i<rows;i++) {
@@ -79,6 +81,8 @@ public class triggers extends BasicPage {
 			zOut.println("<td>"+row.getString("URL")+"</td>");
 			zOut.println("<td><a class=menu href='removetrigger.html?triggerid="+row.getLong("ID")+"'>REMOVE</a></td>");
 			zOut.println("</tr>");
+			
+			zOut.println("<tr><td colspan=4><hr></td></tr>");
 		}
 		zOut.println("</table></center>");
 				

@@ -86,7 +86,7 @@ public abstract class BasicPage extends HttpServlet {
 	public void printSessionExpired(PrintWriter zOut) {
 		zOut.println("<html>"
 				+ "<head>"
-				+ "<link rel=\"stylesheet\" href=\"style.css\">"
+				+ "<link rel=\"stylesheet\" href=\"basicstyle.css\">"
 				+ "</head>"
 				+ "<body>"
 				+ "<center><br><br>");

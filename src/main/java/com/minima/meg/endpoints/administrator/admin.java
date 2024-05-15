@@ -25,7 +25,7 @@ public class admin extends BasicPage {
 			return;
 		}
 		
-		zOut.println("<h2>ADMIN</23>");
+		zOut.println("<h2>Admin</23>");
 		
 		//Show all current Users..
 		JSONObject users = MegDB.getDB().getUserDB().getAllUsers();
@@ -41,6 +41,8 @@ public class admin extends BasicPage {
 				+ "			<td>&nbsp;</td>"
 				+ "		</tr>");
 		
+		zOut.println("<tr><td colspan=5><hr></td></tr>");
+		
 		//Now output the rows
 		int rows = users.getInt("count");
 		for(int i=0;i<rows;i++) {
@@ -53,6 +55,8 @@ public class admin extends BasicPage {
 			zOut.println("<td>"+new Date(row.getLong("CREATED"))+"</td>");
 			zOut.println("<td><a class=menu href='removeuser.html?userid="+row.getLong("ID")+"'>REMOVE</a></td>");
 			zOut.println("</tr>");
+			
+			zOut.println("<tr><td colspan=5><hr></td></tr>");
 		}
 		zOut.println("</table></center>");
 		

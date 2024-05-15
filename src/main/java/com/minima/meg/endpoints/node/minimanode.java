@@ -12,7 +12,7 @@ public class minimanode extends BasicPage {
 
 	@Override
 	public void writePage(HttpServletRequest request, PrintWriter zOut) {
-		zOut.println("<h2>MINIMA NODE</h2>");
+		zOut.println("<h2>Minima Node</h2>");
 		
 		//What is the current Host
 		String mhost 	= MegDB.getDB().getPrefsDB().getMinimaNode();

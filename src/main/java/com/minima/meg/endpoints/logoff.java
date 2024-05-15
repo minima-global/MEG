@@ -34,7 +34,7 @@ public class logoff extends HttpServlet {
 		
 		out.println("<html>"
 				+ "<head>"
-				+ "<link rel=\"stylesheet\" href=\"style.css\">"
+				+ "<link rel=\"stylesheet\" href=\"basicstyle.css\">"
 				+ "</head>"
 				+ "<body>"
 				+ "<center><br><br>");

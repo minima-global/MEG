@@ -14,7 +14,7 @@ public class myprofile extends BasicPage {
 
 	@Override
 	public void writePage(HttpServletRequest request, PrintWriter zOut) {
-		zOut.println("<h2>PROFILE</h2>");
+		zOut.println("<h2>Profile</h2>");
 		
 		HttpSession session = request.getSession();
 		JSONObject usersesh = UserSessions.getUserFromSession(session.getId());

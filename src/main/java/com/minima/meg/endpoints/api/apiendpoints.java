@@ -14,7 +14,7 @@ public class apiendpoints extends BasicPage {
 
 	@Override
 	public void writePage(HttpServletRequest request, PrintWriter zOut) {
-		zOut.println("<h2>API ENDPOINTS</h2>");
+		zOut.println("<h2>Endpoints</h2>");
 		
 		
 		String url = request.getRequestURL().toString();
@@ -59,6 +59,8 @@ public class apiendpoints extends BasicPage {
 				+ "			<td>&nbsp;</td>"
 				+ "		</tr>");
 		
+		zOut.println("<tr><td colspan=3><hr></td></tr>");
+		
 		//Now output the rows
 		int rows = endpoints.getInt("count");
 		for(int i=0;i<rows;i++) {
@@ -69,6 +71,8 @@ public class apiendpoints extends BasicPage {
 			zOut.println("<td><code>"+row.getString("COMMAND")+"</code></td>");
 			zOut.println("<td><a class=menu href='removeendpoint.html?endid="+row.getLong("ID")+"'>REMOVE</a></td>");
 			zOut.println("</tr>");
+			
+			zOut.println("<tr><td colspan=3><hr></td></tr>");
 		}
 		zOut.println("</table></center>");
 	

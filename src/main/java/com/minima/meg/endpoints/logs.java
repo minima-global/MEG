@@ -37,6 +37,8 @@ public class logs extends BasicPage{
 				+ "			<td><b>Created</b></td>"
 				+ "		</tr>");
 		
+		zOut.println("<tr><td colspan=5><hr></td></tr>");
+		
 		//Now output the rows
 		int rows = users.getInt("count");
 		for(int i=0;i<rows;i++) {
@@ -49,6 +51,8 @@ public class logs extends BasicPage{
 			zOut.println("<td nowrap>"+row.getString("USERNAME")+"</td>");
 			zOut.println("<td nowrap>"+new Date(row.getLong("CREATED"))+"</td>");
 			zOut.println("</tr>");
+			
+			zOut.println("<tr><td colspan=5><hr></td></tr>");
 		}
 		zOut.println("</table>");
 		

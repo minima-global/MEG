@@ -10,7 +10,7 @@ public class walletpage extends BasicPage {
 
 	@Override
 	public void writePage(HttpServletRequest request, PrintWriter zOut) {
-		zOut.println("<h2>WALLET API</h2>\r\n"
+		zOut.println("<h2>Wallet API</h2>\r\n"
 				+ "	\r\n"
 				+ "	The Wallet API allows you to perform simple Wallet functionality for any number of Users.<br>"
 				+ " <br>This does NOT access the main Wallet of the Minima node and does not save any "
