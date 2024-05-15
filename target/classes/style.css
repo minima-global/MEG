@@ -35,6 +35,16 @@ body {
 	color: #94E662;
 }
 
+.visitustext{
+	font-family: Manrope;
+	font-size: 	14px;
+	font-weight: 600;
+	line-height: 28px;
+	letter-spacing: 0.02em;
+	text-align: left;
+	color: #F4F4F5;
+}
+
 .logouttext{
 	font-family: Manrope;
 	font-size: 16px;
@@ -48,17 +58,15 @@ body {
 
 .menutable{
 	background: #17191C;
-	padding: 24px 20px 24px 120px;	
+	padding: 24px 20px 24px 120px;
+	border-spacing: 10px;
 }
 
 .mainview{
 	vertical-align:top;
 	width:100%;
 	height:100%;
-	border: 2px solid #0000ff;
-  	border-radius: 10px;
-  	background-color: #eeeeff;
-  	padding:4px;
+	padding:4px;
 }
 
 .newuserform{
@@ -74,7 +82,15 @@ a.menu:link {
 	text-decoration: none;
 	color: #F4F4F5;
 } 
-a.menu:visited {} 
+a.menu:visited {
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 28px;
+	letter-spacing: 0.02em;
+	text-align: left;
+	text-decoration: none;
+	color: #F4F4F5;
+} 
 a.menu:active {} 
 a.menu:hover {}
 
