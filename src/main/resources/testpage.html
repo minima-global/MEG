@@ -9,14 +9,22 @@
 
 <center>
 
-<table class=maintable border=0>
+<script type="text/javascript">
+	function logout(){
+		location.href="logoff.html";
+	}
+</script>
+
+<table class=maintable cellpadding=0 cellspacing=0>
 
 <tr>
 	<td colspan=2>
 		<table class=titletable>
 			<tr>
-				<td width=100% nowrap>&nbsp;<b>Minima Enterprise Gateway</b></td>
-				<td nowrap><a class=menu href='logoff.html'>Log Off</a>&nbsp;&nbsp;</td>
+				<td><img src="MEG_Icon.png"></td>
+				<td width=100% class=titletext nowrap>Minima Enterprise Gateway</td>
+				<td class=logouttext onclick='logout();'><img src="logout.png"></td>
+				<td class=logouttext onclick='logout();'>Logout</td>
 			</tr>
 		</table>
 	</td>
@@ -25,13 +33,14 @@
 <tr>
 	<td style="vertical-align:top;">
 		<table class=menutable height=100%>
-			<tr><td nowrap>&nbsp;<a class=menu href='myprofile.html'>My Profile</a>&nbsp;</td></tr>
+			<tr><td nowrap>&nbsp;<a class=menu href='minimanode.html'><img src="Minima_logo.png"> Minima Node</a>&nbsp;</td></tr>
 			<tr><td>&nbsp;</td></tr>
-			<tr><td nowrap>&nbsp;<a class=menu href='minimanode.html'>Minima Node</a>&nbsp;</td></tr>
 			<tr><td nowrap>&nbsp;<a class=menu href='triggers.html'>Triggers</a>&nbsp;</td></tr>
 			<tr><td nowrap>&nbsp;<a class=menu href='apiendpoints.html'>API Endpoints</a>&nbsp;</td></tr>
-			<tr><td nowrap>&nbsp;<a class=menu href='logs.html'>Logs</a>&nbsp;</td></tr>
+			<tr><td nowrap>&nbsp;<a class=menu href='wallet.html'>Wallet API</a>&nbsp;</td></tr>
 			<tr><td>&nbsp;</td></tr>
+			<tr><td nowrap>&nbsp;<a class=menu href='logs.html'>Logs</a>&nbsp;</td></tr>
+			<tr><td nowrap>&nbsp;<a class=menu href='myprofile.html'>My Profile</a>&nbsp;</td></tr>
 			<tr><td nowrap>&nbsp;<a class=menu href='admin.html'>Admin</a>&nbsp;</td></tr>
 			<tr><td>&nbsp;</td></tr>
 			<tr><td nowrap>&nbsp;<a class=menu href='help.html'>Help</a>&nbsp;</td></tr>

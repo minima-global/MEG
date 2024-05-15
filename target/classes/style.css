@@ -6,7 +6,7 @@
 
 body {
 	font-family: Manrope; 
-    margin: 8;   /* Remove body margins */
+    margin: 0;   /* Remove body margins */
 }
 
 .maintable{
@@ -16,19 +16,39 @@ body {
 }
 
 .titletable{
-	width:100%;
-	border: 2px solid #0000ff;
-  	border-radius: 10px;
-  	background-color: #ccccff;
-  	padding:4px;
+	width: Fill (1,440px)px;
+	height: Fixed (94px)px;
+	padding: 24px 120px 24px 120px;
+	gap: 0px;
+	justify: space-between;
+	opacity: 0px;
+	background: #282B2E;
+}
+
+.titletext{
+	font-family: Manrope;
+	font-size: 20px;
+	font-weight: 600;
+	line-height: 28px;
+	letter-spacing: 0.02em;
+	text-align: left;
+	color: #94E662;
+}
+
+.logouttext{
+	font-family: Manrope;
+	font-size: 16px;
+	font-weight: 500;
+	line-height: 24px;
+	letter-spacing: 0.02em;
+	text-align: center;
+	color: #F4F4F5;
+	cursor:pointer;
 }
 
 .menutable{
-	width:100%;
-	border: 2px solid #0000ff;
-  	border-radius: 10px;
-  	background-color: #ccccff;
-  	padding:4px;
+	background: #17191C;
+	padding: 24px 20px 24px 120px;	
 }
 
 .mainview{
@@ -45,16 +65,18 @@ body {
 	text-align:right;
 }
 
-a.menu:link {color:blue;text-decoration: none;padding:4;} 
-a.menu:visited {color:blue;text-decoration: none;padding:4;} 
-a.menu:active {color:blue;text-decoration: none;padding:4;} 
-a.menu:hover {
-	text-decoration: none; 
-	border-radius: 4px; 
-	background-color:#ffcccc;
-	color:blue;
-	padding:4;
-}
+a.menu:link {
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 28px;
+	letter-spacing: 0.02em;
+	text-align: left;
+	text-decoration: none;
+	color: #F4F4F5;
+} 
+a.menu:visited {} 
+a.menu:active {} 
+a.menu:hover {}
 
 .solobutton {
     background-color: #eee;
