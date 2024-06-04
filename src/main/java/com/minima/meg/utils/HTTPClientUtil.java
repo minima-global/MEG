@@ -82,4 +82,16 @@ public class HTTPClientUtil {
 		}
 		return param;
 	}
+	
+	public static void PrintBlankPage(PrintWriter zOut, String zError) {
+		zOut.println("<html>"
+				+ "<head>"
+				+ "<link rel=\"stylesheet\" href=\"basicstyle.css\">"
+				+ "</head>"
+				+ "<body>"
+				+ "<center><br><br>");
+	    zOut.println(zError+"<br><br>");
+	    zOut.println("<button class=solobutton onclick='location.href=\"index.html\"'>Back to Login</button>");
+	    zOut.println("</body></html>");
+	}
 }

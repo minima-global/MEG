@@ -15,6 +15,7 @@ import com.minima.meg.database.MegDB;
 import com.minima.meg.mainsite.footer;
 import com.minima.meg.mainsite.header;
 import com.minima.meg.server.UserSessions;
+import com.minima.meg.utils.HTTPClientUtil;
 import com.minima.meg.utils.Log;
 
 public class login extends HttpServlet {
@@ -52,11 +53,8 @@ public class login extends HttpServlet {
 					response.setContentType("text/html");
 			        response.setStatus(HttpServletResponse.SC_OK);
 			        
-			        out.println("<html><body><center><br><br>");
-			        out.println("User / Password NOT Found..<br><br>");
-				    out.println("<a href='index.html'>Back to Login</a></center>");
-				    out.println("</body></html>");
-				    
+			        HTTPClientUtil.PrintBlankPage(out,"User / Password NOT Found..");
+			        
 				    return;
 				}
 			}else {
@@ -65,11 +63,8 @@ public class login extends HttpServlet {
 				response.setContentType("text/html");
 		        response.setStatus(HttpServletResponse.SC_OK);
 		        
-		        out.println("<html><body><center><br><br>");
-			    out.println("Default Admin account NOT enabled..<br><br>");
-			    out.println("<a href='index.html'>Back to Login</a></center>");
-			    out.println("</body></html>");
-			    
+		        HTTPClientUtil.PrintBlankPage(out,"Default Admin account NOT enabled..");
+		        
 			    return;
 			}
 			
@@ -79,11 +74,8 @@ public class login extends HttpServlet {
 			response.setContentType("text/html");
 	        response.setStatus(HttpServletResponse.SC_OK);
 	        
-	        out.println("<html><body><center><br><br>");
-		    out.println("User / Password NOT Found..<br><br>");
-		    out.println("<a href='index.html'>Back to Login</a></center>");
-		    out.println("</body></html>");
-		    
+	        HTTPClientUtil.PrintBlankPage(out,"User / Password NOT Found..");
+	        
 		    return;
 		    
 		}else {

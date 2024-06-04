@@ -28,7 +28,7 @@ public class logs extends BasicPage{
 		
 		zOut.println("<h2>LOGS</h2>");
 		zOut.println("<center>");
-		zOut.println("<table border=0 style=\"width:100%;border-spacing:4;\">"
+		zOut.println("<table border=0 style=\"width:100%;border-spacing:4;font-size:12;\">"
 				+ "		<tr>"
 				+ "			<td><b>ID</b></td>"
 				+ "			<td width=100%><b>Event</b></td>"

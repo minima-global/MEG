@@ -28,11 +28,17 @@ public class setnode extends BasicPage {
 		if(request.getParameter("checkonly") != null) {
 			
 		}else {
-			String host 	= request.getParameter("hostip");
-			String meghost	= request.getParameter("megip");
+			
+			//First set the Values..
+			String host 	= request.getParameter("hostip").trim();
+			String meghost	= request.getParameter("megip").trim();
 			if(!meghost.endsWith("/")) {
 				meghost=meghost+"/";
 			}
+			
+			//Add to the database
+			MegDB.getDB().getPrefsDB().setMinimaNode(host);
+			MegDB.getDB().getPrefsDB().setMEGNode(meghost);
 			
 			//Set the WEBHOOK
 			try {
@@ -41,16 +47,13 @@ public class setnode extends BasicPage {
 				
 				JSONObject hook = new JSONObject(res);
 				if(!hook.getBoolean("status")) {
-					Log.log("ERROR setting webhook on Minima "+res);
-					
-					//Add a DB LOG
-					MegDB.getDB().getLogsDB().addLog("ERROR SET MINIMA NODE WEBHOOK", host, usersesh.getString("username"));
-					
-					return;
+					throw new Exception("Failed to set webhook");
 				}
 				
 			} catch (Exception e) {
 				Log.log(e+" "+host);
+				
+				zOut.println("<center><br><br>Minima node set ERROR</center>");
 				
 				//Add a DB LOG
 				MegDB.getDB().getLogsDB().addLog("ERROR SET MINIMA NODE WEBHOOK", host, usersesh.getString("username"));
@@ -58,10 +61,6 @@ public class setnode extends BasicPage {
 				return;
 			}
 			
-			//Add to the database
-			MegDB.getDB().getPrefsDB().setMinimaNode(host);
-			MegDB.getDB().getPrefsDB().setMEGNode(meghost);
-		
 			//Add a DB LOG
 			MegDB.getDB().getLogsDB().addLog("SET MINIMA NODE", host, usersesh.getString("username"));
 			

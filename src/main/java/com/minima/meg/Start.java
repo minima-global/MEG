@@ -4,6 +4,10 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Collections;
+import java.util.List;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 import com.minima.meg.utils.Log;
 
@@ -48,9 +52,9 @@ public class Start
 					
 					System.out.println("MEG Help");
 					System.out.println(" -port            : Specify the port to listen on");
-					System.out.println(" -data            : Specify the datafolder");
-					System.out.println(" -adminpassword   : Specify the 'admin' password (use to add initial accounts)");
-					System.out.println(" -help       : Print this help");
+					System.out.println(" -data            : Specify the data folder");
+					System.out.println(" -adminpassword   : Specify the 'admin' User account password (use to add initial accounts)");
+					System.out.println(" -help            : Print this help");
 					
 					System.exit(1);
 					
@@ -60,6 +64,10 @@ public class Start
 				}
 			}
 		}
+		
+		//Disable Jetty logging
+		System.setProperty("org.eclipse.jetty.util.log.class", "org.eclipse.jetty.util.log.StdErrLog");
+		System.setProperty("org.eclipse.jetty.LEVEL", "OFF");
 		
 		//Use shutdown hook
 		mUseShutdownHook = true;

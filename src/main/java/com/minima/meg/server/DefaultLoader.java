@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+
+import com.minima.meg.database.MegDB;
 import com.minima.meg.utils.FileUtils;
 import com.minima.meg.utils.Log;
 
@@ -27,6 +30,16 @@ public class DefaultLoader extends HttpServlet {
 		
 		if(reqfile.startsWith("/")) {
 			reqfile = reqfile.substring(1);
+		}
+		
+		//Is this the login page..
+		if(reqfile.equals("index.html")) {
+			
+			//Are there any users to log in with..
+			JSONObject users = MegDB.getDB().getUserDB().getAllUsers();
+			if(users.getInt("count") == 0 && !MegDB.getDB().getAdminEnabled()) {
+				reqfile = "index_nousers.html";
+			}
 		}
 		
 		//Load the file
