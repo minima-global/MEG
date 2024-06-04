@@ -60,7 +60,7 @@
 
   <build>
   
-	<finalName>minima-meg-server</finalName>
+	<finalName>minima-meg</finalName>
         <plugins>
 
             <plugin>
