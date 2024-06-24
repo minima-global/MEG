@@ -20,6 +20,8 @@ public class Start
 	/**
 	 * The Main MEG Manager
 	 */
+	public static final String MEG_VERSION = "1.1";
+	
 	private static MEGManager mMEG;
 	
 	private static boolean mUseShutdownHook;
@@ -71,6 +73,8 @@ public class Start
 		
 		//Use shutdown hook
 		mUseShutdownHook = true;
+		
+		Log.log("MEG v"+MEG_VERSION);
 		
         //Create and start server 
 		mMEG = new MEGManager();
