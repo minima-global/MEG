@@ -52,7 +52,7 @@ public class HTTPClientUtil {
 	        client.stop();
 	        
 		}catch(Exception exc) {
-			Log.log("GET ERROR @ "+zURL);
+			Log.log("ERROR GET @ "+zURL+" "+exc.toString());
 			
 			throw exc;
 		}
