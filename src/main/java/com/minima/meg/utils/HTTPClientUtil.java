@@ -40,14 +40,23 @@ public class HTTPClientUtil {
 	
 	public static String GET(String zURL) throws Exception {
 		
-		HttpClient client = new HttpClient();
-        client.start();
-        
-        ContentResponse res = client.GET(zURL);
-        String resp = res.getContentAsString();
-        
-        client.stop();
-        
+		String resp = "";
+		
+		try {
+			HttpClient client = new HttpClient();
+	        client.start();
+	        
+	        ContentResponse res = client.GET(zURL);
+	        resp = res.getContentAsString();
+	        
+	        client.stop();
+	        
+		}catch(Exception exc) {
+			Log.log("GET ERROR @ "+zURL);
+			
+			throw exc;
+		}
+		
         return resp;
 	}
 	
