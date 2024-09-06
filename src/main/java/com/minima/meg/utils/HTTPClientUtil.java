@@ -87,7 +87,15 @@ public class HTTPClientUtil {
 	public static String getValidParam(HttpServletRequest request, String zParam) throws Exception {
 		String param = request.getParameter(zParam);
 		if(param == null) {
-			throw new Exception("Param missing : "+zParam);
+			throw new Exception("Required param missing : "+zParam);
+		}
+		return param;
+	}
+	
+	public static String getValidParam(HttpServletRequest request, String zParam, String zDefault) throws Exception {
+		String param = request.getParameter(zParam);
+		if(param == null) {
+			return zDefault;
 		}
 		return param;
 	}

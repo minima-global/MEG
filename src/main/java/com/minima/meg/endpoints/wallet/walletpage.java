@@ -55,12 +55,13 @@ public class walletpage extends BasicPage {
 				+ "	&nbsp;&nbsp;&nbsp;privatekey : Private Key of the FROM Address<br>\r\n"
 				+ "	&nbsp;&nbsp;&nbsp;script : The script of the FROM Address <br>\r\n"
 				+ "	&nbsp;&nbsp;&nbsp;keyuses : The number of times this address has been used (nonce)<br>\r\n"
+				+ "	&nbsp;&nbsp;&nbsp;burn : Transaction Burn / Fee (optional)<br>\r\n"
 				+ "	<br>\r\n"
 				+ "	Node status : online \r\n"
 				
 				
 				+ "	<h3>/wallet/checktxpow</h3>\r\n"
-				+ "	Check status of transaction (only works for 12 hours.. then pruned)<br>\r\n"
+				+ "	Check transaction is on-chain (only works for 24 hours.. then pruned)<br>\r\n"
 				+ "	<br>\r\n"
 				+ "	Params : <br>\r\n"
 				+ "	&nbsp;&nbsp;&nbsp;txpowid : TxPoWID of transaction<br>\r\n"
@@ -69,7 +70,7 @@ public class walletpage extends BasicPage {
 				
 				
 				+ "	<h3>/wallet/gettxpow</h3>\r\n"
-				+ "	Get TxPoW (only works for 12 hours.. then pruned)<br>\r\n"
+				+ "	Get TxPoW (only works for 48 hours.. then pruned)<br>\r\n"
 				+ "	<br>\r\n"
 				+ "	Params : <br>\r\n"
 				+ "	&nbsp;&nbsp;&nbsp;txpowid : TxPoWID of transaction<br>\r\n"
@@ -87,6 +88,7 @@ public class walletpage extends BasicPage {
 				+ "	&nbsp;&nbsp;&nbsp;toaddress : Address to send <b>to</b><br>\r\n"
 				+ "	&nbsp;&nbsp;&nbsp;fromaddress : Address to send <b>from</b><br>\r\n"
 				+ "	&nbsp;&nbsp;&nbsp;script : The script of the FROM Address <br>\r\n"
+				+ "	&nbsp;&nbsp;&nbsp;burn : Transaction Burn / Fee (optional)<br>\r\n"
 				+ "	<br>\r\n"
 				+ "	Node status : online \r\n"
 				
@@ -102,13 +104,39 @@ public class walletpage extends BasicPage {
 				+ "	Node status : online / offline \r\n"
 				
 				+ "	<h3>/wallet/posttxn</h3>\r\n"
-				+ "	Post a transaction created with signtxn<br>\r\n"
+				+ "	Post a complete transaction created with signtxn<br>\r\n"
 				+ "	<br>\r\n"
 				+ "	Params : <br>\r\n"
 				+ "	&nbsp;&nbsp;&nbsp;data : The transaction created from signtxn <br>\r\n"
 				+ "	<br>\r\n"
 				+ "	Node status : online \r\n"
 				
+				+ "	<h3>/wallet/lockcoins</h3>\r\n"
+				+ "	Lock CoinID / Coins used when creating multiple transactions without posting to mempool<br>\r\n"
+				+ "	<br>\r\n"
+				+ "	Node status : online / offline\r\n"
+
+				+ "	<h3>/wallet/unlockcoins</h3>\r\n"
+				+ "	Unlock CoinID / Coins. Use after you have posted the transactions.<br>\r\n"
+				+ "	<br>\r\n"
+				+ "	Node status : online / offline\r\n"
+
+				+ "	<h3>/wallet/minetxn</h3>\r\n"
+				+ "	Mine a complete transaction created with signtxn and get TxPowID without posting<br>\r\n"
+				+ "	<br>\r\n"
+				+ "	Params : <br>\r\n"
+				+ "	&nbsp;&nbsp;&nbsp;data : The transaction created from signtxn <br>\r\n"
+				+ "	<br>\r\n"
+				+ "	Node status : online / offline\r\n"
+				
+				+ "	<h3>/wallet/postminedtxn</h3>\r\n"
+				+ "	Post a pre-mined transaction created with minetxn<br>\r\n"
+				+ "	<br>\r\n"
+				+ "	Params : <br>\r\n"
+				+ "	&nbsp;&nbsp;&nbsp;data : The transaction created from minetxn <br>\r\n"
+				+ "	<br>\r\n"
+				+ "	Node status : online\r\n"
+
 				+ "");
 	}
 }

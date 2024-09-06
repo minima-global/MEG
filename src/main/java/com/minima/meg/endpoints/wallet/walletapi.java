@@ -55,6 +55,7 @@ public class walletapi extends ApiCaller {
 				String privatekey 	= HTTPClientUtil.getValidParam(request, "privatekey");
 				String script 		= HTTPClientUtil.getValidParam(request, "script");
 				String keyuses 		= HTTPClientUtil.getValidParam(request, "keyuses");
+				String burn 		= HTTPClientUtil.getValidParam(request, "burn","0");
 				
 				//Create the call
 				cmdtocall = "sendfrom"
@@ -62,6 +63,7 @@ public class walletapi extends ApiCaller {
 							+" fromaddress:"+fromaddress
 							+" address:"+toaddress
 							+" amount:"+amount
+							+" burn:"+burn
 							+" tokenid:"+tokenid
 							+" script:\""+script+"\""
 							+" privatekey:"+privatekey
@@ -97,12 +99,14 @@ public class walletapi extends ApiCaller {
 				String toaddress 	= HTTPClientUtil.getValidParam(request, "toaddress");
 				String fromaddress 	= HTTPClientUtil.getValidParam(request, "fromaddress");
 				String script 		= HTTPClientUtil.getValidParam(request, "script");
+				String burn 		= HTTPClientUtil.getValidParam(request, "burn","0");
 				
 				//Create the call
 				cmdtocall = "createfrom"
 							+" fromaddress:"+fromaddress
 							+" address:"+toaddress
 							+" amount:"+amount
+							+" burn:"+burn
 							+" tokenid:"+tokenid
 							+" script:\""+script+"\"";
 				
@@ -125,6 +129,30 @@ public class walletapi extends ApiCaller {
 				
 				//Create the call
 				cmdtocall = "postfrom data:"+data+" mine:true";
+			
+			}else if(apicall.equals("lockcoins")) {
+				
+				//Create the call
+				cmdtocall = "txncoinlock action:lock";
+			
+			}else if(apicall.equals("unlockcoins")) {
+				
+				//Create the call
+				cmdtocall = "txncoinlock action:unlock";
+			
+			}else if(apicall.equals("minetxn")) {
+				
+				String data = HTTPClientUtil.getValidParam(request, "data");
+				
+				//Create the call
+				cmdtocall = "txnmine data:"+data;
+			
+			}else if(apicall.equals("postminedtxn")) {
+				
+				String data = HTTPClientUtil.getValidParam(request, "data");
+				
+				//Create the call
+				cmdtocall = "txnminepost data:"+data;
 			}
 		
 			//Run it..

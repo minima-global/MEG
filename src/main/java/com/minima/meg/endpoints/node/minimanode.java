@@ -47,7 +47,7 @@ public class minimanode extends BasicPage {
 		
 		zOut.println("<br>"
 				+ "<center>"
-				+ "<button class='solobutton' onclick=\"location.href='setnode.html?checkonly=1'\">TEST CONNECTION</button>"
+				+ "<button class='solobutton' onclick=\"location.href='setnode.html?checkonly=1'\">Test connection @ "+mhost+"</button>"
 				+ "</center>");
 	}
 }
