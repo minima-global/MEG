@@ -17,13 +17,13 @@ public class UserSessions {
 	public static JSONObject getUserFromSession(String zSessionid) {
 		
 		//HACK
-		JSONObject userobj = new JSONObject();
-		userobj.put("userid", -1);
-		userobj.put("username", "adminhack");
-		userobj.put("level", "admin");
-		return userobj;
+		//JSONObject userobj = new JSONObject();
+		//userobj.put("userid", -1);
+		//userobj.put("username", "adminhack");
+		//userobj.put("level", "admin");
+		//return userobj;
 		
-		//return mUserSessions.get(zSessionid);
+		return mUserSessions.get(zSessionid);
 	}
 	
 	public static void clearSession(String zSessionid) {
