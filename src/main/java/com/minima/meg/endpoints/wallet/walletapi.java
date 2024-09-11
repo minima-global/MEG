@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.minima.meg.database.MegDB;
 import com.minima.meg.server.ApiCaller;
 import com.minima.meg.utils.HTTPClientUtil;
+import com.minima.meg.utils.Log;
 
 public class walletapi extends ApiCaller {
 
@@ -90,16 +91,13 @@ public class walletapi extends ApiCaller {
 			}else if(apicall.equals("unsignedtxn")) {
 				
 				//Get all the parameters
-				String tokenid="0x00";
-				if(request.getParameter("tokenid") != null) {
-					tokenid=request.getParameter("tokenid");
-				}
-				
 				String amount 		= HTTPClientUtil.getValidParam(request, "amount");
 				String toaddress 	= HTTPClientUtil.getValidParam(request, "toaddress");
 				String fromaddress 	= HTTPClientUtil.getValidParam(request, "fromaddress");
 				String script 		= HTTPClientUtil.getValidParam(request, "script");
+				
 				String burn 		= HTTPClientUtil.getValidParam(request, "burn","0");
+				String tokenid		= HTTPClientUtil.getValidParam(request, "tokenid","0x00");
 				
 				//Create the call
 				cmdtocall = "createfrom"
@@ -153,6 +151,36 @@ public class walletapi extends ApiCaller {
 				
 				//Create the call
 				cmdtocall = "txnminepost data:"+data;
+			
+			
+			}else if(apicall.equals("listcoins")) {
+				
+				//Get all the parameters
+				String address = HTTPClientUtil.getValidParam(request, "address");
+				String tokenid = HTTPClientUtil.getValidParam(request, "tokenid","0x00");
+				
+				cmdtocall = "coins address:"+address+" megammr:true tokenid:"+tokenid;
+			
+			}else if(apicall.equals("constructtxn")) {
+				
+				//Get all the parameters
+				String coinlist		= HTTPClientUtil.getValidParam(request, "coinlist");
+				String script		= HTTPClientUtil.getValidParam(request, "script");
+				
+				String toaddress	= HTTPClientUtil.getValidParam(request, "toaddress");
+				String toamount		= HTTPClientUtil.getValidParam(request, "toamount");
+				
+				String changeaddress	= HTTPClientUtil.getValidParam(request, "changeaddress");
+				String changeamount		= HTTPClientUtil.getValidParam(request, "changeamount");
+				
+				String tokenid		= HTTPClientUtil.getValidParam(request, "tokenid","0x00");
+				
+				cmdtocall = "constructfrom coinlist:"+coinlist+" script:\""+script+"\""
+							+" toaddress:"+toaddress+" toamount:"+toamount
+							+" changeaddress:"+changeaddress+" changeamount:"+changeamount+" tokenid:"+tokenid;
+				
+			}else {
+				throw new Exception("Unknown WALLET API call : "+apicall);
 			}
 		
 			//Run it..
