@@ -1,64 +1,61 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="0" name="com.minima.meg.AppTest" time="0.001" errors="0" skipped="0">
+<testsuite tests="1" failures="0" name="com.minima.meg.AppTest" time="0.006" errors="0" skipped="0">
   <properties>
-    <property name="jansi.mode" value="force"/>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
-    <property name="java.vm.version" value="17.0.6+10"/>
-    <property name="sun.boot.library.path" value="/Users/patrickcerri/.p2/pool/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.macosx.aarch64_17.0.6.v20230204-1729/jre/lib"/>
-    <property name="maven.multiModuleProjectDirectory" value="/Users/patrickcerri/git/MEG"/>
-    <property name="java.vm.vendor" value="Eclipse Adoptium"/>
-    <property name="java.vendor.url" value="https://adoptium.net/"/>
+    <property name="java.vm.version" value="18+36-2087"/>
+    <property name="sun.boot.library.path" value="C:\Users\spartacusrex\java\jdk-18\bin"/>
+    <property name="maven.multiModuleProjectDirectory" value="C:\Users\spartacusrex\git\MEG"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
-    <property name="path.separator" value=":"/>
+    <property name="path.separator" value=";"/>
     <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="user.script" value=""/>
     <property name="user.country" value="GB"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="/Users/patrickcerri/git/MEG"/>
+    <property name="user.dir" value="C:\Users\spartacusrex\git\MEG"/>
     <property name="java.vm.compressedOopsMode" value="Zero based"/>
-    <property name="java.runtime.version" value="17.0.6+10"/>
-    <property name="os.arch" value="aarch64"/>
-    <property name="java.io.tmpdir" value="/var/folders/0t/3qkwr0xj6jxc0bmd73srjj4c0000gn/T/"/>
+    <property name="java.runtime.version" value="18+36-2087"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.io.tmpdir" value="C:\Users\SPARTA~1\AppData\Local\Temp\"/>
     <property name="line.separator" value="
 "/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
-    <property name="os.name" value="Mac OS X"/>
-    <property name="classworlds.conf" value="/Users/patrickcerri/eclipse-workspace/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf4442044049169452270.tmp"/>
-    <property name="sun.jnu.encoding" value="UTF-8"/>
-    <property name="java.library.path" value="/Users/patrickcerri/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
+    <property name="user.variant" value=""/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="classworlds.conf" value="C:\Users\spartacusrex\eclipse-workspace\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf8480918490473297297.tmp"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Users\spartacusrex\java\jdk-18\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:/Users/spartacusrex/.p2/pool/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_14.0.2.v20200815-0932/jre/bin/server;C:/Users/spartacusrex/.p2/pool/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_14.0.2.v20200815-0932/jre/bin;C:\Python310\Scripts\;C:\Python310\;C:\Program Files (x86)\Razer Chroma SDK\bin;C:\Program Files\Razer Chroma SDK\bin;C:\Program Files (x86)\Razer\ChromaBroadcast\bin;C:\Program Files\Razer\ChromaBroadcast\bin;C:\Program Files\Java\jdk-14.0.2\bin\;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files\Oculus\Support\oculus-runtime;C:\Program Files\AdoptOpenJDK\jdk-8.0.265.01-hotspot\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\PuTTY\;C:\Program Files (x86)\Calibre2\;C:\Program Files\Git\cmd;C:\Windows\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps;C:\Program Files\dotnet\;C:\ProgramData\chocolatey\bin;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;%NVM_HOME%;%NVM_SYMLINK%;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\spartacusrex\AppData\Local\Microsoft\WindowsApps;C:\Users\spartacusrex\AppData\Local\Google\Cloud SDK\google-cloud-sdk\bin;C:\Users\spartacusrex\FLUTTERSDK\flutter\flutter\bin\;C:\Users\spartacusrex\AppData\Local\Android\Sdk\platform-tools;C:\Users\spartacusrex\AppData\Roaming\npm;C:\Users\spartacusrex\Documents\apache-maven-3.8.5-bin\apache-maven-3.8.5\bin;C:\Users\spartacusrex\.dotnet\tools;C:\Program Files (x86)\WiX Toolset v3.11\bin;C:\Users\spartacusrex\.web3j\web3j-cli-shadow-1.5.0\bin;C:\Users\spartacusrex\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Users\spartacusrex\eclipse\java-2020-09\eclipse;;."/>
     <property name="jdk.debug" value="release"/>
-    <property name="java.class.version" value="61.0"/>
+    <property name="java.class.version" value="62.0"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="os.version" value="12.5"/>
-    <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
-    <property name="user.home" value="/Users/patrickcerri"/>
+    <property name="os.version" value="10.0"/>
+    <property name="user.home" value="C:\Users\spartacusrex"/>
     <property name="user.timezone" value="Europe/London"/>
-    <property name="file.encoding" value="UTF-8"/>
-    <property name="java.specification.version" value="17"/>
-    <property name="user.name" value="patrickcerri"/>
-    <property name="java.class.path" value="/Users/patrickcerri/.p2/pool/plugins/org.eclipse.m2e.maven.runtime_3.8.604.20221130-2149/jars/plexus-classworlds-2.6.0.jar"/>
-    <property name="java.vm.specification.version" value="17"/>
+    <property name="file.encoding" value="Cp1252"/>
+    <property name="java.specification.version" value="18"/>
+    <property name="user.name" value="spartacusrex"/>
+    <property name="java.class.path" value="C:\Users\spartacusrex\.p2\pool\plugins\org.eclipse.m2e.maven.runtime_1.16.0.20200610-1735\jars\plexus-classworlds-2.6.0.jar"/>
+    <property name="java.vm.specification.version" value="18"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -B -Dstyle.color=always clean install"/>
-    <property name="java.home" value="/Users/patrickcerri/.p2/pool/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.macosx.aarch64_17.0.6.v20230204-1729/jre"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -B package"/>
+    <property name="java.home" value="C:\Users\spartacusrex\java\jdk-18"/>
     <property name="user.language" value="en"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
-    <property name="java.vm.info" value="mixed mode"/>
-    <property name="java.version" value="17.0.6"/>
-    <property name="native.encoding" value="UTF-8"/>
-    <property name="java.vendor" value="Eclipse Adoptium"/>
-    <property name="maven.home" value="/Users/patrickcerri/git/MEG/EMBEDDED"/>
-    <property name="style.color" value="always"/>
-    <property name="file.separator" value="/"/>
-    <property name="java.version.date" value="2023-01-17"/>
-    <property name="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
-    <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.version" value="18"/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="maven.home" value="C:\Users\spartacusrex\git\MEG\EMBEDDED"/>
+    <property name="file.separator" value="\"/>
+    <property name="java.version.date" value="2022-03-22"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="sun.cpu.endian" value="little"/>
-    <property name="java.vendor.version" value="Temurin-17.0.6+10"/>
-    <property name="m2e.build.project.data.socket.port" value="53397"/>
-    <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
-    <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.minima.meg.AppTest" name="shouldAnswerWithTrue" time="0.001"/>
+  <testcase classname="com.minima.meg.AppTest" name="shouldAnswerWithTrue" time="0.006"/>
 </testsuite>
