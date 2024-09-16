@@ -32,7 +32,7 @@ public class walletpage extends BasicPage {
 				+ "	Creates a Wallet from a given seed phrase<br>\r\n"
 				+ "	<br>\r\n"
 				+ "	Params : <br>"
-				+ "	&nbsp;&nbsp;&nbsp;address : seedphrase\r\n"
+				+ "	&nbsp;&nbsp;&nbsp;seedphrase : seedphrase\r\n"
 				+ "	<br><br>\r\n"
 				+ "	Node status : online / offline\r\n"
 				
