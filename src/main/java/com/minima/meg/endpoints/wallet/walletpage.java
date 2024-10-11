@@ -77,6 +77,15 @@ public class walletpage extends BasicPage {
 				+ "	<br>\r\n"
 				+ "	Node status : online \r\n"
 				
+				+ "	<h3>/wallet/scanchain</h3>\r\n"
+				+ "	Scan back through the chain from the tip and return all transaction data / txpowid<br>"
+				+ " Useful to check for deposit addresses<br>\r\n"
+				+ "	<br>\r\n"
+				+ "	Params : <br>\r\n"
+				+ "	&nbsp;&nbsp;&nbsp;depth : How many blocks to scan through (default 16)<br>\r\n"
+				+ "	<br>\r\n"
+				+ "	Node status : online \r\n"
+				
 				+ "	<h2>Advanced Offline Signing Wallet</h2>\r\n"
 				
 				+ "	\r\n"

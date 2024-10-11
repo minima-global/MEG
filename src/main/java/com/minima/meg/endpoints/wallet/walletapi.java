@@ -87,6 +87,14 @@ public class walletapi extends ApiCaller {
 				//Create the call
 				cmdtocall = "txpow txpowid:"+txpowid;
 			
+			}else if(apicall.equals("scanchain")) {
+				
+				//What depth to scan
+				String depth = HTTPClientUtil.getValidParam(request, "depth", "16");
+				
+				//Create the call
+				cmdtocall = "scanchain depth:"+depth;
+			
 				//Advanced APIs..
 			}else if(apicall.equals("unsignedtxn")) {
 				
