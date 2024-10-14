@@ -55,6 +55,9 @@ public class UserDB extends SqlDB {
 		
 		//Run it..
 		stmt.execute(create);
+		
+		//Close connection
+		stmt.close();
 	}
 	
 	/**

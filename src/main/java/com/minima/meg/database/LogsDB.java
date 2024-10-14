@@ -29,6 +29,9 @@ public class LogsDB extends SqlDB {
 		
 		//Run it..
 		stmt.execute(create);
+		
+		//Close connection
+		stmt.close();
 	}
 
 
