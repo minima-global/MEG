@@ -68,12 +68,14 @@ public class setnode extends BasicPage {
 		}
 		
 		//Test a function..
-		String rsp = "Could not connect to to Minima node..";
+		String rsp = "Could not connect to Minima node..";
 		try {
 			rsp = HTTPClientUtil.runMinimaCMD("block");
 		} catch (Exception e) {
 			//e.printStackTrace();
 			Log.log("Error Minima CMD : "+e.toString());
+			
+			rsp = "Could not connect to Minima node..<br><br>"+e.toString();
 		}
 		
 		zOut.println("<center><br><br><div style='word-break:break-all;width:500;'>"+rsp+"</div></center>");
