@@ -1,21 +1,29 @@
 package com.minima.meg.utils;
 
 import java.io.PrintWriter;
+import java.net.URI;
 import java.net.URLEncoder;
+import java.util.Base64;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.eclipse.jetty.client.HttpClient;
+import org.eclipse.jetty.client.api.AuthenticationStore;
 import org.eclipse.jetty.client.api.ContentResponse;
 import org.eclipse.jetty.client.api.Request;
+import org.eclipse.jetty.client.util.BasicAuthentication;
 import org.eclipse.jetty.client.util.StringContentProvider;
 import org.eclipse.jetty.http.HttpHeader;
+import org.eclipse.jetty.http.HttpMethod;
 import org.json.JSONObject;
 
 import com.minima.meg.database.MegDB;
 
 public class HTTPClientUtil {
 
+	/**
+	 * Post DATA on Trigger events
+	 */
 	public static void POST(String zURL, String zData) throws Exception {
 		
 		HttpClient client = new HttpClient();
@@ -24,9 +32,10 @@ public class HTTPClientUtil {
         Request request = client.POST(zURL);
         request.header(HttpHeader.CONTENT_TYPE, "application/json");
         
-        /*// Add basic auth header if credentials provided
-        if (isCredsAvailable()) {
-            String authString = username + ":" + password;
+        // Add basic auth header if credentials provided
+        /*if (true) {
+            //String authString = username + ":" + password;
+            String authString = "minima:popo";
             byte[] authEncBytes = Base64.getEncoder().encode(authString.getBytes());
             String authStringEnc = "Basic " + new String(authEncBytes);
             request.header(HttpHeader.AUTHORIZATION, authStringEnc);
@@ -44,11 +53,21 @@ public class HTTPClientUtil {
 		
 		try {
 			HttpClient client = new HttpClient();
-	        client.start();
+			client.start();
 	        
-	        ContentResponse res = client.GET(zURL);
-	        resp = res.getContentAsString();
-	        
+			//Try with Basic auth
+			if(false) {
+				Request req = client.newRequest(zURL).method(HttpMethod.GET);
+				String authString = "minima:popo";
+	            byte[] authEncBytes = Base64.getEncoder().encode(authString.getBytes());
+	            String authStringEnc = "Basic " + new String(authEncBytes);
+				req.header("Authorization", authStringEnc);
+				ContentResponse res = req.send();
+			}else {
+				ContentResponse res = client.GET(zURL);
+		        resp = res.getContentAsString();
+			}
+			
 	        client.stop();
 	        
 		}catch(Exception exc) {
