@@ -79,10 +79,16 @@ public class walletpage extends BasicPage {
 				+ "	Get TxPoW (only works for 48 hours.. then pruned)<br>\r\n"
 				+ "	<br>\r\n"
 				+ "	Params : <br>\r\n"
-				+ "	&nbsp;&nbsp;&nbsp;txpowid : TxPoWID of transaction<br>\r\n"
+				+ "	&nbsp;&nbsp;&nbsp;txpowid : TxPoWID of transaction (optional)<br>\r\n"
+				+ "	&nbsp;&nbsp;&nbsp;block : Block number (optional)<br>\r\n"
 				+ "	<br>\r\n"
 				+ "	Node status : online \r\n"
 				
+				+ "	<h3>/wallet/block</h3>\r\n"
+				+ "	Get the current top block<br>\r\n"
+				+ "	<br>\r\n"
+				+ "	Node status : online \r\n"
+
 				+ "	<h3>/wallet/scanchain</h3>\r\n"
 				+ "	Scan back through the chain from the tip and return all transaction data / txpowid<br>"
 				+ " Useful to check for deposit addresses<br>\r\n"

@@ -80,14 +80,33 @@ public class walletapi extends ApiCaller {
 				//Create the call
 				cmdtocall = "txpow onchain:"+txpowid;
 			
-			}else if(apicall.equals("gettxpow")) {
-				
-				//Which transaction
-				String txpowid 	= HTTPClientUtil.getValidParam(request, "txpowid");
+			}else if(apicall.equals("block")) {
 				
 				//Create the call
-				cmdtocall = "txpow txpowid:"+txpowid;
-			
+				cmdtocall = "block";
+				
+			}else if(apicall.equals("gettxpow")) {
+				
+				if(HTTPClientUtil.paramExists(request, "txpowid")) {
+					
+					//Which transaction
+					String txpowid 	= HTTPClientUtil.getValidParam(request, "txpowid");
+					
+					//Create the call
+					cmdtocall = "txpow txpowid:"+txpowid;
+				
+				}else if(HTTPClientUtil.paramExists(request, "block")) {
+					
+					//Which transaction
+					String block = HTTPClientUtil.getValidParam(request, "block");
+					
+					//Create the call
+					cmdtocall = "txpow block:"+block;
+					
+				}else {
+					throw new Exception("MUST provide txpowid or block param");
+				}
+				
 			}else if(apicall.equals("scanchain")) {
 				
 				//What depth to scan
