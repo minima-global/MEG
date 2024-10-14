@@ -28,6 +28,9 @@ public class MegDB {
 	LogsDB mLogsDB;
 	PrefsDB mPrefsDB;
 	
+	public static int MINIMUM_KEYUSES = 0;
+	NonceDB mNonceDB;
+	
 	//Is the admin account enabled..
 	boolean mAdminEnabled = false;
 	String mAdminPassword = "";
@@ -39,6 +42,12 @@ public class MegDB {
 		mLogsDB = new LogsDB();
 		
 		mPrefsDB = new PrefsDB();
+		
+		mNonceDB = new NonceDB();
+	}
+	
+	public File getDatabaseFolder() {
+		return mDatabaseFolder;
 	}
 	
 	public void setAdminEnabled(boolean zEnable, String zPassword) {
@@ -66,6 +75,10 @@ public class MegDB {
 		return mPrefsDB;
 	}
 	
+	public NonceDB getNonceDB() {
+		return mNonceDB;
+	}
+	
 	public void loadAllDB() throws SQLException, IOException {
 		
 		Log.log("Loading all MEGDB");
@@ -74,6 +87,7 @@ public class MegDB {
 		mUserDB.loadDB(new File(mDatabaseFolder,"userdb"));
 		mLogsDB.loadDB(new File(mDatabaseFolder,"logsdb"));
 		mPrefsDB.loadDB(new File(mDatabaseFolder,"prefsdb"));
+		mNonceDB.loadDB(new File(mDatabaseFolder,"noncedb"));
 	}
 	
 	public void saveAllDB() throws IOException {
@@ -81,6 +95,7 @@ public class MegDB {
 		
 		mUserDB.saveDB(true);
 		mLogsDB.saveDB(true);
+		mNonceDB.saveDB(true);
 		
 		mPrefsDB.saveDB(new File(mDatabaseFolder,"prefsdb"));
 	}

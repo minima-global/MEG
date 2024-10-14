@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import com.minima.meg.database.MegDB;
 import com.minima.meg.server.ApiCaller;
 import com.minima.meg.utils.HTTPClientUtil;
-import com.minima.meg.utils.Log;
 
 public class walletapi extends ApiCaller {
 
@@ -55,8 +54,10 @@ public class walletapi extends ApiCaller {
 				String fromaddress 	= HTTPClientUtil.getValidParam(request, "fromaddress");
 				String privatekey 	= HTTPClientUtil.getValidParam(request, "privatekey");
 				String script 		= HTTPClientUtil.getValidParam(request, "script");
-				String keyuses 		= HTTPClientUtil.getValidParam(request, "keyuses");
 				String burn 		= HTTPClientUtil.getValidParam(request, "burn","0");
+				
+				//Get the key uses - could be specified or MEG DB
+				String keyuses = getKeyUses(request);
 				
 				//Create the call
 				cmdtocall = "sendfrom"
@@ -120,14 +121,15 @@ public class walletapi extends ApiCaller {
 				
 				String data 		= HTTPClientUtil.getValidParam(request, "data");
 				String privatekey 	= HTTPClientUtil.getValidParam(request, "privatekey");
-				String keyuses 		= HTTPClientUtil.getValidParam(request, "keyuses");
+				
+				//Get the key uses - could be specified or MEG DB
+				String keyuses = getKeyUses(request);
 				
 				//Create the call
 				cmdtocall = "signfrom"
 							+" data:"+data
 							+" privatekey:"+privatekey
 							+" keyuses:"+keyuses;
-				
 				
 			}else if(apicall.equals("posttxn")) {
 				
@@ -206,6 +208,39 @@ public class walletapi extends ApiCaller {
 			//Add a DB LOG
 			MegDB.getDB().getLogsDB().addLog("WALLET CALL FAIL "+e, apicall, zUser);
 		}
+	}
+	
+	public String getKeyUses(HttpServletRequest request) throws Exception {
+		
+		//Have they specified a key uses..
+		String keyuses = "";
+		
+		if(HTTPClientUtil.paramExists(request, "keyuses")) {
+			
+			//Get the key uses specified..
+			keyuses = HTTPClientUtil.getValidParam(request, "keyuses");
+			
+			//Is the Public key specified.. so we can update the DB
+			if(HTTPClientUtil.paramExists(request, "publickey")) {
+				
+				String pubkey = HTTPClientUtil.getValidParam(request, "publickey");
+				
+				MegDB.getDB().getNonceDB().setKeyUses(pubkey, Integer.parseInt(keyuses)+1);
+			}
+			
+		}else if(HTTPClientUtil.paramExists(request, "publickey")) {
+			
+			//Get the DB Public KEY
+			String pubkey = HTTPClientUtil.getValidParam(request, "publickey");
+			
+			//Use the MEG value..
+			keyuses = ""+MegDB.getDB().getNonceDB().getAndIncrementKeyUses(pubkey);
+		
+		}else {
+			throw new Exception("MUST provide either keyuses or publickey param..");
+		}
+		
+		return keyuses;
 	}
 }
 

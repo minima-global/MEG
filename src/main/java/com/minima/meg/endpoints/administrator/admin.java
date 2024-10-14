@@ -1,5 +1,6 @@
 package com.minima.meg.endpoints.administrator;
 
+import java.io.File;
 import java.io.PrintWriter;
 import java.util.Date;
 
@@ -87,5 +88,21 @@ public class admin extends BasicPage {
 				+ "			</tr>\r\n"
 				+ "		</table>\r\n"
 				+ "		</form>");
+		
+		//KEY USES..
+		
+		File noncedb = new File(MegDB.getDB().getDatabaseFolder(),"nonce.mv.db"); 
+		
+		zOut.println("<h3>Key Uses</h3>");
+		zOut.println("When sending/signing with the Wallet API a keyuses(nonce) value is required.<br>"
+					+ "<br>You can specify your own value or use the value stored by <b>MEG</b><br>");
+		zOut.println("<br>The actual database file can be found in the data folder : <br>");
+		zOut.println("<br><b>"+noncedb.getAbsolutePath()+"</b><br><br>");
+		zOut.println("You can backup and reuse this file if you install <b>MEG</b> on another server<br>");
+		zOut.println("<br>");
+		zOut.println("OR - you can set the MINIMUM nonce value to a high enough value without copying "
+				+ "the database by using the <i>-minkeyuses</i> param when starting MEG..<br>");
+		zOut.println("<br>The current MAX value for all keyuses is : <b>"+MegDB.getDB().getNonceDB().getMaxKeyUses()+"</b><br><br>");
+		
 	}
 }

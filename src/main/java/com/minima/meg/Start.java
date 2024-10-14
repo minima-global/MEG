@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
+import com.minima.meg.database.MegDB;
+import com.minima.meg.database.NonceDB;
 import com.minima.meg.utils.Log;
 
 /**
@@ -32,7 +34,8 @@ public class Start
 		int meg_port 		= 8080;
 		String adminpass 	= "";
 		File dataFolder   	= new File(System.getProperty("user.home"),".meg");
-				
+		int minkeyuses		= 0;		
+		
     	//Get the start params..
 		int arglen 	= zArgs.length;
 		if(arglen > 0) {
@@ -44,6 +47,9 @@ public class Start
 				if(arg.equals("-port")) {
 					meg_port = Integer.parseInt(zArgs[counter++]);
 					
+				}else if(arg.equals("-minkeyuses")) {
+					minkeyuses = Integer.parseInt(zArgs[counter++]);
+				
 				}else if(arg.equals("-adminpassword")) {
 					adminpass = zArgs[counter++];
 				
@@ -56,6 +62,7 @@ public class Start
 					System.out.println(" -port            : Specify the port to listen on");
 					System.out.println(" -data            : Specify the data folder");
 					System.out.println(" -adminpassword   : Specify the 'admin' User account password (use to add initial accounts)");
+					System.out.println(" -minkeyuses      : Specify a MINIMUM key uses value for any Public Keys (if you are running this from a new server)");
 					System.out.println(" -help            : Print this help");
 					
 					System.exit(1);
@@ -79,6 +86,22 @@ public class Start
         //Create and start server 
 		mMEG = new MEGManager();
 		mMEG.doStartUp(meg_port,adminpass,dataFolder);
+		
+		//Set Min Key uses..
+		MegDB.getDB().MINIMUM_KEYUSES = minkeyuses;
+		if(minkeyuses!=0) {
+			Log.log("Minimum 'keyuses' set to  : "+minkeyuses);
+		}
+		
+		//Run some tests..
+        /*Log.log("Running some tests..");
+        NonceDB ndb = MegDB.getDB().getNonceDB();
+        Log.log("0xFFEE GEtINcKeys : "+ndb.getAndIncrementKeyUses("0xFFEE"));
+        Log.log("0xFFEE GEtINcKeys : "+ndb.getAndIncrementKeyUses("0xFFEE"));
+        Log.log("0xFFEE GEtINcKeys : "+ndb.getAndIncrementKeyUses("0xFFEE"));
+        Log.log("0xFFEE GEtINcKeys : "+ndb.getAndIncrementKeyUses("0xFFEE"));
+        Log.log("MAX : "+ndb.getMaxKeyUses());
+        */
 		
         //Add a shutdown hook..
         Runtime.getRuntime().addShutdownHook(new Thread(){

@@ -84,6 +84,14 @@ public class HTTPClientUtil {
 		zOut.println(resp.toString());
 	}
 	
+	public static boolean paramExists(HttpServletRequest request, String zParam){
+		String param = request.getParameter(zParam);
+		if(param == null) {
+			return false;
+		}
+		return true;
+	}
+	
 	public static String getValidParam(HttpServletRequest request, String zParam) throws Exception {
 		String param = request.getParameter(zParam);
 		if(param == null) {
