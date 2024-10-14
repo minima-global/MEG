@@ -237,7 +237,7 @@ public class walletapi extends ApiCaller {
 			keyuses = ""+MegDB.getDB().getNonceDB().getAndIncrementKeyUses(pubkey);
 		
 		}else {
-			throw new Exception("MUST provide either keyuses or publickey param..");
+			throw new Exception("MUST provide either keyuses or publickey param for DB lookup..");
 		}
 		
 		return keyuses;
