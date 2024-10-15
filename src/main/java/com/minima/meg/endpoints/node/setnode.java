@@ -36,9 +36,12 @@ public class setnode extends BasicPage {
 				meghost=meghost+"/";
 			}
 			
+			String rpcpass  = request.getParameter("rpcpassword").trim();
+			
 			//Add to the database
 			MegDB.getDB().getPrefsDB().setMinimaNode(host);
 			MegDB.getDB().getPrefsDB().setMEGNode(meghost);
+			MegDB.getDB().getPrefsDB().setMinimaRPCPassword(rpcpass);
 			
 			//Set the WEBHOOK
 			try {
@@ -53,7 +56,7 @@ public class setnode extends BasicPage {
 			} catch (Exception e) {
 				Log.log(e+" "+host);
 				
-				zOut.println("<center><br><br>Minima node set ERROR</center>");
+				zOut.println("<center><br><br>Minima node set ERROR<br><br>"+e+"</center>");
 				
 				//Add a DB LOG
 				MegDB.getDB().getLogsDB().addLog("ERROR SET MINIMA NODE WEBHOOK", host, usersesh.getString("username"));

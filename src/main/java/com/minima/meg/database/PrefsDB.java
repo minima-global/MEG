@@ -13,7 +13,7 @@ public class PrefsDB extends JsonDB {
 	}
 	
 	public String getMinimaNode() {
-		return getString("minima_node","");
+		return getString("minima_node","").trim();
 	}
 
 	public void setMEGNode(String zHost) {
@@ -21,6 +21,21 @@ public class PrefsDB extends JsonDB {
 	}
 	
 	public String getMEGNode() {
-		return getString("meg_node","");
+		return getString("meg_node","").trim();
+	}
+	
+	public boolean hasMinimaRPCPassword() {
+		if(getMinimaRPCPassword().equals("")) {
+			return false;
+		}
+		return true;
+	}
+	
+	public void setMinimaRPCPassword(String zPassword) {
+		setString("rpc_password", zPassword);
+	}
+	
+	public String getMinimaRPCPassword() {
+		return getString("rpc_password","").trim();
 	}
 }

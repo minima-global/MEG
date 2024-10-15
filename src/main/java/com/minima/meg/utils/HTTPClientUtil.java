@@ -56,14 +56,60 @@ public class HTTPClientUtil {
 			client.start();
 	        
 			//Try with Basic auth
-			if(false) {
+			if(true) {
 				Request req = client.newRequest(zURL).method(HttpMethod.GET);
 				String authString = "minima:popo";
 	            byte[] authEncBytes = Base64.getEncoder().encode(authString.getBytes());
 	            String authStringEnc = "Basic " + new String(authEncBytes);
 				req.header("Authorization", authStringEnc);
+				
+				//Run the Query
 				ContentResponse res = req.send();
+				resp 				= res.getContentAsString();
+				
 			}else {
+				ContentResponse res = client.GET(zURL);
+		        resp = res.getContentAsString();
+			}
+			
+	        client.stop();
+	        
+		}catch(Exception exc) {
+			Log.log("ERROR GET @ "+zURL+" "+exc.toString());
+			
+			throw exc;
+		}
+		
+        return resp;
+	}
+	
+	public static String GETMinimaWithAuth(String zURL) throws Exception {
+		
+		String resp = "";
+		
+		try {
+			HttpClient client = new HttpClient();
+			client.start();
+	        
+			//Try with Basic auth
+			if(MegDB.getDB().getPrefsDB().hasMinimaRPCPassword()) {
+				
+				//Construct new request
+				Request req = client.newRequest(zURL).method(HttpMethod.GET);
+				
+				//Create the BASIC AUTH
+				String authString = "minima:"+MegDB.getDB().getPrefsDB().getMinimaRPCPassword();
+	            byte[] authEncBytes = Base64.getEncoder().encode(authString.getBytes());
+	            String authStringEnc = "Basic " + new String(authEncBytes);
+				req.header("Authorization", authStringEnc);
+				
+				//Run the Query
+				ContentResponse res = req.send();
+				resp 				= res.getContentAsString();
+				
+			}else {
+				
+				//Run a normal no auth Query
 				ContentResponse res = client.GET(zURL);
 		        resp = res.getContentAsString();
 			}
@@ -93,7 +139,7 @@ public class HTTPClientUtil {
 		//Now run it.. 
 		String fullurl = mhost+cmd;
 		
-		return GET(fullurl);
+		return GETMinimaWithAuth(fullurl);
 	}
 	
 	public static void writeJSONError(PrintWriter zOut, String zError) {

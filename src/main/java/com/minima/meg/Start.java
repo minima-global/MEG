@@ -22,7 +22,7 @@ public class Start
 	/**
 	 * The Main MEG Manager
 	 */
-	public static final String MEG_VERSION = "1.6";
+	public static final String MEG_VERSION = "1.7";
 	
 	private static MEGManager mMEG;
 	
