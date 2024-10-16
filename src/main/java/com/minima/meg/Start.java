@@ -120,6 +120,11 @@ public class Start
 		
 		//Now set the deaults if set
 		if(!meghost.equals("")) {
+			
+			if(!meghost.endsWith("/")) {
+				meghost = meghost+"/";
+			}
+			
 			MegDB.getDB().getPrefsDB().setMEGNode(meghost);
 		}
 		if(!minimarpcpassword.equals("")) {
