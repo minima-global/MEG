@@ -9,8 +9,11 @@ import java.util.List;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
+import org.json.JSONObject;
+
 import com.minima.meg.database.MegDB;
 import com.minima.meg.database.NonceDB;
+import com.minima.meg.utils.HTTPClientUtil;
 import com.minima.meg.utils.Log;
 
 /**
@@ -119,11 +122,30 @@ public class Start
 		if(!meghost.equals("")) {
 			MegDB.getDB().getPrefsDB().setMEGNode(meghost);
 		}
-		if(!minimarpc.equals("")) {
-			MegDB.getDB().getPrefsDB().setMinimaNode(minimarpc);
-		}
 		if(!minimarpcpassword.equals("")) {
 			MegDB.getDB().getPrefsDB().setMinimaRPCPassword(minimarpcpassword);
+		}
+		
+		if(!minimarpc.equals("")) {
+			MegDB.getDB().getPrefsDB().setMinimaNode(minimarpc);
+		
+			//Set the WEBHOOK
+			try {
+				String cmd = "webhooks action:add hook:"+meghost+"webhook";
+				String res = HTTPClientUtil.runMinimaCMD(cmd);
+				
+				JSONObject hook = new JSONObject(res);
+				if(!hook.getBoolean("status")) {
+					throw new Exception("Failed to set webhook");
+				}
+				
+				Log.log("Minima WEBHOOK set correctly from command line params @ "+minimarpc);
+				
+			} catch (Exception e) {
+				Log.log(e.toString());
+				
+				System.exit(1);
+			}
 		}
 		
 		if(!apicallerpass.equals("")) {
