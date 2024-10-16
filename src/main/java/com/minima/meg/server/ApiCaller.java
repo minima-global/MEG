@@ -75,6 +75,18 @@ public abstract class ApiCaller extends HttpServlet {
 		//Now split..
 		String[] userpass = unencode.split(":");
 		
+		
+		//Is the default apicaller account enabled..
+		if(userpass[0].equals("apicaller") && MegDB.getDB().getApiCallerEnabled()) {
+		
+			//Check the password..
+			if(!MegDB.getDB().checkApiCallerPassword(userpass[1])) {
+				throw new Exception("Invalid User - default apicaller password incorrect");
+			}
+			
+			return "apicaller";
+		}
+		
 		//Now check for this user..
 		JSONObject user = MegDB.getDB().getUserDB().getUser(userpass[0], userpass[1]);
 		if(user.getInt("count") == 0) {

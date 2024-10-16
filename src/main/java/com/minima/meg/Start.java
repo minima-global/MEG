@@ -22,7 +22,7 @@ public class Start
 	/**
 	 * The Main MEG Manager
 	 */
-	public static final String MEG_VERSION = "1.7";
+	public static final String MEG_VERSION = "1.8";
 	
 	private static MEGManager mMEG;
 	
@@ -35,6 +35,12 @@ public class Start
 		String adminpass 	= "";
 		File dataFolder   	= new File(System.getProperty("user.home"),".meg");
 		int minkeyuses		= 0;		
+		
+		String meghost				= "";
+		String minimarpc   			= "";
+		String minimarpcpassword   	= "";
+		
+		String apicallerpass 	= "";
 		
     	//Get the start params..
 		int arglen 	= zArgs.length;
@@ -50,8 +56,20 @@ public class Start
 				}else if(arg.equals("-minkeyuses")) {
 					minkeyuses = Integer.parseInt(zArgs[counter++]);
 				
+				}else if(arg.equals("-meghost")) {
+					meghost = zArgs[counter++];
+					
+				}else if(arg.equals("-minimarpc")) {
+					minimarpc = zArgs[counter++];
+					
+				}else if(arg.equals("-minimarpcpassword")) {
+					minimarpcpassword = zArgs[counter++];
+				
 				}else if(arg.equals("-adminpassword")) {
 					adminpass = zArgs[counter++];
+				
+				}else if(arg.equals("-apicallerpassword")) {
+					apicallerpass = zArgs[counter++];
 				
 				}else if(arg.equals("-data")) {
 					dataFolder = new File(zArgs[counter++]);
@@ -59,11 +77,15 @@ public class Start
 				}else if(arg.equals("-help")) {
 					
 					System.out.println("MEG Help");
-					System.out.println(" -port            : Specify the port to listen on");
-					System.out.println(" -data            : Specify the data folder");
-					System.out.println(" -adminpassword   : Specify the 'admin' User account password (use to add initial accounts)");
-					System.out.println(" -minkeyuses      : Specify a MINIMUM key uses value for any Public Keys (if you are running this from a new server)");
-					System.out.println(" -help            : Print this help");
+					System.out.println(" -port                : The port to listen on");
+					System.out.println(" -data                : The data folder");
+					System.out.println(" -adminpassword       : The 'admin' User account password (can then add other accounts)");
+					System.out.println(" -apicallerpassword   : The 'apicaller' User account password");
+					System.out.println(" -meghost             : The http://host:port of this instance of MEG");
+					System.out.println(" -minimarpc           : The http://host:port of the Minima RPC");
+					System.out.println(" -minimarpcpassword   : The Minima RPC password if enabled");
+					System.out.println(" -minkeyuses          : MINIMUM key uses value for any Public Keys (if you are running this from a new server)");
+					System.out.println(" -help                : Print this help");
 					
 					System.exit(1);
 					
@@ -93,6 +115,21 @@ public class Start
 			Log.log("Minimum 'keyuses' set to  : "+minkeyuses);
 		}
 		
+		//Now set the deaults if set
+		if(!meghost.equals("")) {
+			MegDB.getDB().getPrefsDB().setMEGNode(meghost);
+		}
+		if(!minimarpc.equals("")) {
+			MegDB.getDB().getPrefsDB().setMinimaNode(minimarpc);
+		}
+		if(!minimarpcpassword.equals("")) {
+			MegDB.getDB().getPrefsDB().setMinimaRPCPassword(minimarpcpassword);
+		}
+		
+		if(!apicallerpass.equals("")) {
+			MegDB.getDB().setApiCallerEnabled(true, apicallerpass);
+		}
+	
 		//Run some tests..
         /*Log.log("Running some tests..");
         NonceDB ndb = MegDB.getDB().getNonceDB();

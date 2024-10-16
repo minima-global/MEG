@@ -35,6 +35,10 @@ public class MegDB {
 	boolean mAdminEnabled = false;
 	String mAdminPassword = "";
 	
+	//Is the apicaller enabled..
+	boolean mApiCallerEnabled = false;
+	String mApiCallerPassword = "";
+		
 	public MegDB(File zDatabaseFolder) {
 		mDatabaseFolder = zDatabaseFolder;
 		
@@ -50,6 +54,9 @@ public class MegDB {
 		return mDatabaseFolder;
 	}
 	
+	/**
+	 * Is the admin account enabled..
+	 */
 	public void setAdminEnabled(boolean zEnable, String zPassword) {
 		mAdminEnabled 	= zEnable;
 		mAdminPassword 	= zPassword;
@@ -61,6 +68,22 @@ public class MegDB {
 	
 	public boolean checkAdminPassword(String zPassword) {
 		return mAdminPassword.equals(zPassword);
+	}
+	
+	/**
+	 * Is the apicaller account enabled..
+	 */
+	public void setApiCallerEnabled(boolean zEnable, String zPassword) {
+		mApiCallerEnabled 	= zEnable;
+		mApiCallerPassword 	= zPassword;
+	}
+	
+	public boolean getApiCallerEnabled() {
+		return mApiCallerEnabled;
+	}
+	
+	public boolean checkApiCallerPassword(String zPassword) {
+		return mApiCallerPassword.equals(zPassword);
 	}
 	
 	public UserDB getUserDB() {
