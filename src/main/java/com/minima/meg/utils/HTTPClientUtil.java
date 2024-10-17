@@ -54,25 +54,9 @@ public class HTTPClientUtil {
 		try {
 			HttpClient client = new HttpClient();
 			client.start();
-	        
-			//Try with Basic auth
-			if(true) {
-				Request req = client.newRequest(zURL).method(HttpMethod.GET);
-				String authString = "minima:popo";
-	            byte[] authEncBytes = Base64.getEncoder().encode(authString.getBytes());
-	            String authStringEnc = "Basic " + new String(authEncBytes);
-				req.header("Authorization", authStringEnc);
-				
-				//Run the Query
-				ContentResponse res = req.send();
-				resp 				= res.getContentAsString();
-				
-			}else {
-				ContentResponse res = client.GET(zURL);
-		        resp = res.getContentAsString();
-			}
-			
-	        client.stop();
+	    	ContentResponse res = client.GET(zURL);
+	        resp = res.getContentAsString();
+			client.stop();
 	        
 		}catch(Exception exc) {
 			Log.log("ERROR GET @ "+zURL+" "+exc.toString());
@@ -125,7 +109,61 @@ public class HTTPClientUtil {
         return resp;
 	}
 	
+	public static String POSTMinimaWithAuth(String zURL, String zData) throws Exception {
+		
+		String resp = "";
+		
+		try {
+			
+			HttpClient client = new HttpClient();
+			client.start();
+	        
+			Request request = client.POST(zURL);
+	        request.header(HttpHeader.CONTENT_TYPE, "text/plain");
+	        
+	        // Add basic auth header if credentials provided
+	        if(MegDB.getDB().getPrefsDB().hasMinimaRPCPassword()) {
+	            
+	        	//Create the BASIC AUTH
+				String authString = "minima:"+MegDB.getDB().getPrefsDB().getMinimaRPCPassword();
+	            byte[] authEncBytes = Base64.getEncoder().encode(authString.getBytes());
+	            String authStringEnc = "Basic " + new String(authEncBytes);
+	            request.header("Authorization", authStringEnc);
+	        }
+	        
+	        //Set the Data
+	        request.content(new StringContentProvider(zData), "text/plain");
+	        
+	        //Run the POST request
+	        ContentResponse res = request.send();
+	        
+	        //Get the results
+	        resp 				= res.getContentAsString();
+	        
+	        //Stop the Client
+	        client.stop();
+	        
+		}catch(Exception exc) {
+			Log.log("ERROR POST @ "+zURL+" "+exc.toString());
+			
+			throw exc;
+		}
+		
+        return resp;
+	}
+	
 	public static String runMinimaCMD(String zCommand) throws Exception {
+		
+		//get the Host..
+		String mhost = MegDB.getDB().getPrefsDB().getMinimaNode();
+		if(!mhost.endsWith("/")) {
+			mhost = mhost+"/";
+		}
+		
+		return POSTMinimaWithAuth(mhost,zCommand);
+	}
+	
+	/*public static String runMinimaCMD(String zCommand) throws Exception {
 		
 		//get the Host..
 		String mhost = MegDB.getDB().getPrefsDB().getMinimaNode();
@@ -140,7 +178,7 @@ public class HTTPClientUtil {
 		String fullurl = mhost+cmd;
 		
 		return GETMinimaWithAuth(fullurl);
-	}
+	}*/
 	
 	public static void writeJSONError(PrintWriter zOut, String zError) {
 		JSONObject resp = new JSONObject();
