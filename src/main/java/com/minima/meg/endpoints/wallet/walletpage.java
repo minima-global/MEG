@@ -67,7 +67,7 @@ public class walletpage extends BasicPage {
 				
 				
 				+ "	<h3>/wallet/checktxpow</h3>\r\n"
-				+ "	Check transaction is on-chain (only works for 24 hours.. then pruned)<br>\r\n"
+				+ "	Check transaction is on-chain<br>\r\n"
 				+ "	<br>\r\n"
 				+ "	Params : <br>\r\n"
 				+ "	&nbsp;&nbsp;&nbsp;txpowid : TxPoWID of transaction<br>\r\n"
@@ -76,7 +76,7 @@ public class walletpage extends BasicPage {
 				
 				
 				+ "	<h3>/wallet/gettxpow</h3>\r\n"
-				+ "	Get TxPoW (only works for 48 hours.. then pruned)<br>\r\n"
+				+ "	Get TxPoW<br>\r\n"
 				+ "	<br>\r\n"
 				+ "	Params : <br>\r\n"
 				+ "	&nbsp;&nbsp;&nbsp;txpowid : TxPoWID of transaction (optional)<br>\r\n"
