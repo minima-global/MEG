@@ -71,6 +71,33 @@ public class walletapi extends ApiCaller {
 							+" privatekey:"+privatekey
 							+" keyuses:"+keyuses;
 			
+			}else if(apicall.equals("consolidate")) {
+				
+				//Get all the parameters
+				String tokenid="0x00";
+				if(request.getParameter("tokenid") != null) {
+					tokenid=request.getParameter("tokenid");
+				}
+				
+				String maxcoins 	= HTTPClientUtil.getValidParam(request, "maxcoins","40");
+				String fromaddress 	= HTTPClientUtil.getValidParam(request, "fromaddress");
+				String privatekey 	= HTTPClientUtil.getValidParam(request, "privatekey");
+				String script 		= HTTPClientUtil.getValidParam(request, "script");
+				String burn 		= HTTPClientUtil.getValidParam(request, "burn","0");
+				
+				//Get the key uses - could be specified or MEG DB
+				String keyuses = getKeyUses(request);
+				
+				//Create the call
+				cmdtocall = "consolidatefrom"
+							+" mine:true"
+							+" maxcoins:"+maxcoins
+							+" fromaddress:"+fromaddress
+							+" burn:"+burn
+							+" tokenid:"+tokenid
+							+" script:\""+script+"\""
+							+" privatekey:"+privatekey
+							+" keyuses:"+keyuses;
 			
 			}else if(apicall.equals("checktxpow")) {
 				
