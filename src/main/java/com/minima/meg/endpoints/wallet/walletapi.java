@@ -79,7 +79,7 @@ public class walletapi extends ApiCaller {
 					tokenid=request.getParameter("tokenid");
 				}
 				
-				String maxcoins 	= HTTPClientUtil.getValidParam(request, "maxcoins","40");
+				String maxcoins 	= HTTPClientUtil.getValidParam(request, "maxcoins","50");
 				String fromaddress 	= HTTPClientUtil.getValidParam(request, "fromaddress");
 				String privatekey 	= HTTPClientUtil.getValidParam(request, "privatekey");
 				String script 		= HTTPClientUtil.getValidParam(request, "script");

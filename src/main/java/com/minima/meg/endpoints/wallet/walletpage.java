@@ -74,7 +74,7 @@ public class walletpage extends BasicPage {
 				+ "	&nbsp;&nbsp;&nbsp;privatekey : Private Key of the FROM Address<br>\r\n"
 				+ "	&nbsp;&nbsp;&nbsp;script : The script of the FROM Address <br>\r\n"
 				+ "	&nbsp;&nbsp;&nbsp;burn : Transaction Burn / Fee (optional)<br>\r\n"
-				+ "	&nbsp;&nbsp;&nbsp;maxcoins : How many coins to consolidate (optional - defaults to 40)<br>\r\n"
+				+ "	&nbsp;&nbsp;&nbsp;maxcoins : How many coins to consolidate (optional - defaults to 50)<br>\r\n"
 				+ "	<br>\r\n"
 				+ "	Then..<br>"
 				+ " &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>either</i> provide your own keyuses<br>"
