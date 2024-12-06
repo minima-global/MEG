@@ -46,8 +46,9 @@ public class logs extends BasicPage{
 			
 			zOut.println("<tr>");
 			zOut.println("<td nowrap>"+row.getString("ID")+"</td>");
-			zOut.println("<td nowrap>"+row.getString("EVENT")+"</td>");
-			zOut.println("<td nowrap>"+getValueCheckLength(row,"DETAILS")+"</td>");
+			zOut.println("<td>"+row.getString("EVENT")+"</td>");
+			//zOut.println("<td>"+getValueCheckLength(row,"DETAILS")+"</td>");
+			zOut.println("<td>"+row.getString("DETAILS")+"</td>");
 			zOut.println("<td nowrap>"+row.getString("USERNAME")+"</td>");
 			zOut.println("<td nowrap>"+new Date(row.getLong("CREATED"))+"</td>");
 			zOut.println("</tr>");

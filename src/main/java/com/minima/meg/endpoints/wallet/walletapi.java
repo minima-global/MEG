@@ -20,6 +20,7 @@ public class walletapi extends ApiCaller {
 			
 			//What command do we need to call
 			String cmdtocall = "";
+			String cmdtocallnoprivate = null;
 			
 			if(apicall.equals("create")) {
 				//Create a new WALLET..
@@ -70,6 +71,17 @@ public class walletapi extends ApiCaller {
 							+" script:\""+script+"\""
 							+" privatekey:"+privatekey
 							+" keyuses:"+keyuses;
+				
+				cmdtocallnoprivate = "sendfrom"
+						+" mine:true"
+						+" fromaddress:"+fromaddress
+						+" address:"+toaddress
+						+" amount:"+amount
+						+" burn:"+burn
+						+" tokenid:"+tokenid
+						+" script:\""+script+"\""
+						+" privatekey:***"
+						+" keyuses:"+keyuses;
 			
 			}else if(apicall.equals("consolidate")) {
 				
@@ -98,6 +110,16 @@ public class walletapi extends ApiCaller {
 							+" script:\""+script+"\""
 							+" privatekey:"+privatekey
 							+" keyuses:"+keyuses;
+				
+				cmdtocallnoprivate = "consolidatefrom"
+						+" mine:true"
+						+" maxcoins:"+maxcoins
+						+" fromaddress:"+fromaddress
+						+" burn:"+burn
+						+" tokenid:"+tokenid
+						+" script:\""+script+"\""
+						+" privatekey:***"
+						+" keyuses:"+keyuses;
 			
 			}else if(apicall.equals("checktxpow")) {
 				
@@ -177,6 +199,11 @@ public class walletapi extends ApiCaller {
 							+" privatekey:"+privatekey
 							+" keyuses:"+keyuses;
 				
+				cmdtocallnoprivate = "signfrom"
+						+" data:"+data
+						+" privatekey:***"
+						+" keyuses:"+keyuses;
+				
 			}else if(apicall.equals("posttxn")) {
 				
 				String data 		= HTTPClientUtil.getValidParam(request, "data");
@@ -243,8 +270,12 @@ public class walletapi extends ApiCaller {
 			String res = HTTPClientUtil.runMinimaCMD(cmdtocall);
 			
 			//Add a DB LOG
-			MegDB.getDB().getLogsDB().addLog("WALLET CALL", apicall, zUser);
-		
+			if(cmdtocallnoprivate == null) {
+				MegDB.getDB().getLogsDB().addLog("WALLET CALL", apicall+"> "+cmdtocall, zUser);
+			}else {
+				MegDB.getDB().getLogsDB().addLog("WALLET CALL", apicall+"> "+cmdtocallnoprivate, zUser);
+			}
+			
 			//And output
 			zOut.println(res);
 			

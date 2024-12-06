@@ -5,6 +5,7 @@ import java.sql.Statement;
 
 import org.json.JSONObject;
 
+import com.minima.meg.utils.Log;
 import com.minima.meg.utils.SqlDB;
 
 public class LogsDB extends SqlDB {
@@ -38,6 +39,8 @@ public class LogsDB extends SqlDB {
 	public JSONObject addLog(String zEvent, String zDetails, String zUser) {
 		String sql = "INSERT INTO logs(event, details, username, created) VALUES "
 				+ "('"+zEvent+"','"+zDetails+"','"+zUser+"',"+System.currentTimeMillis()+")";
+		
+		Log.log("SQL : "+sql);
 		
 		return executeGenericSQL(sql);
 	}
