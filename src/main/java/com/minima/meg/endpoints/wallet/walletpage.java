@@ -66,7 +66,7 @@ public class walletpage extends BasicPage {
 				+ "	Node status : online \r\n"
 				
 				+ "	<h3>/wallet/consolidate</h3>\r\n"
-				+ "	Consolidate coins from an address (join many coins into 1 coin)<br>\r\n"
+				+ "	Consolidate coins from an address (join many coins into 10 coins)<br>\r\n"
 				+ "	<br>\r\n"
 				+ "	Params : <br>\r\n"
 				+ "	&nbsp;&nbsp;&nbsp;tokenid : TokenID of the token (defaults to Minima)<br>\r\n"
