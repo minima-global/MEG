@@ -44,6 +44,14 @@ public class walletpage extends BasicPage {
 				+ "	<br>\r\n"
 				+ "	Node status : online \r\n"
 				
+				+ "	<h3>/wallet/checkaddress</h3>\r\n"
+				+ "	Check if this is a valid Minima Address<br>\r\n"
+				+ "	<br>\r\n"
+				+ "	Params : <br>\r\n"
+				+ "	&nbsp;&nbsp;&nbsp;address : Address to check<br>\r\n"
+				+ "	<br>\r\n"
+				+ "	Node status : online / offline \r\n"
+
 				+ "	<h3>/wallet/send</h3>\r\n"
 				+ "	Send an amount from an address<br>\r\n"
 				+ "	<br>\r\n"

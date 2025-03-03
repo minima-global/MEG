@@ -42,6 +42,14 @@ public class walletapi extends ApiCaller {
 				//Create a new WALLET..
 				cmdtocall = "balance megammr:true address:"+address;
 			
+			}else if(apicall.equals("checkaddress")) {
+				
+				//Get the address..
+				String address = HTTPClientUtil.getValidParam(request,"address");
+				
+				//Check if this is a valid address
+				cmdtocall = "checkaddress address:"+address;
+			
 			}else if(apicall.equals("send")) {
 				
 				//Get all the parameters
