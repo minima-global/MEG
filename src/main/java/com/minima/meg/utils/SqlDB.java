@@ -332,7 +332,7 @@ public abstract class SqlDB {
 			stmt.close();
 						
 		} catch (Exception e) {
-			Log.log("ExecuteSQL sql:"+zSQL+" error:"+e.toString());
+			Log.log("ExecuteSQL SQL:"+zSQL+" error:"+e.toString());
 			
 			results.put("status", false);
 			results.put("count",0);
