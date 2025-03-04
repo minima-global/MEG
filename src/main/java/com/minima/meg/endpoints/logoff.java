@@ -18,9 +18,6 @@ public class logoff extends HttpServlet {
 			throws ServletException, IOException {
 	
 		HttpSession session = request.getSession();
-		if(Log.LOGGING_ENABLED) {
-			Log.log("GET "+request.getRequestURI());
-		}
 		
 		response.setContentType("text/html");
         response.setStatus(HttpServletResponse.SC_OK);

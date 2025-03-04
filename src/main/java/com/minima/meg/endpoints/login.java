@@ -24,14 +24,10 @@ public class login extends HttpServlet {
 			throws ServletException, IOException {
 	
 		HttpSession session = request.getSession();
-		if(Log.LOGGING_ENABLED) {
-			Log.log("POST "+request.getRequestURI());
-		}
+		PrintWriter out 	= response.getWriter();
 		
-		PrintWriter out = response.getWriter();
-		
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
+		String username 	= request.getParameter("username");
+		String password 	= request.getParameter("password");
 		
 		//Check the Username and Password..
 		JSONObject user = MegDB.getDB().getUserDB().getUser(username, password);

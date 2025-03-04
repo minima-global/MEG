@@ -74,6 +74,9 @@ public class Start
 				}else if(arg.equals("-apicallerpassword")) {
 					apicallerpass = zArgs[counter++];
 				
+				}else if(arg.equals("-logs")) {
+					Log.LOGGING_ENABLED = true;
+					
 				}else if(arg.equals("-data")) {
 					dataFolder = new File(zArgs[counter++]);
 				

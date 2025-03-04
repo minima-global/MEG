@@ -45,9 +45,7 @@ public abstract class BlockingServlet extends HttpServlet {
 		JSONObject res = getResponse(request.getRequestURI(), params);
 			
 		String resp = res.toString();
-		if(Log.LOGGING_ENABLED) {
-			Log.log("GET "+request.getRequestURI()+" "+params.toString()+" REPLY:"+resp);
-		}
+		Log.log("GET "+request.getRequestURI()+" "+params.toString()+" REPLY:"+resp);
 		
 		//Always reply in JSON
         response.setContentType("application/json");
@@ -76,9 +74,7 @@ public abstract class BlockingServlet extends HttpServlet {
 		JSONObject res = getResponse(request.getRequestURI(), json);
 		
 		String resp = res.toString();
-		if(Log.LOGGING_ENABLED) {
-			Log.log("POST "+request.getRequestURI()+" "+json.toString()+" REPLY:"+resp);
-		}
+		Log.log("POST "+request.getRequestURI()+" "+json.toString()+" REPLY:"+resp);
 		
 		//Always reply in JSON
 		response.setContentType("application/json");
