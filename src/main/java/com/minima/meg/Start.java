@@ -91,6 +91,7 @@ public class Start
 					System.out.println(" -minimarpc           : The http://host:port of the Minima RPC");
 					System.out.println(" -minimarpcpassword   : The Minima RPC password if enabled");
 					System.out.println(" -minkeyuses          : MINIMUM key uses value for any Public Keys (if you are running this from a new server)");
+					System.out.println(" -logs                : Enable Debug logs)");
 					System.out.println(" -help                : Print this help");
 					
 					System.exit(1);
