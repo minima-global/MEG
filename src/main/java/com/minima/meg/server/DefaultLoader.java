@@ -19,7 +19,7 @@ public class DefaultLoader extends HttpServlet {
 	protected void doGet(HttpServletRequest request,HttpServletResponse response)
 				throws ServletException, IOException {
 		
-		Log.log("GET RESOURCE "+request.getRequestURI());
+		//Log.log("GET RESOURCE "+request.getRequestURI());
 		
 		String reqfile = request.getRequestURI();
 		if(reqfile.endsWith("/")) {

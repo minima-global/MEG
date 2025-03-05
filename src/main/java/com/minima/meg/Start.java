@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -33,19 +34,32 @@ public class Start
 	
 	public static void main( String[] zArgs ) throws Exception
     {
-		//Default..
-		int meg_port 		= 8080;
-		String adminpass 	= "";
+		
+		//Get Environment vars..
+		Map<String, String> envs = System.getenv();
+		
+		//Default.. check environment variables..
+		int meg_port 		= getEnvVarIntIfExists(envs,"meg_port",8080);
+				
+		String adminpass 	= getEnvVarIfExists(envs,"meg_adminpassword");
+		
 		File dataFolder   	= new File(System.getProperty("user.home"),".meg");
-		int minkeyuses		= 0;		
+		String dataset 		= getEnvVarIfExists(envs,"meg_data");
+		if(!dataset.equals("")) {
+			dataFolder = new File(dataset);
+		}
 		
-		String meghost				= "";
-		String minimarpc   			= "";
-		String minimarpcpassword   	= "";
+		int minkeyuses				= getEnvVarIntIfExists(envs,"meg_minkeyuses",0);		
 		
-		String apicallerpass 	= "";
+		String meghost				= getEnvVarIfExists(envs,"meg_meghost");
+		String minimarpc   			= getEnvVarIfExists(envs,"meg_minimarpc");
+		String minimarpcpassword   	= getEnvVarIfExists(envs,"meg_minimarpcpassword");
 		
-    	//Get the start params..
+		String apicallerpass 		= getEnvVarIfExists(envs,"meg_apicallerpassword");
+
+		int delay = getEnvVarIntIfExists(envs,"meg_startupdelay",0);
+
+    	//Now Get the start params.. from command line
 		int arglen 	= zArgs.length;
 		if(arglen > 0) {
 			int counter	= 0;
@@ -58,6 +72,9 @@ public class Start
 					
 				}else if(arg.equals("-minkeyuses")) {
 					minkeyuses = Integer.parseInt(zArgs[counter++]);
+				
+				}else if(arg.equals("-startupdelay")) {
+					delay = Integer.parseInt(zArgs[counter++]);
 				
 				}else if(arg.equals("-meghost")) {
 					meghost = zArgs[counter++];
@@ -91,7 +108,8 @@ public class Start
 					System.out.println(" -minimarpc           : The http://host:port of the Minima RPC");
 					System.out.println(" -minimarpcpassword   : The Minima RPC password if enabled");
 					System.out.println(" -minkeyuses          : MINIMUM key uses value for any Public Keys (if you are running this from a new server)");
-					System.out.println(" -logs                : Enable Debug logs)");
+					System.out.println(" -startupdelay        : Wait X ms before starting up (giving time to Minima to start) - used in Docker Container..");
+					//System.out.println(" -logs                : Enable Debug logs)");
 					System.out.println(" -help                : Print this help");
 					
 					System.exit(1);
@@ -111,6 +129,12 @@ public class Start
 		mUseShutdownHook = true;
 		
 		Log.log("MEG v"+MEG_VERSION);
+		
+		//Is there a delay
+		if(delay != 0) {
+			Log.log("Startup Delay : "+delay+" ms..");
+			Thread.sleep(delay);
+		}
 		
         //Create and start server 
 		mMEG = new MEGManager();
@@ -239,4 +263,20 @@ public class Start
   	    
   	    System.exit(0);
     }
+	
+	public static String getEnvVarIfExists(Map<String, String> zEnv, String zName) {
+		String val = zEnv.get(zName);
+		if(val == null) {
+			return "";
+		}
+		return val;
+	}
+	
+	public static int getEnvVarIntIfExists(Map<String, String> zEnv, String zName, int zDefault) {
+		String val = zEnv.get(zName);
+		if(val == null) {
+			return zDefault;
+		}
+		return Integer.parseInt(val);
+	}
 }

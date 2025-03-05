@@ -35,8 +35,7 @@ COPY ./jar/minima-meg-server.jar minima-meg-server.jar
 WORKDIR $HOME
 
 # Minima ports
-EXPOSE 8888
+EXPOSE 8080
 
 # Start her up 
-#ENTRYPOINT ["java", "-jar", "/usr/local/minima-meg-server.jar", "-conf", "/home/minima/minima.config"]
 ENTRYPOINT ["java", "-jar", "/usr/local/minima-meg-server.jar"]

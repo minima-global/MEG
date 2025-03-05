@@ -40,8 +40,6 @@ public class LogsDB extends SqlDB {
 		String sql = "INSERT INTO logs(event, details, username, created) VALUES "
 				+ "('"+zEvent+"','"+zDetails+"','"+zUser+"',"+System.currentTimeMillis()+")";
 		
-		Log.log("SQL : "+sql);
-		
 		return executeGenericSQL(sql);
 	}
 	
