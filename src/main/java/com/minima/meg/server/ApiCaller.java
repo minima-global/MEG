@@ -3,6 +3,7 @@ package com.minima.meg.server;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Base64;
+import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,9 +14,25 @@ import org.json.JSONObject;
 
 import com.minima.meg.database.MegDB;
 import com.minima.meg.utils.HTTPClientUtil;
+import com.minima.meg.utils.Log;
 
 public abstract class ApiCaller extends HttpServlet {
 
+	@Override
+	protected void doOptions(HttpServletRequest request,HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		//Log.log("Recieved OPTIONS request");
+		
+		//Do the default
+		super.doOptions(request, response);
+		
+		//Allow from all origins and using credentials
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		response.setHeader("Access-Control-Allow-Headers", "Authorization");
+	}
+	
+	@Override
 	protected void doGet(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException, IOException {
 		
@@ -35,10 +52,16 @@ public abstract class ApiCaller extends HttpServlet {
         doAppiCall("GET",request, user, out);
 	}
 	
+	@Override
 	protected void doPost(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException, IOException {
 	
+		//JSON response
 		response.setContentType("application/json");
+		
+		//CORS
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		
         response.setStatus(HttpServletResponse.SC_OK);
         PrintWriter out = response.getWriter();
         
@@ -46,6 +69,7 @@ public abstract class ApiCaller extends HttpServlet {
         String user = "";
         try {
         	user = getAuthUser(request.getHeader("Authorization"));
+        	
         }catch(Exception exc) {
         	HTTPClientUtil.writeJSONError(out,exc.toString());
         	return;

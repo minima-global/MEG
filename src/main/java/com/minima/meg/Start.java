@@ -26,7 +26,7 @@ public class Start
 	/**
 	 * The Main MEG Manager
 	 */
-	public static final String MEG_VERSION = "2.5";
+	public static final String MEG_VERSION = "2.6";
 	
 	private static MEGManager mMEG;
 	
@@ -183,6 +183,7 @@ public class Start
 		
 		if(!apicallerpass.equals("")) {
 			MegDB.getDB().setApiCallerEnabled(true, apicallerpass);
+			Log.log("Default APICaller password set..");
 		}
 	
 		//Run some tests..
