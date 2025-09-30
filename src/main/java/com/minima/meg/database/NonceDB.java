@@ -162,17 +162,17 @@ public class NonceDB extends SqlDB {
 			startKeyUses(zPublickey,MegDB.MINIMUM_KEYUSES);
 			
 			keyuses = MegDB.MINIMUM_KEYUSES;
-			
+		
 		}else {
 			
 			//Is is less then the min..
 			if(keyuses < MegDB.MINIMUM_KEYUSES) {
 				keyuses = MegDB.MINIMUM_KEYUSES;
 			}
-			
-			//Now increment
-			setKeyUses(zPublickey, keyuses+1);
 		}
+		
+		//Now increment
+		setKeyUses(zPublickey, keyuses+1);
 		
 		return keyuses;
 	}

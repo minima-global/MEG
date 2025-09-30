@@ -22,8 +22,6 @@ public abstract class ApiCaller extends HttpServlet {
 	protected void doOptions(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		//Log.log("Recieved OPTIONS request");
-		
 		//Do the default
 		super.doOptions(request, response);
 		
