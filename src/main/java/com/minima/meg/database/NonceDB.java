@@ -66,7 +66,7 @@ public class NonceDB extends SqlDB {
 				return keyuses;
 				
 			}else{
-				
+				int y=0;
 				//Add to db
 				startKeyUses(zPublickey,MegDB.MINIMUM_KEYUSES);
 			}
