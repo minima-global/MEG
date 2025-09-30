@@ -48,7 +48,7 @@ public class NonceDB extends SqlDB {
 	}
 
 
-	public int getKeyUses(String zPublickey) {
+	public int getStartKeyUses(String zPublickey) {
 		
 		try {
 			NONCEDB_GET_KEYUSES.clearParameters();
@@ -64,10 +64,15 @@ public class NonceDB extends SqlDB {
 				int keyuses = rs.getInt("keyuses");
 				
 				return keyuses;
+				
+			}else{
+				
+				//Add to db
+				startKeyUses(zPublickey,MegDB.MINIMUM_KEYUSES);
 			}
 			
 			//Not found yet - must be first time
-			return 0;
+			return MegDB.MINIMUM_KEYUSES;
 			
 		} catch (SQLException e) {
 			Log.log(e.toString());
@@ -150,25 +155,16 @@ public class NonceDB extends SqlDB {
 	public int getAndIncrementKeyUses(String zPublickey) throws Exception {
 		
 		//Get current uses..
-		int keyuses = getKeyUses(zPublickey);
+		int keyuses = getStartKeyUses(zPublickey);
 		
+		//Some error has Occurred..
 		if(keyuses == -1) {
-			//Some error has Occurred..
 			throw new Exception("Database fail..");
 		}
-		
-		//Was this the first time asking..
-		if(keyuses == 0) {
-			startKeyUses(zPublickey,MegDB.MINIMUM_KEYUSES);
 			
+		//Is is less then the min..
+		if(keyuses < MegDB.MINIMUM_KEYUSES) {
 			keyuses = MegDB.MINIMUM_KEYUSES;
-		
-		}else {
-			
-			//Is is less then the min..
-			if(keyuses < MegDB.MINIMUM_KEYUSES) {
-				keyuses = MegDB.MINIMUM_KEYUSES;
-			}
 		}
 		
 		//Now increment
