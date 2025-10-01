@@ -311,6 +311,8 @@ public class walletapi extends ApiCaller {
 				
 				String pubkey = HTTPClientUtil.getValidParam(request, "publickey");
 				
+				//Create if not exist and set
+				MegDB.getDB().getNonceDB().getStartKeyUses(pubkey);
 				MegDB.getDB().getNonceDB().setKeyUses(pubkey, Integer.parseInt(keyuses)+1);
 			}
 			
