@@ -27,7 +27,7 @@ public abstract class ApiCaller extends HttpServlet {
 		
 		//Allow from all origins and using credentials
 		response.setHeader("Access-Control-Allow-Origin", "*");
-		response.setHeader("Access-Control-Allow-Headers", "Authorization");
+		response.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type");
 	}
 	
 	@Override
