@@ -122,7 +122,8 @@ public class walletpage extends BasicPage {
 				+ " Useful to check for deposit addresses<br>\r\n"
 				+ "	<br>\r\n"
 				+ "	Params : <br>\r\n"
-				+ "	&nbsp;&nbsp;&nbsp;depth : How many blocks to scan through (default 16)<br>\r\n"
+				+ "	&nbsp;&nbsp;&nbsp;depth  : How many blocks to scan through (default 16)<br>\r\n"
+				+ "	&nbsp;&nbsp;&nbsp;offset : How deep to start scan (default 0)<br>\r\n"
 				+ "	<br>\r\n"
 				+ "	Node status : online \r\n"
 				

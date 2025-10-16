@@ -142,6 +142,11 @@ public class walletapi extends ApiCaller {
 				
 				//Create the call
 				cmdtocall = "block";
+					
+			}else if(apicall.equals("random")) {
+				
+				//Create the call
+				cmdtocall = "random";
 				
 			}else if(apicall.equals("gettxpow")) {
 				
@@ -173,6 +178,11 @@ public class walletapi extends ApiCaller {
 				//Create the call
 				cmdtocall = "scanchain depth:"+depth;
 			
+				//Only in Minima 1.0.46 or later,,
+				if(HTTPClientUtil.paramExists(request, "offset")) {
+					cmdtocall += " offset:"+HTTPClientUtil.getValidParam(request, "offset");
+				}
+				
 				//Advanced APIs..
 			}else if(apicall.equals("unsignedtxn")) {
 				
