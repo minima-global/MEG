@@ -178,10 +178,12 @@ public class walletapi extends ApiCaller {
 				//Create the call
 				cmdtocall = "scanchain depth:"+depth;
 			
-				//Only in Minima 1.0.46 or later,,
-				if(HTTPClientUtil.paramExists(request, "offset")) {
-					cmdtocall += " offset:"+HTTPClientUtil.getValidParam(request, "offset");
-				}
+				//Only added offset in Minima 1.0.46 or later..
+				cmdtocall = checkAddParam(request, "offset", "offset", cmdtocall);
+				
+				//if(HTTPClientUtil.paramExists(request, "offset")) {
+				//	cmdtocall += " offset:"+HTTPClientUtil.getValidParam(request, "offset");
+				//}
 				
 				//Advanced APIs..
 			}else if(apicall.equals("unsignedtxn")) {
@@ -339,6 +341,16 @@ public class walletapi extends ApiCaller {
 		}
 		
 		return keyuses;
+	}
+	
+	//Use this to add params ONLY if they are present.. as they have been added in later version of Minima only.
+	public String checkAddParam(HttpServletRequest request, String zParamName, String  zAddParam, String zOldCommand) throws Exception {
+		
+		if(HTTPClientUtil.paramExists(request, zParamName)) {
+			return zOldCommand+" "+zAddParam+":"+HTTPClientUtil.getValidParam(request, zParamName);
+		}
+		
+		return zOldCommand;
 	}
 }
 
