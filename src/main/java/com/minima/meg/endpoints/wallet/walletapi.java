@@ -65,13 +65,14 @@ public class walletapi extends ApiCaller {
 				String privatekey 	= HTTPClientUtil.getValidParam(request, "privatekey");
 				String script 		= HTTPClientUtil.getValidParam(request, "script");
 				String burn 		= HTTPClientUtil.getValidParam(request, "burn","0");
+				String mine 		= HTTPClientUtil.getValidParam(request, "mine","true");
 				
 				//Get the key uses - could be specified or MEG DB
 				String keyuses = getKeyUses(request);
 				
 				//Create the call
 				cmdtocall = "sendfrom"
-							+" mine:true"
+							+" mine:"+mine
 							+" fromaddress:"+fromaddress
 							+" address:"+toaddress
 							+" amount:"+amount
@@ -82,7 +83,7 @@ public class walletapi extends ApiCaller {
 							+" keyuses:"+keyuses;
 				
 				cmdtocallnoprivate = "sendfrom"
-						+" mine:true"
+						+" mine:"+mine
 						+" fromaddress:"+fromaddress
 						+" address:"+toaddress
 						+" amount:"+amount
@@ -105,13 +106,14 @@ public class walletapi extends ApiCaller {
 				String privatekey 	= HTTPClientUtil.getValidParam(request, "privatekey");
 				String script 		= HTTPClientUtil.getValidParam(request, "script");
 				String burn 		= HTTPClientUtil.getValidParam(request, "burn","0");
+				String mine 		= HTTPClientUtil.getValidParam(request, "mine","true");
 				
 				//Get the key uses - could be specified or MEG DB
 				String keyuses = getKeyUses(request);
 				
 				//Create the call
 				cmdtocall = "consolidatefrom"
-							+" mine:true"
+							+" mine:"+mine
 							+" maxcoins:"+maxcoins
 							+" fromaddress:"+fromaddress
 							+" burn:"+burn
@@ -121,7 +123,7 @@ public class walletapi extends ApiCaller {
 							+" keyuses:"+keyuses;
 				
 				cmdtocallnoprivate = "consolidatefrom"
-						+" mine:true"
+						+" mine:"+mine
 						+" maxcoins:"+maxcoins
 						+" fromaddress:"+fromaddress
 						+" burn:"+burn
@@ -193,7 +195,6 @@ public class walletapi extends ApiCaller {
 				String toaddress 	= HTTPClientUtil.getValidParam(request, "toaddress");
 				String fromaddress 	= HTTPClientUtil.getValidParam(request, "fromaddress");
 				String script 		= HTTPClientUtil.getValidParam(request, "script");
-				
 				String burn 		= HTTPClientUtil.getValidParam(request, "burn","0");
 				String tokenid		= HTTPClientUtil.getValidParam(request, "tokenid","0x00");
 				
