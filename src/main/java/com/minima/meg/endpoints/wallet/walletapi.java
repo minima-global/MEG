@@ -40,6 +40,7 @@ public class walletapi extends ApiCaller {
 				//Get the address..
 				String address = HTTPClientUtil.getValidParam(request,"address");
 				
+				
 				//Create a new WALLET..
 				cmdtocall = "balance megammr:true address:"+address;
 			
@@ -93,6 +94,16 @@ public class walletapi extends ApiCaller {
 						+" privatekey:***"
 						+" keyuses:"+keyuses;
 			
+				//Shall we add STATE ? Only added in later versions of Minima
+				if(HTTPClientUtil.paramExists(request, "state")) {
+					String state = HTTPClientUtil.getValidParam(request, "state");
+					
+					cmdtocall 			+= " state:"+state;
+					cmdtocallnoprivate 	+= " state:"+state;
+					
+					Log.log("STATE CALL : " + cmdtocallnoprivate);
+				}
+				
 			}else if(apicall.equals("consolidate")) {
 				
 				//Get all the parameters
@@ -264,8 +275,13 @@ public class walletapi extends ApiCaller {
 				String address = HTTPClientUtil.getValidParam(request, "address");
 				String tokenid = HTTPClientUtil.getValidParam(request, "tokenid","0x00");
 				
-				cmdtocall = "coins address:"+address+" megammr:true tokenid:"+tokenid;
-			
+				//List all coins..
+				if(tokenid.equals("0x01")) {
+					cmdtocall = "coins address:"+address+" megammr:true";
+				}else {
+					cmdtocall = "coins address:"+address+" megammr:true tokenid:"+tokenid;
+				}
+				
 			}else if(apicall.equals("constructtxn")) {
 				
 				//Get all the parameters
