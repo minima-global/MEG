@@ -29,11 +29,13 @@
 /home/spartacusrex/git/MEG/src/main/java/com/minima/meg/utils/Log.java
 /home/spartacusrex/git/MEG/src/main/java/com/minima/meg/utils/messages/Message.java
 /home/spartacusrex/git/MEG/src/main/java/com/minima/meg/endpoints/logs.java
+/home/spartacusrex/git/MEG/src/main/java/com/minima/meg/database/CacheDB.java
 /home/spartacusrex/git/MEG/src/main/java/com/minima/meg/endpoints/api/apiendpoints.java
 /home/spartacusrex/git/MEG/src/main/java/com/minima/meg/database/PrefsDB.java
 /home/spartacusrex/git/MEG/src/main/java/com/minima/meg/server/DefaultLoader.java
 /home/spartacusrex/git/MEG/src/main/java/com/minima/meg/endpoints/administrator/admin.java
 /home/spartacusrex/git/MEG/src/main/java/com/minima/meg/server/BasicPage.java
+/home/spartacusrex/git/MEG/src/main/java/com/minima/meg/database/CacheObject.java
 /home/spartacusrex/git/MEG/src/main/java/com/minima/meg/endpoints/administrator/newuser.java
 /home/spartacusrex/git/MEG/src/main/java/com/minima/meg/database/LogsDB.java
 /home/spartacusrex/git/MEG/src/main/java/com/minima/meg/database/MegDB.java
