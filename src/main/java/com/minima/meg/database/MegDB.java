@@ -31,6 +31,10 @@ public class MegDB {
 	public static int MINIMUM_KEYUSES = 0;
 	NonceDB mNonceDB;
 	
+	//Is the Cache DB enabled..
+	public static boolean CACHE_DB_ENABLED 	= false;
+	CacheDB mCachedDB 						= new CacheDB();
+	
 	//Is the admin account enabled..
 	boolean mAdminEnabled = false;
 	String mAdminPassword = "";
@@ -52,6 +56,13 @@ public class MegDB {
 	
 	public File getDatabaseFolder() {
 		return mDatabaseFolder;
+	}
+	
+	/**
+	 * Get the CacheDB
+	 */
+	public CacheDB getCacheDB() {
+		return mCachedDB;
 	}
 	
 	/**

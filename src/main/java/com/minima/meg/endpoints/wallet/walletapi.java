@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.minima.meg.database.CacheDB;
 import com.minima.meg.database.MegDB;
 import com.minima.meg.server.ApiCaller;
 import com.minima.meg.utils.HTTPClientUtil;
@@ -15,6 +16,9 @@ public class walletapi extends ApiCaller {
 		
 		//Which Endpoint
 		String apicall = request.getRequestURI().substring(8);
+		
+		//Is this a cache call
+		boolean use_cache = false;
 		
 		//Now run the command
 		try {
@@ -29,6 +33,8 @@ public class walletapi extends ApiCaller {
 			
 			}else if(apicall.equals("seedphrase")) {
 				
+				use_cache = true;
+				
 				//Get the seed..
 				String seed = HTTPClientUtil.getValidParam(request,"seedphrase");
 				
@@ -37,14 +43,17 @@ public class walletapi extends ApiCaller {
 			
 			}else if(apicall.equals("balance")) {
 				
+				use_cache = true;
+				
 				//Get the address..
 				String address = HTTPClientUtil.getValidParam(request,"address");
-				
 				
 				//Create a new WALLET..
 				cmdtocall = "balance megammr:true address:"+address;
 			
 			}else if(apicall.equals("checkaddress")) {
+				
+				use_cache = true;
 				
 				//Get the address..
 				String address = HTTPClientUtil.getValidParam(request,"address");
@@ -100,8 +109,6 @@ public class walletapi extends ApiCaller {
 					
 					cmdtocall 			+= " state:"+state;
 					cmdtocallnoprivate 	+= " state:"+state;
-					
-					Log.log("STATE CALL : " + cmdtocallnoprivate);
 				}
 				
 			}else if(apicall.equals("consolidate")) {
@@ -153,6 +160,8 @@ public class walletapi extends ApiCaller {
 			
 			}else if(apicall.equals("block")) {
 				
+				use_cache = true;
+				
 				//Create the call
 				cmdtocall = "block";
 					
@@ -162,6 +171,8 @@ public class walletapi extends ApiCaller {
 				cmdtocall = "random";
 				
 			}else if(apicall.equals("gettxpow")) {
+				
+				use_cache = true;
 				
 				if(HTTPClientUtil.paramExists(request, "txpowid")) {
 					
@@ -184,6 +195,8 @@ public class walletapi extends ApiCaller {
 				}
 				
 			}else if(apicall.equals("scanchain")) {
+				
+				use_cache = true;
 				
 				//What depth to scan
 				String depth = HTTPClientUtil.getValidParam(request, "depth", "16");
@@ -271,6 +284,8 @@ public class walletapi extends ApiCaller {
 			
 			}else if(apicall.equals("listcoins")) {
 				
+				use_cache = true;
+				
 				//Get all the parameters
 				String address = HTTPClientUtil.getValidParam(request, "address");
 				String tokenid = HTTPClientUtil.getValidParam(request, "tokenid","0x00");
@@ -303,9 +318,32 @@ public class walletapi extends ApiCaller {
 			}else {
 				throw new Exception("Unknown WALLET API call : "+apicall);
 			}
-		
-			//Run it..
-			String res = HTTPClientUtil.runMinimaCMD(cmdtocall);
+			
+			//Is this a cache call..
+			String res = null;
+			if(use_cache && MegDB.CACHE_DB_ENABLED) {
+				
+				//Is there an answer
+				String cacheresp = MegDB.getDB().getCacheDB().getCacheData(cmdtocall);
+				if(cacheresp != null) {
+					
+					//Set the cached response
+					res = cacheresp;
+				
+				}else {
+					
+					//No Cache entry
+					res = HTTPClientUtil.runMinimaCMD(cmdtocall);
+					
+					//And ADD it..
+					MegDB.getDB().getCacheDB().addCacheCall(cmdtocall, res);
+				}
+			
+			}else {
+				
+				//Run it..
+				res = HTTPClientUtil.runMinimaCMD(cmdtocall);
+			}
 			
 			//Add a DB LOG
 			if(cmdtocallnoprivate == null) {

@@ -26,7 +26,7 @@ public class Start
 	/**
 	 * The Main MEG Manager
 	 */
-	public static final String MEG_VERSION = "2.6.6";
+	public static final String MEG_VERSION = "2.6.7";
 	
 	private static MEGManager mMEG;
 	
@@ -59,6 +59,8 @@ public class Start
 
 		int delay = getEnvVarIntIfExists(envs,"meg_startupdelay",0);
 
+		boolean use_cache = false;
+		
     	//Now Get the start params.. from command line
 		int arglen 	= zArgs.length;
 		if(arglen > 0) {
@@ -93,7 +95,10 @@ public class Start
 				
 				}else if(arg.equals("-logs")) {
 					Log.LOGGING_ENABLED = true;
-					
+				
+				}else if(arg.equals("-enablecache")) {
+					use_cache = true;
+				
 				}else if(arg.equals("-data")) {
 					dataFolder = new File(zArgs[counter++]);
 				
@@ -109,6 +114,7 @@ public class Start
 					System.out.println(" -minimarpcpassword   : The Minima RPC password if enabled");
 					System.out.println(" -minkeyuses          : MINIMUM key uses value for any Public Keys (if you are running this from a new server)");
 					System.out.println(" -startupdelay        : Wait X ms before starting up (giving time to Minima to start) - used in Docker Container..");
+					System.out.println(" -enablecache         : Use a 60 second cache on certain calls (getTxPoW, scanchain, balance etc..)");
 					//System.out.println(" -logs                : Enable Debug logs)");
 					System.out.println(" -help                : Print this help");
 					
@@ -141,9 +147,15 @@ public class Start
 		mMEG.doStartUp(meg_port,adminpass,dataFolder);
 		
 		//Set Min Key uses..
-		MegDB.getDB().MINIMUM_KEYUSES = minkeyuses;
+		MegDB.MINIMUM_KEYUSES = minkeyuses;
 		if(minkeyuses!=0) {
 			Log.log("Minimum 'keyuses' set to  : "+minkeyuses);
+		}
+		
+		//Is Cache Enabled..
+		if(use_cache) {
+			MegDB.CACHE_DB_ENABLED = true;
+			Log.log("Wallet API Cache Enabled");
 		}
 		
 		//Now set the deaults if set
