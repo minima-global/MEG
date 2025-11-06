@@ -160,6 +160,8 @@ public class HTTPClientUtil {
 			mhost = mhost+"/";
 		}
 		
+		Log.debug("Minima > "+zCommand);
+		
 		return POSTMinimaWithAuth(mhost,zCommand);
 	}
 	

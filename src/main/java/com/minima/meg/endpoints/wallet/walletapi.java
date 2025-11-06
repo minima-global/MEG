@@ -28,6 +28,7 @@ public class walletapi extends ApiCaller {
 			String cmdtocallnoprivate = null;
 			
 			if(apicall.equals("create")) {
+				
 				//Create a new WALLET..
 				cmdtocall = "keys action:genkey";
 			
@@ -152,6 +153,8 @@ public class walletapi extends ApiCaller {
 			
 			}else if(apicall.equals("checktxpow")) {
 				
+				use_cache = true;
+				
 				//Which transaction
 				String txpowid 	= HTTPClientUtil.getValidParam(request, "txpowid");
 				
@@ -204,12 +207,8 @@ public class walletapi extends ApiCaller {
 				//Create the call
 				cmdtocall = "scanchain depth:"+depth;
 			
-				//Only added offset in Minima 1.0.46 or later..
+				//Only add param if added to call.. so does not break OLDer Minima
 				cmdtocall = checkAddParam(request, "offset", "offset", cmdtocall);
-				
-				//if(HTTPClientUtil.paramExists(request, "offset")) {
-				//	cmdtocall += " offset:"+HTTPClientUtil.getValidParam(request, "offset");
-				//}
 				
 				//Advanced APIs..
 			}else if(apicall.equals("unsignedtxn")) {
@@ -281,7 +280,6 @@ public class walletapi extends ApiCaller {
 				//Create the call
 				cmdtocall = "txnminepost data:"+data;
 			
-			
 			}else if(apicall.equals("listcoins")) {
 				
 				use_cache = true;
@@ -296,6 +294,9 @@ public class walletapi extends ApiCaller {
 				}else {
 					cmdtocall = "coins address:"+address+" megammr:true tokenid:"+tokenid;
 				}
+				
+				//Only add param if added to call.. so does not break OLDer Minima
+				cmdtocall = checkAddParam(request, "state", "state", cmdtocall);
 				
 			}else if(apicall.equals("constructtxn")) {
 				
@@ -314,6 +315,16 @@ public class walletapi extends ApiCaller {
 				cmdtocall = "constructfrom coinlist:"+coinlist+" script:\""+script+"\""
 							+" toaddress:"+toaddress+" toamount:"+toamount
 							+" changeaddress:"+changeaddress+" changeamount:"+changeamount+" tokenid:"+tokenid;
+				
+			
+			}else if(apicall.equals("rawtransaction")) {
+				
+				String inputs   = HTTPClientUtil.getValidParam(request, "inputs");
+				String outputs  = HTTPClientUtil.getValidParam(request, "outputs");
+				String scripts  = HTTPClientUtil.getValidParam(request, "scripts");
+				String state    = HTTPClientUtil.getValidParam(request, "state", "{}");
+				
+				cmdtocall 		= "rawtxnfrom inputs:"+inputs+" outputs:"+outputs+" scripts:"+scripts+" state:"+state;
 				
 			}else {
 				throw new Exception("Unknown WALLET API call : "+apicall);
@@ -402,7 +413,10 @@ public class walletapi extends ApiCaller {
 	public String checkAddParam(HttpServletRequest request, String zParamName, String  zAddParam, String zOldCommand) throws Exception {
 		
 		if(HTTPClientUtil.paramExists(request, zParamName)) {
-			return zOldCommand+" "+zAddParam+":"+HTTPClientUtil.getValidParam(request, zParamName);
+			String param = HTTPClientUtil.getValidParam(request, zParamName);
+			if(!param.equals("")) {
+				return zOldCommand+" "+zAddParam+":"+param;
+			}
 		}
 		
 		return zOldCommand;
