@@ -317,7 +317,7 @@ public class walletapi extends ApiCaller {
 							+" changeaddress:"+changeaddress+" changeamount:"+changeamount+" tokenid:"+tokenid;
 				
 			
-			}else if(apicall.equals("rawtransaction")) {
+			}else if(apicall.equals("rawtxn")) {
 				
 				String inputs   = HTTPClientUtil.getValidParam(request, "inputs");
 				String outputs  = HTTPClientUtil.getValidParam(request, "outputs");
@@ -325,6 +325,15 @@ public class walletapi extends ApiCaller {
 				String state    = HTTPClientUtil.getValidParam(request, "state", "{}");
 				
 				cmdtocall 		= "rawtxnfrom inputs:"+inputs+" outputs:"+outputs+" scripts:"+scripts+" state:"+state;
+				
+			
+			}else if(apicall.equals("viewtxn")) {
+				
+				use_cache = true;
+				
+				String txndata = HTTPClientUtil.getValidParam(request, "data");
+				
+				cmdtocall = "txnview data:"+txndata;
 				
 			}else {
 				throw new Exception("Unknown WALLET API call : "+apicall);

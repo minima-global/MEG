@@ -193,6 +193,15 @@ public class walletpage extends BasicPage {
 				+ "	<br>\r\n"
 				+ "	Node status : online \r\n"
 				
+				+ "	\r\n"
+				+ "	<h3>/wallet/viewtxn</h3>\r\n"
+				+ "	Convert txndata to a readable JSON format<br>\r\n"
+				+ "	<br>\r\n"
+				+ "	Params : <br>\r\n"
+				+ "	&nbsp;&nbsp;&nbsp;data : The transaction data<br>\r\n"
+				+ "	<br>\r\n"
+				+ "	Node status : online / offline \r\n"
+
 				+ "	<h3>/wallet/lockcoins</h3>\r\n"
 				+ "	Lock CoinID / Coins used when creating multiple transactions without posting to mempool<br>\r\n"
 				+ "	<br>\r\n"
