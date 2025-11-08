@@ -4,11 +4,9 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.minima.meg.database.CacheDB;
 import com.minima.meg.database.MegDB;
 import com.minima.meg.server.ApiCaller;
 import com.minima.meg.utils.HTTPClientUtil;
-import com.minima.meg.utils.Log;
 
 public class walletapi extends ApiCaller {
 

@@ -4,16 +4,11 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
 
 import org.json.JSONObject;
 
 import com.minima.meg.database.MegDB;
-import com.minima.meg.database.NonceDB;
 import com.minima.meg.utils.HTTPClientUtil;
 import com.minima.meg.utils.Log;
 
@@ -26,7 +21,7 @@ public class Start
 	/**
 	 * The Main MEG Manager
 	 */
-	public static final String MEG_VERSION = "2.6.9";
+	public static final String MEG_VERSION = "2.7.0";
 	
 	private static MEGManager mMEG;
 	
@@ -94,7 +89,7 @@ public class Start
 					apicallerpass = zArgs[counter++];
 				
 				}else if(arg.equals("-logs")) {
-					Log.LOGGING_ENABLED = true;
+					Log.DEBUG_LOGGING_ENABLED = true;
 				
 				}else if(arg.equals("-enablecache")) {
 					use_cache = true;

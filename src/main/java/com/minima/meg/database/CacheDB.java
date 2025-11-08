@@ -29,15 +29,15 @@ public class CacheDB {
 		
 		//Cycle through the whole cache..
 		for(CacheObject cobj : mCachedData) {
-		
-			//Is this the data..
-			if(cobj.mCommand.equals(zCommand)) {
-				foundcache = cobj;
-			}
 			
-			//Check time.. do we keep it..
+			//Check time FIRST.. 
 			if(cobj.mTimeMilli + 60000 > ctime) {
 				newlist.add(cobj);
+				
+				//Is this the data..
+				if(cobj.mCommand.equals(zCommand)) {
+					foundcache = cobj;
+				}
 			}
 		}
 		
@@ -45,10 +45,10 @@ public class CacheDB {
 		mCachedData = newlist;
 		
 		if(foundcache != null) {
-			//Log.log("Cache Found : "+zCommand+" cachesize:"+mCachedData.size());
+			Log.debug("Cache Found : "+zCommand+" cachesize:"+mCachedData.size());
 			return foundcache.mResponse;
 		}else {
-			//Log.log("Cache NOT Found : "+zCommand+" cachesize:"+mCachedData.size());
+			//Log.debug("Cache NOT Found : "+zCommand+" cachesize:"+mCachedData.size());
 		}
 		
 		return null;

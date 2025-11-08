@@ -3,7 +3,6 @@ package com.minima.meg.endpoints.api;
 import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 

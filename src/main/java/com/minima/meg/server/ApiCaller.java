@@ -3,7 +3,6 @@ package com.minima.meg.server;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Base64;
-import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +13,6 @@ import org.json.JSONObject;
 
 import com.minima.meg.database.MegDB;
 import com.minima.meg.utils.HTTPClientUtil;
-import com.minima.meg.utils.Log;
 
 public abstract class ApiCaller extends HttpServlet {
 

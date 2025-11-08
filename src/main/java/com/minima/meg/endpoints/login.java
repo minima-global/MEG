@@ -16,7 +16,6 @@ import com.minima.meg.mainsite.footer;
 import com.minima.meg.mainsite.header;
 import com.minima.meg.server.UserSessions;
 import com.minima.meg.utils.HTTPClientUtil;
-import com.minima.meg.utils.Log;
 
 public class login extends HttpServlet {
 	

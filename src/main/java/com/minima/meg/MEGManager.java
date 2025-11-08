@@ -3,7 +3,6 @@ package com.minima.meg;
 import java.io.File;
 
 import com.minima.meg.database.MegDB;
-import com.minima.meg.database.NonceDB;
 import com.minima.meg.endpoints.trigger.TriggerProcessor;
 import com.minima.meg.server.JettyServer;
 import com.minima.meg.utils.Log;

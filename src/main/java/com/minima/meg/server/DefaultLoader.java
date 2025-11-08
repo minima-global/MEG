@@ -12,7 +12,6 @@ import org.json.JSONObject;
 
 import com.minima.meg.database.MegDB;
 import com.minima.meg.utils.FileUtils;
-import com.minima.meg.utils.Log;
 
 public class DefaultLoader extends HttpServlet {
 	

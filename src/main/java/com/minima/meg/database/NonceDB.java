@@ -5,8 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import org.json.JSONObject;
-
 import com.minima.meg.utils.Log;
 import com.minima.meg.utils.SqlDB;
 

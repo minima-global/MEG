@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.minima.meg.server.UserSessions;
-import com.minima.meg.utils.Log;
 
 public class logoff extends HttpServlet {
 	
