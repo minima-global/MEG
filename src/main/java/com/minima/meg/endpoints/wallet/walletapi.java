@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.minima.meg.database.MegDB;
 import com.minima.meg.server.ApiCaller;
 import com.minima.meg.utils.HTTPClientUtil;
+import com.minima.meg.utils.Log;
 
 public class walletapi extends ApiCaller {
 
@@ -40,6 +41,9 @@ public class walletapi extends ApiCaller {
 				//Create a new WALLET..
 				cmdtocall = "keys action:genkey phrase:\""+seed+"\"";
 			
+				//A no private key message
+				cmdtocallnoprivate = "keys action:genkey phrase:***";
+				
 			}else if(apicall.equals("balance")) {
 				
 				use_cache = true;
@@ -350,8 +354,14 @@ public class walletapi extends ApiCaller {
 				
 				}else {
 					
+					if(cmdtocallnoprivate == null) {
+						Log.debug("Minima > "+cmdtocall);
+					}else {
+						Log.debug("Minima > "+cmdtocallnoprivate);
+					}
+					
 					//No Cache entry
-					res = HTTPClientUtil.runMinimaCMD(cmdtocall);
+					res = HTTPClientUtil.runMinimaCMD(cmdtocall, false);
 					
 					//And ADD it..
 					MegDB.getDB().getCacheDB().addCacheCall(cmdtocall, res);
@@ -359,8 +369,14 @@ public class walletapi extends ApiCaller {
 			
 			}else {
 				
+				if(cmdtocallnoprivate == null) {
+					Log.debug("Minima > "+cmdtocall);
+				}else {
+					Log.debug("Minima > "+cmdtocallnoprivate);
+				}
+				
 				//Run it..
-				res = HTTPClientUtil.runMinimaCMD(cmdtocall);
+				res = HTTPClientUtil.runMinimaCMD(cmdtocall, false);
 			}
 			
 			//Add a DB LOG

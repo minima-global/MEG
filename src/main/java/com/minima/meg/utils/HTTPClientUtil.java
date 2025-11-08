@@ -149,6 +149,10 @@ public class HTTPClientUtil {
 	}
 	
 	public static String runMinimaCMD(String zCommand) throws Exception {
+		return runMinimaCMD(zCommand, true);
+	}
+	
+	public static String runMinimaCMD(String zCommand, boolean zDebugLOG) throws Exception {
 		
 		//get the Host..
 		String mhost = MegDB.getDB().getPrefsDB().getMinimaNode();
@@ -156,7 +160,9 @@ public class HTTPClientUtil {
 			mhost = mhost+"/";
 		}
 		
-		Log.debug("Minima > "+zCommand);
+		if(zDebugLOG) {
+			Log.debug("Minima > "+zCommand);
+		}
 		
 		return POSTMinimaWithAuth(mhost,zCommand);
 	}

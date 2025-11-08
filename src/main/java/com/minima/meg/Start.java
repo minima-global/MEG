@@ -153,6 +153,10 @@ public class Start
 			Log.log("Wallet API Cache Enabled");
 		}
 		
+		if(Log.DEBUG_LOGGING_ENABLED) {
+			Log.log("DEBUG logs enabled");	
+		}
+		
 		//Now set the deaults if set
 		if(!meghost.equals("")) {
 			
