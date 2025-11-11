@@ -292,9 +292,9 @@ public class walletapi extends ApiCaller {
 				
 				//List all coins..
 				if(tokenid.equals("0x01")) {
-					cmdtocall = "coins address:"+address+" megammr:true";
+					cmdtocall = "coins simplestate:true address:"+address+" megammr:true";
 				}else {
-					cmdtocall = "coins address:"+address+" megammr:true tokenid:"+tokenid;
+					cmdtocall = "coins simplestate:true address:"+address+" megammr:true tokenid:"+tokenid;
 				}
 				
 				//Only add param if added to call.. so does not break OLDer Minima
