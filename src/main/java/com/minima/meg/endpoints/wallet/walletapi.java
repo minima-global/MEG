@@ -246,10 +246,17 @@ public class walletapi extends ApiCaller {
 							+" privatekey:"+privatekey
 							+" keyuses:"+keyuses;
 				
+				//Only add param if added to call.. so does not break OLDer Minima
+				cmdtocall = checkAddParam(request, "post", "post", cmdtocall);
+				
+				//And the no private key output version
 				cmdtocallnoprivate = "signfrom"
 						+" data:"+data
 						+" privatekey:***"
 						+" keyuses:"+keyuses;
+				
+				cmdtocallnoprivate = checkAddParam(request, "post", "post", cmdtocallnoprivate);
+				
 				
 			}else if(apicall.equals("posttxn")) {
 				
