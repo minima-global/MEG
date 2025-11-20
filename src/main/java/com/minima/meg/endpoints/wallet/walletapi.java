@@ -106,13 +106,12 @@ public class walletapi extends ApiCaller {
 						+" privatekey:***"
 						+" keyuses:"+keyuses;
 			
-				//Shall we add STATE ? Only added in later versions of Minima
-				if(HTTPClientUtil.paramExists(request, "state")) {
-					String state = HTTPClientUtil.getValidParam(request, "state");
-					
-					cmdtocall 			+= " state:"+state;
-					cmdtocallnoprivate 	+= " state:"+state;
-				}
+				//Only add param if added to call.. so does not break OLDer Minima
+				cmdtocall 			= checkAddParam(request, "state", "state", cmdtocall);
+				cmdtocall 			= checkAddParam(request, "split", "split", cmdtocall);
+				
+				cmdtocallnoprivate 	= checkAddParam(request, "state", "state", cmdtocallnoprivate);
+				cmdtocallnoprivate 	= checkAddParam(request, "split", "split", cmdtocallnoprivate);
 				
 			}else if(apicall.equals("consolidate")) {
 				
