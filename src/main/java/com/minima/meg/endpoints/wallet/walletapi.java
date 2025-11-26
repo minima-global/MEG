@@ -58,6 +58,7 @@ public class walletapi extends ApiCaller {
 				cmdtocall = checkAddParam(request, "coinlist", "coinlist", cmdtocall);
 				cmdtocall = checkAddParam(request, "confirmations", "confirmations", cmdtocall);
 				cmdtocall = checkAddParam(request, "tokenid", "tokenid", cmdtocall);
+				cmdtocall = checkAddParam(request, "tokendetails", "tokendetails", cmdtocall);
 				
 			}else if(apicall.equals("checkaddress")) {
 				
