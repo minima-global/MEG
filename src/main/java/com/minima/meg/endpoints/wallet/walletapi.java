@@ -54,6 +54,11 @@ public class walletapi extends ApiCaller {
 				//Create a new WALLET..
 				cmdtocall = "balance megammr:true address:"+address;
 			
+				//Optional params
+				cmdtocall = checkAddParam(request, "coinlist", "coinlist", cmdtocall);
+				cmdtocall = checkAddParam(request, "confirmations", "confirmations", cmdtocall);
+				cmdtocall = checkAddParam(request, "tokenid", "tokenid", cmdtocall);
+				
 			}else if(apicall.equals("checkaddress")) {
 				
 				use_cache = true;
@@ -255,7 +260,6 @@ public class walletapi extends ApiCaller {
 						+" keyuses:"+keyuses;
 				
 				cmdtocallnoprivate = checkAddParam(request, "post", "post", cmdtocallnoprivate);
-				
 				
 			}else if(apicall.equals("posttxn")) {
 				
