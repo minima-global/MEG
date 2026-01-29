@@ -72,6 +72,12 @@ public class walletapi extends ApiCaller {
 			
 			}else if(apicall.equals("send")) {
 				
+				//LOG!
+				/*if(true) {
+					Log.debug("APICALL  : "+apicall);
+					Log.debug("PARAMS   : "+request.getParameterMap());
+				}*/
+				
 				//Get all the parameters
 				String tokenid="0x00";
 				if(request.getParameter("tokenid") != null) {
