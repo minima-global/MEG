@@ -72,12 +72,6 @@ public class walletapi extends ApiCaller {
 			
 			}else if(apicall.equals("send")) {
 				
-				//LOG!
-				/*if(true) {
-					Log.debug("APICALL  : "+apicall);
-					Log.debug("PARAMS   : "+request.getParameterMap());
-				}*/
-				
 				//Get all the parameters
 				String tokenid="0x00";
 				if(request.getParameter("tokenid") != null) {
@@ -186,6 +180,54 @@ public class walletapi extends ApiCaller {
 				//Create the call
 				cmdtocall = "random";
 				
+			}else if(apicall.equals("runscript")) {
+				
+				String script = HTTPClientUtil.getValidParam(request, "script");
+				
+				//Create the call
+				cmdtocall = "runscript script:\""+script+"\"";
+				
+			}else if(apicall.equals("createtoken")) {
+				
+				String fromaddress 	= HTTPClientUtil.getValidParam(request, "fromaddress");
+				String script 		= HTTPClientUtil.getValidParam(request, "script");
+				String privatekey 	= HTTPClientUtil.getValidParam(request, "privatekey");
+				
+				//Get the key uses - could be specified or MEG DB
+				String keyuses = getKeyUses(request);
+				
+				String amount 	= HTTPClientUtil.getValidParam(request, "amount");
+				String name 	= HTTPClientUtil.getValidParam(request, "name");
+				
+				//Is name a JSON
+				if(!name.contains("{") && name.contains(" ")) {
+					name = "\""+name+"\"";
+				}
+				
+				String decimals	= HTTPClientUtil.getValidParam(request, "decimals","8");
+				String mine 	= HTTPClientUtil.getValidParam(request, "mine","true");
+				
+				//Create the call
+				cmdtocall = "createtokenfrom"
+							+" mine:"+mine
+							+" decimals:"+decimals
+							+" fromaddress:"+fromaddress
+							+" name:"+name
+							+" amount:"+amount
+							+" script:\""+script+"\""
+							+" privatekey:"+privatekey
+							+" keyuses:"+keyuses;
+				
+				cmdtocallnoprivate = "createtokenfrom"
+						+" mine:"+mine
+						+" decimals:"+decimals
+						+" fromaddress:"+fromaddress
+						+" name:"+name
+						+" amount:"+amount
+						+" script:\""+script+"\""
+						+" privatekey:***"
+						+" keyuses:"+keyuses;
+			
 			}else if(apicall.equals("gettxpow")) {
 				
 				use_cache = true;
