@@ -55,10 +55,13 @@
 				console.log("SEND : "+JSON.stringify(resp));
 			});*/
 			
-			MINIMASK.account.createtoken("TheToken", 43, function(resp){
+			/*MINIMASK.account.createtoken("TheToken", 43, function(resp){
 				console.log("createtoken : "+JSON.stringify(resp));
-			});
+			});*/
 			
+			MINIMASK.meg.runscript("RETURN TRUE", function(resp){
+				console.log("runscript : "+JSON.stringify(resp));
+			});
 			
 			/*MINIMASK.meg.createtoken("My Token Name",13,
 				"MxG083ZKYBCKMG8T736M6NRWYUD7RKPEYRKP59QJ4CSFGH66T7YPTD86K76STUA",
