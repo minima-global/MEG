@@ -68,6 +68,12 @@ public class UserDB extends SqlDB {
 	}
 	
 	public JSONObject getUser(String zUsername, String zPassword){
+	
+		//Do not allow..
+		if(zUsername.contains(";") || zPassword.contains(";")) {
+			return new JSONObject();
+		}
+		
 		return executeGenericSQL("SELECT * FROM users "
 				+ "WHERE username='"+zUsername+"' AND password='"+zPassword+"'");
 	}
@@ -120,6 +126,11 @@ public class UserDB extends SqlDB {
 	}
 	
 	public JSONObject getTrigger(String zTrigger){
+		//Do not allow..
+		if(zTrigger.contains(";")) {
+			return new JSONObject();
+		}
+		
 		return executeGenericSQL("SELECT * FROM triggers WHERE trigger='"+zTrigger+"'");
 	}
 	
