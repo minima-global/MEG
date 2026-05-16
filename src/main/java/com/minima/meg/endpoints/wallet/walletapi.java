@@ -8,6 +8,7 @@ import com.minima.meg.database.MegDB;
 import com.minima.meg.server.ApiCaller;
 import com.minima.meg.utils.HTTPClientUtil;
 import com.minima.meg.utils.Log;
+import com.minima.meg.utils.checks.CheckInputs;
 
 public class walletapi extends ApiCaller {
 
@@ -38,6 +39,9 @@ public class walletapi extends ApiCaller {
 				//Get the seed..
 				String seed = HTTPClientUtil.getValidParam(request,"seedphrase");
 				
+				//Check the inputs
+				CheckInputs.checkSeed(seed);
+				
 				//Create a new WALLET..
 				cmdtocall = "keys action:genkey phrase:\""+seed+"\"";
 			
@@ -51,14 +55,17 @@ public class walletapi extends ApiCaller {
 				//Get the address..
 				String address = HTTPClientUtil.getValidParam(request,"address");
 				
+				//Check the inputs
+				CheckInputs.checkHex(address);
+				
 				//Create a new WALLET..
 				cmdtocall = "balance megammr:true address:"+address;
 			
 				//Optional params
-				cmdtocall = checkAddParam(request, "coinlist", "coinlist", cmdtocall);
-				cmdtocall = checkAddParam(request, "confirmations", "confirmations", cmdtocall);
-				cmdtocall = checkAddParam(request, "tokenid", "tokenid", cmdtocall);
-				cmdtocall = checkAddParam(request, "tokendetails", "tokendetails", cmdtocall);
+				cmdtocall = checkAddBooleanParam(request, "coinlist", "coinlist", cmdtocall);
+				cmdtocall = checkAddNumberParam(request, "confirmations", "confirmations", cmdtocall);
+				cmdtocall = checkAddHexParam(request, "tokenid", "tokenid", cmdtocall);
+				cmdtocall = checkAddBooleanParam(request, "tokendetails", "tokendetails", cmdtocall);
 				
 			}else if(apicall.equals("checkaddress")) {
 				
@@ -66,6 +73,9 @@ public class walletapi extends ApiCaller {
 				
 				//Get the address..
 				String address = HTTPClientUtil.getValidParam(request,"address");
+				
+				//Check the inputs
+				CheckInputs.checkHex(address);
 				
 				//Check if this is a valid address
 				cmdtocall = "checkaddress address:"+address;
@@ -88,6 +98,16 @@ public class walletapi extends ApiCaller {
 				
 				//Get the key uses - could be specified or MEG DB
 				String keyuses = getKeyUses(request);
+				
+				//Check the inputs
+				CheckInputs.checkNumber(amount);
+				CheckInputs.checkHex(toaddress);
+				CheckInputs.checkHex(fromaddress);
+				CheckInputs.checkHex(privatekey);
+				CheckInputs.checkScript(script);
+				CheckInputs.checkNumber(burn);
+				CheckInputs.checkBoolean(mine);
+				CheckInputs.checkNumber(keyuses);
 				
 				//Create the call
 				cmdtocall = "sendfrom"
@@ -114,10 +134,10 @@ public class walletapi extends ApiCaller {
 			
 				//Only add param if added to call.. so does not break OLDer Minima
 				cmdtocall 			= checkAddParam(request, "state", "state", cmdtocall);
-				cmdtocall 			= checkAddParam(request, "split", "split", cmdtocall);
+				cmdtocall 			= checkAddNumberParam(request, "split", "split", cmdtocall);
 				
 				cmdtocallnoprivate 	= checkAddParam(request, "state", "state", cmdtocallnoprivate);
-				cmdtocallnoprivate 	= checkAddParam(request, "split", "split", cmdtocallnoprivate);
+				cmdtocallnoprivate 	= checkAddNumberParam(request, "split", "split", cmdtocallnoprivate);
 				
 			}else if(apicall.equals("consolidate")) {
 				
@@ -136,6 +156,14 @@ public class walletapi extends ApiCaller {
 				
 				//Get the key uses - could be specified or MEG DB
 				String keyuses = getKeyUses(request);
+				
+				//Check the inputs
+				CheckInputs.checkNumber(maxcoins);
+				CheckInputs.checkHex(fromaddress);
+				CheckInputs.checkHex(privatekey);
+				CheckInputs.checkScript(script);
+				CheckInputs.checkNumber(burn);
+				CheckInputs.checkBoolean(mine);
 				
 				//Create the call
 				cmdtocall = "consolidatefrom"
@@ -165,6 +193,9 @@ public class walletapi extends ApiCaller {
 				//Which transaction
 				String txpowid 	= HTTPClientUtil.getValidParam(request, "txpowid");
 				
+				//Check the inputs
+				CheckInputs.checkHex(txpowid);
+				
 				//Create the call
 				cmdtocall = "txpow onchain:"+txpowid;
 			
@@ -184,6 +215,9 @@ public class walletapi extends ApiCaller {
 				
 				String script = HTTPClientUtil.getValidParam(request, "script");
 				
+				//Check the inputs
+				CheckInputs.checkScript(script);
+				
 				//Create the call
 				cmdtocall = "runscript script:\""+script+"\"";
 				
@@ -192,12 +226,17 @@ public class walletapi extends ApiCaller {
 				String fromaddress 	= HTTPClientUtil.getValidParam(request, "fromaddress");
 				String script 		= HTTPClientUtil.getValidParam(request, "script");
 				String privatekey 	= HTTPClientUtil.getValidParam(request, "privatekey");
+				String amount 		= HTTPClientUtil.getValidParam(request, "amount");
+				String name 		= HTTPClientUtil.getValidParam(request, "name");
 				
 				//Get the key uses - could be specified or MEG DB
 				String keyuses = getKeyUses(request);
 				
-				String amount 	= HTTPClientUtil.getValidParam(request, "amount");
-				String name 	= HTTPClientUtil.getValidParam(request, "name");
+				//Check the inputs
+				CheckInputs.checkHex(fromaddress);
+				CheckInputs.checkScript(script);
+				CheckInputs.checkHex(privatekey);
+				CheckInputs.checkNumber(amount);
 				
 				//Is name a JSON
 				if(!name.contains("{") && name.contains(" ")) {
@@ -237,6 +276,9 @@ public class walletapi extends ApiCaller {
 					//Which transaction
 					String txpowid 	= HTTPClientUtil.getValidParam(request, "txpowid");
 					
+					//Check the inputs
+					CheckInputs.checkHex(txpowid);
+					
 					//Create the call
 					cmdtocall = "txpow txpowid:"+txpowid;
 				
@@ -244,6 +286,9 @@ public class walletapi extends ApiCaller {
 					
 					//Which transaction
 					String block = HTTPClientUtil.getValidParam(request, "block");
+					
+					//Check the inputs
+					CheckInputs.checkNumber(block);
 					
 					//Create the call
 					cmdtocall = "txpow block:"+block;
@@ -258,6 +303,9 @@ public class walletapi extends ApiCaller {
 				
 				//What depth to scan
 				String depth = HTTPClientUtil.getValidParam(request, "depth", "16");
+				
+				//Check the inputs
+				CheckInputs.checkNumber(depth);
 				
 				//Create the call
 				cmdtocall = "scanchain depth:"+depth;
@@ -276,6 +324,14 @@ public class walletapi extends ApiCaller {
 				String burn 		= HTTPClientUtil.getValidParam(request, "burn","0");
 				String tokenid		= HTTPClientUtil.getValidParam(request, "tokenid","0x00");
 				
+				//Check the inputs
+				CheckInputs.checkNumber(amount);
+				CheckInputs.checkHex(toaddress);
+				CheckInputs.checkHex(fromaddress);
+				CheckInputs.checkScript(script);
+				CheckInputs.checkNumber(burn);
+				CheckInputs.checkHex(tokenid);
+				
 				//Create the call
 				cmdtocall = "createfrom"
 							+" fromaddress:"+fromaddress
@@ -293,6 +349,11 @@ public class walletapi extends ApiCaller {
 				//Get the key uses - could be specified or MEG DB
 				String keyuses = getKeyUses(request);
 				
+				//Check the inputs
+				CheckInputs.checkHex(data);
+				CheckInputs.checkHex(privatekey);
+				CheckInputs.checkNumber(keyuses);
+				
 				//Create the call
 				cmdtocall = "signfrom"
 							+" data:"+data
@@ -300,7 +361,7 @@ public class walletapi extends ApiCaller {
 							+" keyuses:"+keyuses;
 				
 				//Only add param if added to call.. so does not break OLDer Minima
-				cmdtocall = checkAddParam(request, "post", "post", cmdtocall);
+				cmdtocall = checkAddBooleanParam(request, "post", "post", cmdtocall);
 				
 				//And the no private key output version
 				cmdtocallnoprivate = "signfrom"
@@ -313,6 +374,9 @@ public class walletapi extends ApiCaller {
 			}else if(apicall.equals("posttxn")) {
 				
 				String data 		= HTTPClientUtil.getValidParam(request, "data");
+				
+				//Check the inputs
+				CheckInputs.checkHex(data);
 				
 				//Create the call
 				cmdtocall = "postfrom data:"+data+" mine:true";
@@ -331,12 +395,18 @@ public class walletapi extends ApiCaller {
 				
 				String data = HTTPClientUtil.getValidParam(request, "data");
 				
+				//Check the inputs
+				CheckInputs.checkHex(data);
+				
 				//Create the call
 				cmdtocall = "txnmine data:"+data;
 			
 			}else if(apicall.equals("postminedtxn")) {
 				
 				String data = HTTPClientUtil.getValidParam(request, "data");
+				
+				//Check the inputs
+				CheckInputs.checkHex(data);
 				
 				//Create the call
 				cmdtocall = "txnminepost data:"+data;
@@ -348,6 +418,10 @@ public class walletapi extends ApiCaller {
 				//Get all the parameters
 				String address = HTTPClientUtil.getValidParam(request, "address");
 				String tokenid = HTTPClientUtil.getValidParam(request, "tokenid","0x00");
+				
+				//Check the inputs
+				CheckInputs.checkHex(address);
+				CheckInputs.checkHex(tokenid);
 				
 				//List all coins..
 				if(tokenid.equals("0x01")) {
@@ -373,6 +447,14 @@ public class walletapi extends ApiCaller {
 				
 				String tokenid		= HTTPClientUtil.getValidParam(request, "tokenid","0x00");
 				
+				//Check inputs
+				CheckInputs.checkScript(script);
+				CheckInputs.checkHex(toaddress);
+				CheckInputs.checkNumber(toamount);
+				CheckInputs.checkHex(changeaddress);
+				CheckInputs.checkNumber(changeamount);
+				CheckInputs.checkHex(tokenid);
+				
 				cmdtocall = "constructfrom coinlist:"+coinlist+" script:\""+script+"\""
 							+" toaddress:"+toaddress+" toamount:"+toamount
 							+" changeaddress:"+changeaddress+" changeamount:"+changeamount+" tokenid:"+tokenid;
@@ -393,6 +475,9 @@ public class walletapi extends ApiCaller {
 				use_cache = true;
 				
 				String txndata = HTTPClientUtil.getValidParam(request, "data");
+				
+				//Check the inputs
+				CheckInputs.checkHex(txndata);
 				
 				cmdtocall = "txnview data:"+txndata;
 				
@@ -497,6 +582,45 @@ public class walletapi extends ApiCaller {
 		if(HTTPClientUtil.paramExists(request, zParamName)) {
 			String param = HTTPClientUtil.getValidParam(request, zParamName);
 			if(!param.equals("")) {
+				return zOldCommand+" "+zAddParam+":"+param;
+			}
+		}
+		
+		return zOldCommand;
+	}
+	
+	public String checkAddBooleanParam(HttpServletRequest request, String zParamName, String  zAddParam, String zOldCommand) throws Exception {
+		
+		if(HTTPClientUtil.paramExists(request, zParamName)) {
+			String param = HTTPClientUtil.getValidParam(request, zParamName);
+			if(!param.equals("")) {
+				CheckInputs.checkBoolean(param);
+				return zOldCommand+" "+zAddParam+":"+param;
+			}
+		}
+		
+		return zOldCommand;
+	}
+	
+	public String checkAddNumberParam(HttpServletRequest request, String zParamName, String  zAddParam, String zOldCommand) throws Exception {
+		
+		if(HTTPClientUtil.paramExists(request, zParamName)) {
+			String param = HTTPClientUtil.getValidParam(request, zParamName);
+			if(!param.equals("")) {
+				CheckInputs.checkNumber(param);
+				return zOldCommand+" "+zAddParam+":"+param;
+			}
+		}
+		
+		return zOldCommand;
+	}
+	
+	public String checkAddHexParam(HttpServletRequest request, String zParamName, String  zAddParam, String zOldCommand) throws Exception {
+		
+		if(HTTPClientUtil.paramExists(request, zParamName)) {
+			String param = HTTPClientUtil.getValidParam(request, zParamName);
+			if(!param.equals("")) {
+				CheckInputs.checkHex(param);
 				return zOldCommand+" "+zAddParam+":"+param;
 			}
 		}
