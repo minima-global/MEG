@@ -42,7 +42,7 @@ public class LogsDB extends SqlDB {
 		SQL_SELECT_LOGS	= mSQLConnection.prepareStatement("SELECT * FROM logs ORDER BY ID DESC LIMIT ? OFFSET ?");
 	}
 
-	public JSONObject addLog(String zEvent, String zDetails, String zUser) {
+	public JSONObject addLog(String zEvent, String zDetails, String zUsername) {
 		
 		try {
 			
@@ -50,7 +50,7 @@ public class LogsDB extends SqlDB {
 			SQL_INSERT_LOG.clearParameters();
 			SQL_INSERT_LOG.setString(1, zEvent);
 			SQL_INSERT_LOG.setString(2, zDetails);
-			SQL_INSERT_LOG.setString(3, zUser);
+			SQL_INSERT_LOG.setString(3, zUsername);
 			SQL_INSERT_LOG.setLong(4, System.currentTimeMillis());
 			
 			//Run the query
