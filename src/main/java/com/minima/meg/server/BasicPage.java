@@ -21,7 +21,7 @@ public abstract class BasicPage extends HttpServlet {
 			throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
-		Log.log("GET "+request.getRequestURI());
+		//Log.log("GET "+request.getRequestURI());
 		
 		response.setContentType("text/html");
         response.setStatus(HttpServletResponse.SC_OK);
@@ -51,7 +51,7 @@ public abstract class BasicPage extends HttpServlet {
 			throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
-		Log.log("POST "+request.getRequestURI());
+		//Log.log("POST "+request.getRequestURI());
 		
 		response.setContentType("text/html");
         response.setStatus(HttpServletResponse.SC_OK);
