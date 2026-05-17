@@ -212,6 +212,11 @@ public class HTTPClientUtil {
 		if(param == null) {
 			return zDefault;
 		}
+		
+		if(param.contains(";")) {
+			throw new Exception("Invalid character in input..");
+		}
+		
 		return param;
 	}
 	
