@@ -40,7 +40,7 @@ public class CheckInputs {
 	}
 	
 	public static void checkSeed(String zSeed) throws CheckInputException {
-		String regex = "^[a-zA-Z0-9_-[\\s]]*$";
+		String regex = "^[a-zA-Z0-9\\!\\?_-[\\s]]*$";
 		if(!zSeed.matches(regex)) {
 			throw new CheckInputException("Invalid seed value");
 		}
@@ -61,7 +61,7 @@ public class CheckInputs {
 		
 			checkNumber("0.1");
 			
-			checkSeed("0x09090  -  909   ");
+			checkSeed("asd0x09090! ! ? ! _  -  909   ");
 			
 		}catch(Exception exc) {
 			exc.printStackTrace();
