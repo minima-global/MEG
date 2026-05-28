@@ -21,11 +21,13 @@ public class Start
 	/**
 	 * The Main MEG Manager
 	 */
-	public static final String MEG_VERSION = "3.4";
+	public static final String MEG_VERSION = "3.5.1";
 	
 	private static MEGManager mMEG;
 	
 	private static boolean mUseShutdownHook;
+	
+	
 	
 	public static void main( String[] zArgs ) throws Exception
     {
@@ -91,6 +93,10 @@ public class Start
 				}else if(arg.equals("-logs")) {
 					Log.DEBUG_LOGGING_ENABLED = true;
 				
+				}else if(arg.equals("-privatelogs")) {
+					Log.DEBUG_LOGGING_ENABLED 		= true;
+					Log.DEBUG_LOGGING_SHOWPRIVATE 	= true;
+					
 				}else if(arg.equals("-enablecache")) {
 					use_cache = true;
 				
@@ -110,7 +116,8 @@ public class Start
 					System.out.println(" -minkeyuses          : MINIMUM key uses value for any Public Keys (if you are running this from a new server)");
 					System.out.println(" -startupdelay        : Wait X ms before starting up (giving time to Minima to start) - used in Docker Container..");
 					System.out.println(" -enablecache         : Use a 60 second cache on certain calls (getTxPoW, scanchain, balance etc..)");
-					System.out.println(" -logs                : Enable Debug logs)");
+					System.out.println(" -logs                : Enable Debug logs");
+					System.out.println(" -privatelogs         : Enable Debug logs AND show full private keys on CLI");
 					System.out.println(" -help                : Print this help");
 					
 					System.exit(1);

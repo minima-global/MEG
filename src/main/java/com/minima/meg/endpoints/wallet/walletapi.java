@@ -497,11 +497,15 @@ public class walletapi extends ApiCaller {
 					res = cacheresp;
 				
 				}else {
-					
-					if(cmdtocallnoprivate == null) {
-						Log.debug("Minima > "+cmdtocall);
+				
+					if(Log.DEBUG_LOGGING_SHOWPRIVATE) {
+						Log.debug("Minima [PRIVATE] > "+cmdtocall);
 					}else {
-						Log.debug("Minima > "+cmdtocallnoprivate);
+						if(cmdtocallnoprivate == null) {
+							Log.debug("Minima > "+cmdtocall);
+						}else {
+							Log.debug("Minima > "+cmdtocallnoprivate);
+						}
 					}
 					
 					//No Cache entry
@@ -513,10 +517,14 @@ public class walletapi extends ApiCaller {
 			
 			}else {
 				
-				if(cmdtocallnoprivate == null) {
-					Log.debug("Minima > "+cmdtocall);
+				if(Log.DEBUG_LOGGING_SHOWPRIVATE) {
+					Log.debug("Minima [PRIVATE] > "+cmdtocall);
 				}else {
-					Log.debug("Minima > "+cmdtocallnoprivate);
+					if(cmdtocallnoprivate == null) {
+						Log.debug("Minima > "+cmdtocall);
+					}else {
+						Log.debug("Minima > "+cmdtocallnoprivate);
+					}
 				}
 				
 				//Run it..
