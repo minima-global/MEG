@@ -28,7 +28,7 @@ public class Start
 	private static boolean mUseShutdownHook;
 	
 	
-	
+	//Main Function
 	public static void main( String[] zArgs ) throws Exception
     {
 		
