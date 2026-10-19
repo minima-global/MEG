@@ -109,6 +109,11 @@ public class HTTPClientUtil {
 		
 		String resp = "";
 		
+		//CHECK..
+		if(zData.contains(";")) {
+			throw new Exception("Invalid character in input..");
+		}
+		
 		try {
 			
 			HttpClient client = new HttpClient();
@@ -164,6 +169,11 @@ public class HTTPClientUtil {
 			Log.debug("Minima > "+zCommand);
 		}
 		
+		//CHECK..
+		if(zCommand.contains(";")) {
+			throw new Exception("Invalid character in input..");
+		}
+		
 		return POSTMinimaWithAuth(mhost,zCommand);
 	}
 	
@@ -204,6 +214,11 @@ public class HTTPClientUtil {
 		if(param == null) {
 			throw new Exception("Required param missing : "+zParam);
 		}
+		
+		if(param.contains(";")) {
+			throw new Exception("Invalid character in input..");
+		}
+		
 		return param;
 	}
 	
